@@ -4,7 +4,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.DatNumber = exports.DatString = undefined;
+exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23,6 +23,15 @@ Object.defineProperty(exports, 'DatNumber', {
     enumerable: true,
     get: function get() {
         return _interopRequireDefault(_DatNumber).default;
+    }
+});
+
+var _DatBoolean = require('./components/DatBoolean');
+
+Object.defineProperty(exports, 'DatBoolean', {
+    enumerable: true,
+    get: function get() {
+        return _interopRequireDefault(_DatBoolean).default;
     }
 });
 
@@ -111,7 +120,132 @@ Dat.defaultProps = {
 };
 exports.default = Dat;
 
-},{"./components/DatNumber":2,"./components/DatString":3,"lodash":5}],2:[function(require,module,exports){
+},{"./components/DatBoolean":2,"./components/DatNumber":3,"./components/DatString":4,"lodash":6}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _lodash = require('lodash');
+
+var _react = (window.React);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DatBoolean = function (_React$Component) {
+    _inherits(DatBoolean, _React$Component);
+
+    function DatBoolean(props, context) {
+        _classCallCheck(this, DatBoolean);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatBoolean).call(this, props, context));
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.state = {
+            value: 0,
+            isSliderActive: false
+        };
+        return _this;
+    }
+
+    _createClass(DatBoolean, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.setState({
+                value: this.getValue()
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({
+                value: this.getValue(nextProps)
+            });
+        }
+    }, {
+        key: 'shouldComponentUpdate',
+        value: function shouldComponentUpdate(nextProps, nextState) {
+            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
+        }
+    }, {
+        key: 'getValue',
+        value: function getValue() {
+            var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+
+            return (0, _lodash.result)(props.data, props.path);
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var _this2 = this;
+
+            this.setState({ value: event.target.checked }, function () {
+                _this2.update();
+            });
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            var value = this.state.value;
+
+            this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
+            this.props.onUpdate && this.props.onUpdate(value);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var id = this.props.id;
+            var value = this.state.value;
+
+            var label = (0, _lodash.isString)(this.props.label) ? this.props.label : this.props.path;
+            return _react2.default.createElement(
+                'li',
+                { className: 'cr boolean' },
+                _react2.default.createElement(
+                    'label',
+                    { htmlFor: id },
+                    label
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'checkbox-wrapper' },
+                    _react2.default.createElement('input', {
+                        type: 'checkbox',
+                        id: id,
+                        checked: value,
+                        onChange: this.handleChange }),
+                    _react2.default.createElement('div', { className: 'checkbox' })
+                )
+            );
+        }
+    }]);
+
+    return DatBoolean;
+}(_react2.default.Component);
+
+DatBoolean.propTypes = {
+    id: _react.PropTypes.string,
+    data: _react.PropTypes.object,
+    path: _react.PropTypes.string,
+    label: _react.PropTypes.string,
+    onUpdate: _react.PropTypes.func,
+    _onUpdateValue: _react.PropTypes.func
+};
+exports.default = DatBoolean;
+module.exports = exports['default'];
+
+},{"lodash":6}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -177,7 +311,7 @@ var DatNumber = function (_React$Component) {
     }, {
         key: 'shouldComponentUpdate',
         value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
+            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
         }
     }, {
         key: 'getValue',
@@ -367,7 +501,7 @@ DatNumber.propTypes = {
 exports.default = DatNumber;
 module.exports = exports['default'];
 
-},{"classnames":4,"lodash":5}],3:[function(require,module,exports){
+},{"classnames":5,"lodash":6}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -420,7 +554,7 @@ var DatString = function (_React$Component) {
     }, {
         key: 'shouldComponentUpdate',
         value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
+            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
         }
     }, {
         key: 'getValue',
@@ -493,7 +627,7 @@ DatString.propTypes = {
 exports.default = DatString;
 module.exports = exports['default'];
 
-},{"lodash":5}],4:[function(require,module,exports){
+},{"lodash":6}],5:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -543,7 +677,7 @@ module.exports = exports['default'];
 	}
 }());
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 /**
  * @license
