@@ -3,6 +3,7 @@ node_modules
 npm-debug.log
 public
 tmp
+lib
 
 # Created by https://www.gitignore.io
 
