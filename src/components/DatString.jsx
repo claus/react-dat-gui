@@ -32,7 +32,8 @@ class DatString extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.path !== this.props.path ||
+        return nextProps.id !== this.props.id ||
+               nextProps.path !== this.props.path ||
                nextProps.label !== this.props.label ||
                nextState.value !== this.state.value;
     }

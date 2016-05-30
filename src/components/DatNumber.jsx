@@ -45,7 +45,8 @@ class DatNumber extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.path !== this.props.path ||
+        return nextProps.id !== this.props.id ||
+               nextProps.path !== this.props.path ||
                nextProps.label !== this.props.label ||
                nextProps.min !== this.props.value ||
                nextProps.max !== this.props.value ||
