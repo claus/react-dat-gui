@@ -1,0 +1,159 @@
+$background-color: #1a1a1a;
+
+$hover-lighten: 5%;
+$border-lighten: 5%;
+$active-lighten: 10%;
+
+$number-color: #2FA1D6;
+$boolean-color: #806787;
+$string-color: #1ed36f;
+$function-color: #e61d5f;
+$save-row-color: #dad5cb;
+
+$button-color: darken($save-row-color, 10%);
+$border-color: lighten($background-color, $border-lighten);
+$input-color: lighten($background-color, 8.5%);
+
+$border-left-size: 5px;
+
+.react-dat-gui {
+    position: fixed;
+    right: 16px;
+    top: 0;
+    width: 280px;
+    font-size: 11px;
+    font-family: 'Lucida Grande', sans-serif;
+
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    .dg {
+        margin: 0;
+        padding: 0;
+        color: #eee;
+        overflow: auto;
+
+        &.main {
+            background: $background-color;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                background: $background-color;
+            }
+
+            &::-webkit-scrollbar-corner {
+                height: 0;
+                display: none;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background: lighten($background-color, 30%);
+            }
+        }
+    }
+
+    .cr {
+        display: flex;
+        border-bottom: 1px solid $border-color;
+        user-select: none;
+
+        &.number {
+            border-left: $border-left-size solid $number-color;
+            
+            .slider {
+                display: none;
+                position: relative;
+                width: 40%;
+                border: 3px solid $background-color;
+                border-right-width: 1px;
+                background-color: $input-color;
+                user-select: none;
+                cursor: ew-resize;
+
+                &:hover, &.is-active {
+                    background-color: lighten($input-color, $hover-lighten);
+                }
+
+                .slider-bar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $number-color;
+                }
+            }
+            
+            input[type=text] {
+                width: 60%;
+                color: $number-color;
+            }
+            
+            &.has-slider {
+                .slider {
+                    display: block;
+                }
+                input[type=text] {
+                    width: 20%;
+                }
+            }
+        }
+
+        &.string {
+            border-left: $border-left-size solid $string-color;
+
+            input[type=text] {
+                width: 60%;
+                color: $string-color;
+            }
+        }
+
+        &.boolean {
+            border-left: $border-left-size solid $boolean-color;
+
+            &:hover {
+                background: #111;
+            }
+        }
+
+        &.function {
+            border-left: $border-left-size solid $function-color;
+
+            &:hover {
+                background: #111;
+            }
+        }
+
+        label {
+            width: 40%;
+            padding: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        input[type=text] {
+            background: $input-color;
+            border: 3px solid $background-color;
+            border-radius: 0;
+            padding: 2px 5px;
+            outline: none;
+
+            &:hover {
+                background: lighten($input-color, $hover-lighten);
+            }
+
+            &:focus {
+                background: lighten($input-color, $active-lighten);
+                color: #fff;
+            }
+        }
+    }
+}
