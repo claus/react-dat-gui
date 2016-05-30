@@ -158,6 +158,11 @@ $border-left-size: 5px;
                 input[type=checkbox]:hover ~ .checkbox {
                     background-color: lighten($input-color, $hover-lighten);
                 }
+
+                input[type=checkbox]:focus ~ .checkbox,
+                input[type=checkbox]:active ~ .checkbox {
+                    background-color: lighten($input-color, $active-lighten);
+                }
             }
         }
 
