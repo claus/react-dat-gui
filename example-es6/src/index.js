@@ -24,6 +24,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
                 <Dat data={this.state.data} onUpdate={this.handleUpdate}>
                     <DatString path="name" label="Name" />
                     <DatNumber path="age" label="Age" min={0} max={100} step={1} />
