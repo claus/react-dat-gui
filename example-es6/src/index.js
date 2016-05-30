@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dat, { DatString, DatNumber } from '../../src/Dat.jsx';
+import Dat, { DatString, DatNumber, DatBoolean } from '../../src/Dat.jsx';
 
 require('../../src/Dat.scss');
 
@@ -11,8 +11,9 @@ class App extends React.Component {
         this.handleUpdate = this.handleUpdate.bind(this);
         this.state ={
             data: {
-                name: 'Claus',
-                age: 48
+                string: 'Hello World',
+                number: 66,
+                boolean: false,
             }
         }
     }
@@ -26,8 +27,9 @@ class App extends React.Component {
             <div>
                 <pre>{JSON.stringify(this.state.data, null, 2)}</pre>
                 <Dat data={this.state.data} onUpdate={this.handleUpdate}>
-                    <DatString path="name" label="Name" />
-                    <DatNumber path="age" label="Age" min={0} max={100} step={1} />
+                    <DatString path="string" label="String" />
+                    <DatNumber path="number" label="Number" min={0} max={100} step={1} />
+                    <DatBoolean path="boolean" label="Boolean" />
                 </Dat>
             </div>
         );

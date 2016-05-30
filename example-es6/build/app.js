@@ -68,7 +68,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(174);
+	__webpack_require__(175);
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -81,8 +81,9 @@
 	        _this.handleUpdate = _this.handleUpdate.bind(_this);
 	        _this.state = {
 	            data: {
-	                name: 'Claus',
-	                age: 48
+	                string: 'Hello World',
+	                number: 66,
+	                boolean: false
 	            }
 	        };
 	        return _this;
@@ -100,10 +101,16 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(
+	                    'pre',
+	                    null,
+	                    JSON.stringify(this.state.data, null, 2)
+	                ),
+	                _react2.default.createElement(
 	                    _Dat2.default,
 	                    { data: this.state.data, onUpdate: this.handleUpdate },
-	                    _react2.default.createElement(_Dat.DatString, { path: 'name', label: 'Name' }),
-	                    _react2.default.createElement(_Dat.DatNumber, { path: 'age', label: 'Age', min: 0, max: 100, step: 1 })
+	                    _react2.default.createElement(_Dat.DatString, { path: 'string', label: 'String' }),
+	                    _react2.default.createElement(_Dat.DatNumber, { path: 'number', label: 'Number', min: 0, max: 100, step: 1 }),
+	                    _react2.default.createElement(_Dat.DatBoolean, { path: 'boolean', label: 'Boolean' })
 	                )
 	            );
 	        }
@@ -20391,7 +20398,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.DatNumber = exports.DatString = undefined;
+	exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -20410,6 +20417,15 @@
 	    enumerable: true,
 	    get: function get() {
 	        return _interopRequireDefault(_DatNumber).default;
+	    }
+	});
+	
+	var _DatBoolean = __webpack_require__(174);
+	
+	Object.defineProperty(exports, 'DatBoolean', {
+	    enumerable: true,
+	    get: function get() {
+	        return _interopRequireDefault(_DatBoolean).default;
 	    }
 	});
 	
@@ -20554,7 +20570,7 @@
 	    }, {
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
+	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
 	        }
 	    }, {
 	        key: 'getValue',
@@ -37122,7 +37138,7 @@
 	    }, {
 	        key: 'shouldComponentUpdate',
 	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
+	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
 	        }
 	    }, {
 	        key: 'getValue',
@@ -37369,13 +37385,140 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _lodash = __webpack_require__(170);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DatBoolean = function (_React$Component) {
+	    _inherits(DatBoolean, _React$Component);
+	
+	    function DatBoolean(props, context) {
+	        _classCallCheck(this, DatBoolean);
+	
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatBoolean).call(this, props, context));
+	
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.state = {
+	            value: 0,
+	            isSliderActive: false
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(DatBoolean, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.setState({
+	                value: this.getValue()
+	            });
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({
+	                value: this.getValue(nextProps)
+	            });
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
+	        }
+	    }, {
+	        key: 'getValue',
+	        value: function getValue() {
+	            var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
+	
+	            return (0, _lodash.result)(props.data, props.path);
+	        }
+	    }, {
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            var _this2 = this;
+	
+	            this.setState({ value: event.target.checked }, function () {
+	                _this2.update();
+	            });
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update() {
+	            var value = this.state.value;
+	
+	            this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
+	            this.props.onUpdate && this.props.onUpdate(value);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var id = this.props.id;
+	            var value = this.state.value;
+	
+	            var label = (0, _lodash.isString)(this.props.label) ? this.props.label : this.props.path;
+	            return _react2.default.createElement(
+	                'li',
+	                { className: 'cr boolean' },
+	                _react2.default.createElement(
+	                    'label',
+	                    { htmlFor: id },
+	                    label
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'checkbox-wrapper' },
+	                    _react2.default.createElement('input', {
+	                        type: 'checkbox',
+	                        id: id,
+	                        checked: value,
+	                        onChange: this.handleChange }),
+	                    _react2.default.createElement('div', { className: 'checkbox' })
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return DatBoolean;
+	}(_react2.default.Component);
+	
+	DatBoolean.propTypes = {
+	    id: _react.PropTypes.string,
+	    data: _react.PropTypes.object,
+	    path: _react.PropTypes.string,
+	    label: _react.PropTypes.string,
+	    onUpdate: _react.PropTypes.func,
+	    _onUpdateValue: _react.PropTypes.func
+	};
+	exports.default = DatBoolean;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(175);
+	var content = __webpack_require__(176);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(177)(content, {});
+	var update = __webpack_require__(178)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -37392,21 +37535,21 @@
 	}
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(176)();
+	exports = module.exports = __webpack_require__(177)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 11px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: flex;\n    border-bottom: 1px solid #272727;\n    user-select: none; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: none;\n        position: relative;\n        width: 40%;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        user-select: none;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:hover, .react-dat-gui .cr.number .slider.is-active {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.number .slider .slider-bar {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%;\n          background-color: #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        width: 60%;\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number.has-slider .slider {\n        display: block; }\n      .react-dat-gui .cr.number.has-slider input[type=text] {\n        width: 20%; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        width: 60%;\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean:hover {\n        background: #111; }\n    .react-dat-gui .cr.function {\n      border-left: 5px solid #e61d5f; }\n      .react-dat-gui .cr.function:hover {\n        background: #111; }\n    .react-dat-gui .cr label {\n      width: 40%;\n      padding: 5px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      outline: none; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EAiI5C;EA5ID;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA1Cc,EA0DjB;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,cAAc;IACd,iCAlDc;IAmDd,kBAAkB,EA6FrB;IA3IL;MAiDY,+BA7DU,EAoGb;MAxFT;QAoDgB,cAAc;QACd,mBAAmB;QACnB,WAAW;QACX,0BAzEU;QA0EV,wBAAwB;QACxB,0BA7DK;QA8DL,kBAAkB;QAClB,kBAAkB,EAcrB;QAzEb;UA8DoB,0BAAyB,EAC5B;QA/DjB;UAkEoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa;UACb,0BAnFE,EAoFL;MAxEjB;QA4EgB,WAAW;QACX,eAzFM,EA0FT;MA9Eb;QAkFoB,eAAe,EAClB;MAnFjB;QAqFoB,WAAW,EACd;IAtFjB;MA2FY,+BArGU,EA2Gb;MAjGT;QA8FgB,WAAW;QACX,eAzGM,EA0GT;IAhGb;MAoGY,+BA/GW,EAoHd;MAzGT;QAuGgB,iBAAiB,EACpB;IAxGb;MA4GY,+BArHY,EA0Hf;MAjHT;QA+GgB,iBAAiB,EACpB;IAhHb;MAoHY,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB,EAC3B;IAzHT;MA4HY,oBAhIS;MAiIT,0BA/Ic;MAgJd,iBAAiB;MACjB,iBAAiB;MACjB,cAAc,EAUjB;MA1IT;QAmIgB,oBAAmB,EACtB;MApIb;QAuIgB,oBAAmB;QACnB,YAAY,EACf","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$function-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 11px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $background-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: flex;\n        border-bottom: 1px solid $border-color;\n        user-select: none;\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            .slider {\n                display: none;\n                position: relative;\n                width: 40%;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                user-select: none;\n                cursor: ew-resize;\n\n                &:hover, &.is-active {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                .slider-bar {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: $number-color;\n                }\n            }\n            \n            input[type=text] {\n                width: 60%;\n                color: $number-color;\n            }\n            \n            &.has-slider {\n                .slider {\n                    display: block;\n                }\n                input[type=text] {\n                    width: 20%;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                width: 60%;\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            border-left: $border-left-size solid $boolean-color;\n\n            &:hover {\n                background: #111;\n            }\n        }\n\n        &.function {\n            border-left: $border-left-size solid $function-color;\n\n            &:hover {\n                background: #111;\n            }\n        }\n\n        label {\n            width: 40%;\n            padding: 5px;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            outline: none;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 11px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: flex;\n    border-bottom: 1px solid #272727;\n    user-select: none; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: none;\n        position: relative;\n        width: 40%;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        user-select: none;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:hover, .react-dat-gui .cr.number .slider.is-active {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.number .slider .slider-bar {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%;\n          background-color: #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        width: 60%;\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number.has-slider .slider {\n        display: block; }\n      .react-dat-gui .cr.number.has-slider input[type=text] {\n        width: 20%; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        width: 60%;\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean .checkbox-wrapper {\n        position: relative;\n        width: 60%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox {\n          width: calc(1.2em + 10px);\n          border: 3px solid #1a1a1a;\n          background: #303030;\n          z-index: 0; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          margin: 0;\n          opacity: 0;\n          z-index: 1; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox:after {\n          content: '';\n          display: block;\n          position: absolute;\n          top: 0.35em;\n          right: 0.35em;\n          bottom: 0.35em;\n          left: 0.35em;\n          background: #8d7394; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:hover ~ .checkbox {\n          background-color: #3c3c3c; }\n    .react-dat-gui .cr.function {\n      border-left: 5px solid #e61d5f; }\n      .react-dat-gui .cr.function:hover {\n        background: #111; }\n    .react-dat-gui .cr label {\n      display: inline-block;\n      align-items: center;\n      min-width: 0;\n      width: 40%;\n      padding: 5px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      user-select: none; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      outline: none;\n      font-size: inherit; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EA4K5C;EAvLD;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA1Cc,EA0DjB;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,cAAc;IACd,iCAlDc;IAmDd,kBAAkB,EAwIrB;IAtLL;MAiDY,+BA7DU,EAoGb;MAxFT;QAoDgB,cAAc;QACd,mBAAmB;QACnB,WAAW;QACX,0BAzEU;QA0EV,wBAAwB;QACxB,0BA7DK;QA8DL,kBAAkB;QAClB,kBAAkB,EAcrB;QAzEb;UA8DoB,0BAAyB,EAC5B;QA/DjB;UAkEoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa;UACb,0BAnFE,EAoFL;MAxEjB;QA4EgB,WAAW;QACX,eAzFM,EA0FT;MA9Eb;QAkFoB,eAAe,EAClB;MAnFjB;QAqFoB,WAAW,EACd;IAtFjB;MA2FY,+BArGU,EA2Gb;MAjGT;QA8FgB,WAAW;QACX,eAzGM,EA0GT;IAhGb;MAoGY,+BA/GW,EA0Jd;MA/IT;QAuGgB,mBAAmB;QACnB,WAAW,EAsCd;QA9Ib;;UA4GoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa,EAChB;QAjHjB;UAoHoB,0BAAW;UACX,0BAvIM;UAwIN,oBA1HC;UA2HD,WAAW,EACd;QAxHjB;UA2HoB,UAAU;UACV,WAAW;UACX,WAAW,EACd;QA9HjB;UAiIoB,YAAY;UACZ,eAAe;UACf,mBAAmB;UACnB,YAAY;UACZ,cAAc;UACd,eAAe;UACf,aAAa;UACb,oBAAmB,EACtB;QAzIjB;UA4IoB,0BAAyB,EAC5B;IA7IjB;MAkJY,+BA3JY,EAgKf;MAvJT;QAqJgB,iBAAiB,EACpB;IAtJb;MA0JY,sBAAsB;MACtB,oBAAoB;MACpB,aAAa;MACb,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB;MACxB,kBAAkB,EACrB;IAnKT;MAsKY,oBA1KS;MA2KT,0BAzLc;MA0Ld,iBAAiB;MACjB,iBAAiB;MACjB,cAAc;MACd,mBAAmB,EAUtB;MArLT;QA8KgB,oBAAmB,EACtB;MA/Kb;QAkLgB,oBAAmB;QACnB,YAAY,EACf","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$function-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 11px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $background-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: flex;\n        border-bottom: 1px solid $border-color;\n        user-select: none;\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            .slider {\n                display: none;\n                position: relative;\n                width: 40%;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                user-select: none;\n                cursor: ew-resize;\n\n                &:hover, &.is-active {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                .slider-bar {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: $number-color;\n                }\n            }\n            \n            input[type=text] {\n                width: 60%;\n                color: $number-color;\n            }\n            \n            &.has-slider {\n                .slider {\n                    display: block;\n                }\n                input[type=text] {\n                    width: 20%;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                width: 60%;\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            border-left: $border-left-size solid $boolean-color;\n\n            .checkbox-wrapper {\n                position: relative;\n                width: 60%;\n\n                .checkbox,\n                input[type=checkbox] {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                }\n\n                .checkbox {\n                    width: calc(1.2em + 10px);\n                    border: 3px solid $background-color;\n                    background: $input-color;\n                    z-index: 0;\n                }\n\n                input[type=checkbox] {\n                    margin: 0;\n                    opacity: 0;\n                    z-index: 1;\n                }\n\n                input[type=checkbox]:checked ~ .checkbox:after {\n                    content: '';\n                    display: block;\n                    position: absolute;\n                    top: 0.35em;\n                    right: 0.35em;\n                    bottom: 0.35em;\n                    left: 0.35em;\n                    background: lighten($boolean-color, 5%);\n                }\n\n                input[type=checkbox]:hover ~ .checkbox {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n            }\n        }\n\n        &.function {\n            border-left: $border-left-size solid $function-color;\n\n            &:hover {\n                background: #111;\n            }\n        }\n\n        label {\n            display: inline-block;\n            align-items: center;\n            min-width: 0;\n            width: 40%;\n            padding: 5px;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n            user-select: none;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            outline: none;\n            font-size: inherit;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports) {
 
 	/*
@@ -37462,7 +37605,7 @@
 
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
