@@ -118,9 +118,13 @@ $border-left-size: 5px;
         &.boolean {
             border-left: $border-left-size solid $boolean-color;
 
+            label {
+                width: calc(100% - 1.2em - 10px);
+            }
+
             .checkbox-wrapper {
                 position: relative;
-                width: 60%;
+                width: calc(1.2em + 10px);
 
                 .checkbox,
                 input[type=checkbox] {
@@ -132,10 +136,22 @@ $border-left-size: 5px;
                 }
 
                 .checkbox {
-                    width: calc(1.2em + 10px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     border: 3px solid $background-color;
                     background: $input-color;
                     z-index: 0;
+                    left: auto;
+                    right: 0;
+
+                    > .checkmark {
+                        display: none;
+                        width: 0.7em;
+                        height: 0.7em;
+                        stroke-width: 10px;
+                        stroke: lighten($boolean-color, 10%);
+                    }
                 }
 
                 input[type=checkbox] {
@@ -144,24 +160,12 @@ $border-left-size: 5px;
                     z-index: 1;
                 }
 
-                input[type=checkbox]:checked ~ .checkbox:after {
-                    content: '';
+                input[type=checkbox]:checked ~ .checkbox > .checkmark {
                     display: block;
-                    position: absolute;
-                    top: 0.35em;
-                    right: 0.35em;
-                    bottom: 0.35em;
-                    left: 0.35em;
-                    background: lighten($boolean-color, 5%);
                 }
 
                 input[type=checkbox]:hover ~ .checkbox {
                     background-color: lighten($input-color, $hover-lighten);
-                }
-
-                input[type=checkbox]:focus ~ .checkbox,
-                input[type=checkbox]:active ~ .checkbox {
-                    background-color: lighten($input-color, $active-lighten);
                 }
             }
         }

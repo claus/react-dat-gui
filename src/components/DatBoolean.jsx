@@ -69,7 +69,11 @@ class DatBoolean extends React.Component {
                         id={id}
                         checked={value}
                         onChange={this.handleChange} />
-                    <div className="checkbox" />
+                    <div className="checkbox">
+                        <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <path d="M0,0L50,50M50,0L0,50Z" />
+                        </svg>
+                    </div>
                 </div>
             </li>
         );
