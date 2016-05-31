@@ -11,6 +11,7 @@ class DatString extends React.Component {
         liveUpdate: PropTypes.bool,
         onUpdate: PropTypes.func,
         _onUpdateValue: PropTypes.func,
+        _labelWidth: PropTypes.number,
     };
 
     constructor(props, context) {
@@ -35,6 +36,7 @@ class DatString extends React.Component {
         return nextProps.id !== this.props.id ||
                nextProps.path !== this.props.path ||
                nextProps.label !== this.props.label ||
+               nextProps._labelWidth !== this.props._labelWidth ||
                nextState.value !== this.state.value;
     }
 
@@ -61,16 +63,19 @@ class DatString extends React.Component {
     }
 
     render() {
-        const { id } = this.props;
+        const { id, _labelWidth } = this.props;
         const { value } = this.state;
         const label = isString(this.props.label) ? this.props.label : this.props.path;
+        const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};
+        const inputStyle = _labelWidth ? { width: `${100 - _labelWidth}%` } : {};
         return (
             <li className="cr string">
-                <label htmlFor={id}>{label}</label>
+                <label htmlFor={id} style={labelStyle}>{label}</label>
                 <input
                     type="text"
                     id={id}
                     value={value}
+                    style={inputStyle}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur} />
             </li>

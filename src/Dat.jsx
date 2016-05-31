@@ -10,6 +10,8 @@ class Dat extends React.Component {
         onUpdate: PropTypes.func.isRequired,
         liveUpdate: PropTypes.bool,
         className: PropTypes.string,
+        style: PropTypes.object,
+        labelWidth: PropTypes.number,
     };
 
     static defaultProps = {
@@ -28,7 +30,7 @@ class Dat extends React.Component {
     }
 
     renderChildren() {
-        const { children, data } = this.props;
+        const { children, data, labelWidth } = this.props;
         return React.Children.toArray(children).map((child, i) => {
             const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
             return cloneElement(child, {
@@ -36,15 +38,17 @@ class Dat extends React.Component {
                 key: i,
                 data,
                 liveUpdate,
+                _labelWidth: labelWidth,
                 _onUpdateValue: this.handleUpdateValue,
             });
         });
     }
 
     render() {
+        const { style = {} } = this.props;
         const className = cx('react-dat-gui', this.props.className);
         return (
-            <div className={className}>
+            <div className={className} style={style}>
                 <ul className="dg main">
                     {this.renderChildren()}
                 </ul>

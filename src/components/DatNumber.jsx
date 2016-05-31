@@ -12,6 +12,7 @@ class DatNumber extends React.Component {
         liveUpdate: PropTypes.bool,
         onUpdate: PropTypes.func,
         _onUpdateValue: PropTypes.func,
+        _labelWidth: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
         step: PropTypes.number,
@@ -48,6 +49,7 @@ class DatNumber extends React.Component {
         return nextProps.id !== this.props.id ||
                nextProps.path !== this.props.path ||
                nextProps.label !== this.props.label ||
+               nextProps._labelWidth !== this.props._labelWidth ||
                nextProps.min !== this.props.value ||
                nextProps.max !== this.props.value ||
                nextProps.step !== this.props.value ||
@@ -150,23 +152,27 @@ class DatNumber extends React.Component {
     }
 
     render() {
-        const { id, min, max } = this.props;
+        const { id, min, max, _labelWidth } = this.props;
         const { value, isSliderActive } = this.state;
         const label = isString(this.props.label) ? this.props.label : this.props.path;
         const hasSlider = isFinite(min) && isFinite(min);
+        const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};
+        const sliderStyle = _labelWidth ? { width: `${2 * (100 - _labelWidth) / 3}%` } : {};
+        const inputStyle = _labelWidth ? { width: `${hasSlider ? (100 - _labelWidth) / 3 : 100 - _labelWidth}%` } : {};
         const sliderPercent = (this.applyConstraints(value) - min) * 100 / (max - min);
         const sliderBarStyle = hasSlider ? { maxWidth: `${sliderPercent}%` } : {};
         const sliderClassName = cx('slider', { 'is-active': isSliderActive })
         const className = cx('cr', 'number', { 'has-slider': hasSlider });
         return (
             <li className={className}>
-                <label htmlFor={id}>{label}</label>
-                <div className={sliderClassName} ref="slider" onMouseDown={this.handleMouseDown}>
+                <label htmlFor={id} style={labelStyle}>{label}</label>
+                <div className={sliderClassName} style={sliderStyle} ref="slider" onMouseDown={this.handleMouseDown}>
                     <div className="slider-bar" style={sliderBarStyle} />
                 </div>
                 <input
                     type="text"
                     inputMode="numeric"
+                    style={inputStyle}
                     id={id}
                     value={value}
                     onChange={this.handleChange}
