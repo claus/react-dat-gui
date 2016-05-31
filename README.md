@@ -2,6 +2,10 @@
 
 Currently very much under construction.
 
+## Demo
+
+https://react-dat-gui.herokuapp.com/
+
 ## Installation
 
 ```
