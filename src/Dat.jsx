@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import { set, cloneDeep, isUndefined } from 'lodash';
 import React, { PropTypes, cloneElement } from 'react';
 
@@ -8,6 +9,7 @@ class Dat extends React.Component {
         children: PropTypes.node.isRequired,
         onUpdate: PropTypes.func.isRequired,
         liveUpdate: PropTypes.bool,
+        className: PropTypes.string,
     };
 
     static defaultProps = {
@@ -40,8 +42,9 @@ class Dat extends React.Component {
     }
 
     render() {
+        const className = cx('react-dat-gui', this.props.className);
         return (
-            <div className="react-dat-gui">
+            <div className={className}>
                 <ul className="dg main">
                     {this.renderChildren()}
                 </ul>
