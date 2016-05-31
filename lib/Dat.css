@@ -3,7 +3,7 @@
   right: 16px;
   top: 0;
   width: 280px;
-  font-size: 11px;
+  font-size: 12px;
   font-family: 'Lucida Grande', sans-serif;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -65,9 +65,11 @@
         color: #1ed36f; }
     .react-dat-gui .cr.boolean {
       border-left: 5px solid #806787; }
+      .react-dat-gui .cr.boolean label {
+        width: calc(100% - 1.2em - 10px); }
       .react-dat-gui .cr.boolean .checkbox-wrapper {
         position: relative;
-        width: 60%; }
+        width: calc(1.2em + 10px); }
         .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox,
         .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {
           position: absolute;
@@ -76,28 +78,28 @@
           width: 100%;
           height: 100%; }
         .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox {
-          width: calc(1.2em + 10px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border: 3px solid #1a1a1a;
           background: #303030;
-          z-index: 0; }
+          z-index: 0;
+          left: auto;
+          right: 0; }
+          .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox > .checkmark {
+            display: none;
+            width: 0.7em;
+            height: 0.7em;
+            stroke-width: 10px;
+            stroke: #99829f; }
         .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {
           margin: 0;
           opacity: 0;
           z-index: 1; }
-        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox:after {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0.35em;
-          right: 0.35em;
-          bottom: 0.35em;
-          left: 0.35em;
-          background: #8d7394; }
+        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox > .checkmark {
+          display: block; }
         .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:hover ~ .checkbox {
           background-color: #3c3c3c; }
-        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:focus ~ .checkbox,
-        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:active ~ .checkbox {
-          background-color: #494949; }
     .react-dat-gui .cr.button {
       border-left: 5px solid #c5bdad; }
       .react-dat-gui .cr.button:hover {
