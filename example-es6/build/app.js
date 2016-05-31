@@ -20463,6 +20463,10 @@
 	    }
 	});
 	
+	var _classnames = __webpack_require__(173);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _lodash = __webpack_require__(170);
 	
 	var _react = __webpack_require__(1);
@@ -20507,6 +20511,7 @@
 	            var _props2 = this.props;
 	            var children = _props2.children;
 	            var data = _props2.data;
+	            var labelWidth = _props2.labelWidth;
 	
 	            return _react2.default.Children.toArray(children).map(function (child, i) {
 	                var liveUpdate = (0, _lodash.isUndefined)(child.props.liveUpdate) ? _this2.props.liveUpdate : child.props.liveUpdate;
@@ -20515,6 +20520,7 @@
 	                    key: i,
 	                    data: data,
 	                    liveUpdate: liveUpdate,
+	                    _labelWidth: labelWidth,
 	                    _onUpdateValue: _this2.handleUpdateValue
 	                });
 	            });
@@ -20522,9 +20528,13 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _props$style = this.props.style;
+	            var style = _props$style === undefined ? {} : _props$style;
+	
+	            var className = (0, _classnames2.default)('react-dat-gui', this.props.className);
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'react-dat-gui' },
+	                { className: className, style: style },
 	                _react2.default.createElement(
 	                    'ul',
 	                    { className: 'dg main' },
@@ -20541,7 +20551,10 @@
 	    data: _react.PropTypes.object.isRequired,
 	    children: _react.PropTypes.node.isRequired,
 	    onUpdate: _react.PropTypes.func.isRequired,
-	    liveUpdate: _react.PropTypes.bool
+	    liveUpdate: _react.PropTypes.bool,
+	    className: _react.PropTypes.string,
+	    style: _react.PropTypes.object,
+	    labelWidth: _react.PropTypes.number
 	};
 	Dat.defaultProps = {
 	    liveUpdate: true
@@ -20640,22 +20653,27 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var id = this.props.id;
+	            var _props = this.props;
+	            var id = _props.id;
+	            var _labelWidth = _props._labelWidth;
 	            var value = this.state.value;
 	
 	            var label = (0, _lodash.isString)(this.props.label) ? this.props.label : this.props.path;
+	            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
+	            var inputStyle = _labelWidth ? { width: 100 - _labelWidth + '%' } : {};
 	            return _react2.default.createElement(
 	                'li',
 	                { className: 'cr string' },
 	                _react2.default.createElement(
 	                    'label',
-	                    { htmlFor: id },
+	                    { htmlFor: id, style: labelStyle },
 	                    label
 	                ),
 	                _react2.default.createElement('input', {
 	                    type: 'text',
 	                    id: id,
 	                    value: value,
+	                    style: inputStyle,
 	                    onChange: this.handleChange,
 	                    onBlur: this.handleBlur })
 	            );
@@ -20672,7 +20690,8 @@
 	    label: _react.PropTypes.string,
 	    liveUpdate: _react.PropTypes.bool,
 	    onUpdate: _react.PropTypes.func,
-	    _onUpdateValue: _react.PropTypes.func
+	    _onUpdateValue: _react.PropTypes.func,
+	    _labelWidth: _react.PropTypes.number
 	};
 	exports.default = DatString;
 
@@ -37309,12 +37328,16 @@
 	            var id = _props3.id;
 	            var min = _props3.min;
 	            var max = _props3.max;
+	            var _labelWidth = _props3._labelWidth;
 	            var _state = this.state;
 	            var value = _state.value;
 	            var isSliderActive = _state.isSliderActive;
 	
 	            var label = (0, _lodash.isString)(this.props.label) ? this.props.label : this.props.path;
 	            var hasSlider = (0, _lodash.isFinite)(min) && (0, _lodash.isFinite)(min);
+	            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
+	            var sliderStyle = _labelWidth ? { width: 2 * (100 - _labelWidth) / 3 + '%' } : {};
+	            var inputStyle = _labelWidth ? { width: (hasSlider ? (100 - _labelWidth) / 3 : 100 - _labelWidth) + '%' } : {};
 	            var sliderPercent = (this.applyConstraints(value) - min) * 100 / (max - min);
 	            var sliderBarStyle = hasSlider ? { maxWidth: sliderPercent + '%' } : {};
 	            var sliderClassName = (0, _classnames2.default)('slider', { 'is-active': isSliderActive });
@@ -37324,17 +37347,18 @@
 	                { className: className },
 	                _react2.default.createElement(
 	                    'label',
-	                    { htmlFor: id },
+	                    { htmlFor: id, style: labelStyle },
 	                    label
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: sliderClassName, ref: 'slider', onMouseDown: this.handleMouseDown },
+	                    { className: sliderClassName, style: sliderStyle, ref: 'slider', onMouseDown: this.handleMouseDown },
 	                    _react2.default.createElement('div', { className: 'slider-bar', style: sliderBarStyle })
 	                ),
 	                _react2.default.createElement('input', {
 	                    type: 'text',
 	                    inputMode: 'numeric',
+	                    style: inputStyle,
 	                    id: id,
 	                    value: value,
 	                    onChange: this.handleChange,
@@ -37355,6 +37379,7 @@
 	    liveUpdate: _react.PropTypes.bool,
 	    onUpdate: _react.PropTypes.func,
 	    _onUpdateValue: _react.PropTypes.func,
+	    _labelWidth: _react.PropTypes.number,
 	    min: _react.PropTypes.number,
 	    max: _react.PropTypes.number,
 	    step: _react.PropTypes.number
