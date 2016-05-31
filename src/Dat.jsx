@@ -56,3 +56,4 @@ export default Dat;
 export { default as DatString } from './components/DatString';
 export { default as DatNumber } from './components/DatNumber';
 export { default as DatBoolean } from './components/DatBoolean';
+export { default as DatButton } from './components/DatButton';

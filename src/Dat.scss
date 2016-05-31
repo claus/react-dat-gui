@@ -7,7 +7,7 @@ $active-lighten: 10%;
 $number-color: #2FA1D6;
 $boolean-color: #806787;
 $string-color: #1ed36f;
-$function-color: #e61d5f;
+$button-color: #e61d5f;
 $save-row-color: #dad5cb;
 
 $button-color: darken($save-row-color, 10%);
@@ -166,15 +166,20 @@ $border-left-size: 5px;
             }
         }
 
-        &.function {
-            border-left: $border-left-size solid $function-color;
+        &.button {
+            border-left: $border-left-size solid $button-color;
 
             &:hover {
                 background: #111;
             }
+
+            span {
+                width: 100%;
+                cursor: pointer;
+            }
         }
 
-        label {
+        label, span {
             display: inline-block;
             align-items: center;
             min-width: 0;

@@ -79,7 +79,9 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props, context));
 	
 	        _this.handleUpdate = _this.handleUpdate.bind(_this);
+	        _this.handleClick = _this.handleClick.bind(_this);
 	        _this.state = {
+	            flashCounter: 0,
 	            data: {
 	                string: 'Hello World',
 	                number: 66,
@@ -95,22 +97,45 @@
 	            this.setState({ data: data });
 	        }
 	    }, {
+	        key: 'handleClick',
+	        value: function handleClick() {
+	            var _this2 = this;
+	
+	            clearInterval(this.iv);
+	            this.setState({ flashCounter: 0 });
+	            this.iv = setInterval(function () {
+	                var flashCounter = _this2.state.flashCounter + 1;
+	                if (flashCounter === 20) {
+	                    clearInterval(_this2.iv);
+	                    flashCounter = 0;
+	                }
+	                _this2.setState({ flashCounter: flashCounter });
+	            }, 30);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _state = this.state;
+	            var data = _state.data;
+	            var color = _state.color;
+	            var flashCounter = _state.flashCounter;
+	
+	            var style = { color: '#' + (flashCounter ? Math.floor(Math.random() * 16777215).toString(16) : 'fff') };
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    'pre',
-	                    null,
-	                    JSON.stringify(this.state.data, null, 2)
+	                    { style: style },
+	                    JSON.stringify(data, null, 2)
 	                ),
 	                _react2.default.createElement(
 	                    _Dat2.default,
-	                    { data: this.state.data, onUpdate: this.handleUpdate },
+	                    { data: data, onUpdate: this.handleUpdate },
 	                    _react2.default.createElement(_Dat.DatString, { path: 'string', label: 'String' }),
 	                    _react2.default.createElement(_Dat.DatNumber, { path: 'number', label: 'Number', min: 0, max: 100, step: 1 }),
-	                    _react2.default.createElement(_Dat.DatBoolean, { path: 'boolean', label: 'Boolean' })
+	                    _react2.default.createElement(_Dat.DatBoolean, { path: 'boolean', label: 'Boolean' }),
+	                    _react2.default.createElement(_Dat.DatButton, { label: 'Button', onClick: this.handleClick })
 	                )
 	            );
 	        }
@@ -20398,7 +20423,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
+	exports.DatButton = exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -20426,6 +20451,15 @@
 	    enumerable: true,
 	    get: function get() {
 	        return _interopRequireDefault(_DatBoolean).default;
+	    }
+	});
+	
+	var _DatButton = __webpack_require__(179);
+	
+	Object.defineProperty(exports, 'DatButton', {
+	    enumerable: true,
+	    get: function get() {
+	        return _interopRequireDefault(_DatButton).default;
 	    }
 	});
 	
@@ -37543,7 +37577,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 11px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: flex;\n    border-bottom: 1px solid #272727;\n    user-select: none; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: none;\n        position: relative;\n        width: 40%;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        user-select: none;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:hover, .react-dat-gui .cr.number .slider.is-active {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.number .slider .slider-bar {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%;\n          background-color: #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        width: 60%;\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number.has-slider .slider {\n        display: block; }\n      .react-dat-gui .cr.number.has-slider input[type=text] {\n        width: 20%; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        width: 60%;\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean .checkbox-wrapper {\n        position: relative;\n        width: 60%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox {\n          width: calc(1.2em + 10px);\n          border: 3px solid #1a1a1a;\n          background: #303030;\n          z-index: 0; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          margin: 0;\n          opacity: 0;\n          z-index: 1; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox:after {\n          content: '';\n          display: block;\n          position: absolute;\n          top: 0.35em;\n          right: 0.35em;\n          bottom: 0.35em;\n          left: 0.35em;\n          background: #8d7394; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:hover ~ .checkbox {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:focus ~ .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:active ~ .checkbox {\n          background-color: #494949; }\n    .react-dat-gui .cr.function {\n      border-left: 5px solid #e61d5f; }\n      .react-dat-gui .cr.function:hover {\n        background: #111; }\n    .react-dat-gui .cr label {\n      display: inline-block;\n      align-items: center;\n      min-width: 0;\n      width: 40%;\n      padding: 5px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      user-select: none; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      outline: none;\n      font-size: inherit; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EAiL5C;EA5LD;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA1Cc,EA0DjB;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,cAAc;IACd,iCAlDc;IAmDd,kBAAkB,EA6IrB;IA3LL;MAiDY,+BA7DU,EAoGb;MAxFT;QAoDgB,cAAc;QACd,mBAAmB;QACnB,WAAW;QACX,0BAzEU;QA0EV,wBAAwB;QACxB,0BA7DK;QA8DL,kBAAkB;QAClB,kBAAkB,EAcrB;QAzEb;UA8DoB,0BAAyB,EAC5B;QA/DjB;UAkEoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa;UACb,0BAnFE,EAoFL;MAxEjB;QA4EgB,WAAW;QACX,eAzFM,EA0FT;MA9Eb;QAkFoB,eAAe,EAClB;MAnFjB;QAqFoB,WAAW,EACd;IAtFjB;MA2FY,+BArGU,EA2Gb;MAjGT;QA8FgB,WAAW;QACX,eAzGM,EA0GT;IAhGb;MAoGY,+BA/GW,EA+Jd;MApJT;QAuGgB,mBAAmB;QACnB,WAAW,EA2Cd;QAnJb;;UA4GoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa,EAChB;QAjHjB;UAoHoB,0BAAW;UACX,0BAvIM;UAwIN,oBA1HC;UA2HD,WAAW,EACd;QAxHjB;UA2HoB,UAAU;UACV,WAAW;UACX,WAAW,EACd;QA9HjB;UAiIoB,YAAY;UACZ,eAAe;UACf,mBAAmB;UACnB,YAAY;UACZ,cAAc;UACd,eAAe;UACf,aAAa;UACb,oBAAmB,EACtB;QAzIjB;UA4IoB,0BAAyB,EAC5B;QA7IjB;;UAiJoB,0BAAyB,EAC5B;IAlJjB;MAuJY,+BAhKY,EAqKf;MA5JT;QA0JgB,iBAAiB,EACpB;IA3Jb;MA+JY,sBAAsB;MACtB,oBAAoB;MACpB,aAAa;MACb,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB;MACxB,kBAAkB,EACrB;IAxKT;MA2KY,oBA/KS;MAgLT,0BA9Lc;MA+Ld,iBAAiB;MACjB,iBAAiB;MACjB,cAAc;MACd,mBAAmB,EAUtB;MA1LT;QAmLgB,oBAAmB,EACtB;MApLb;QAuLgB,oBAAmB;QACnB,YAAY,EACf","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$function-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 11px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $background-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: flex;\n        border-bottom: 1px solid $border-color;\n        user-select: none;\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            .slider {\n                display: none;\n                position: relative;\n                width: 40%;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                user-select: none;\n                cursor: ew-resize;\n\n                &:hover, &.is-active {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                .slider-bar {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: $number-color;\n                }\n            }\n            \n            input[type=text] {\n                width: 60%;\n                color: $number-color;\n            }\n            \n            &.has-slider {\n                .slider {\n                    display: block;\n                }\n                input[type=text] {\n                    width: 20%;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                width: 60%;\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            border-left: $border-left-size solid $boolean-color;\n\n            .checkbox-wrapper {\n                position: relative;\n                width: 60%;\n\n                .checkbox,\n                input[type=checkbox] {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                }\n\n                .checkbox {\n                    width: calc(1.2em + 10px);\n                    border: 3px solid $background-color;\n                    background: $input-color;\n                    z-index: 0;\n                }\n\n                input[type=checkbox] {\n                    margin: 0;\n                    opacity: 0;\n                    z-index: 1;\n                }\n\n                input[type=checkbox]:checked ~ .checkbox:after {\n                    content: '';\n                    display: block;\n                    position: absolute;\n                    top: 0.35em;\n                    right: 0.35em;\n                    bottom: 0.35em;\n                    left: 0.35em;\n                    background: lighten($boolean-color, 5%);\n                }\n\n                input[type=checkbox]:hover ~ .checkbox {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                input[type=checkbox]:focus ~ .checkbox,\n                input[type=checkbox]:active ~ .checkbox {\n                    background-color: lighten($input-color, $active-lighten);\n                }\n            }\n        }\n\n        &.function {\n            border-left: $border-left-size solid $function-color;\n\n            &:hover {\n                background: #111;\n            }\n        }\n\n        label {\n            display: inline-block;\n            align-items: center;\n            min-width: 0;\n            width: 40%;\n            padding: 5px;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n            user-select: none;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            outline: none;\n            font-size: inherit;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 11px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: flex;\n    border-bottom: 1px solid #272727;\n    user-select: none; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: none;\n        position: relative;\n        width: 40%;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        user-select: none;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:hover, .react-dat-gui .cr.number .slider.is-active {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.number .slider .slider-bar {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%;\n          background-color: #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        width: 60%;\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number.has-slider .slider {\n        display: block; }\n      .react-dat-gui .cr.number.has-slider input[type=text] {\n        width: 20%; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        width: 60%;\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean .checkbox-wrapper {\n        position: relative;\n        width: 60%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox {\n          width: calc(1.2em + 10px);\n          border: 3px solid #1a1a1a;\n          background: #303030;\n          z-index: 0; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          margin: 0;\n          opacity: 0;\n          z-index: 1; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox:after {\n          content: '';\n          display: block;\n          position: absolute;\n          top: 0.35em;\n          right: 0.35em;\n          bottom: 0.35em;\n          left: 0.35em;\n          background: #8d7394; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:hover ~ .checkbox {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:focus ~ .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:active ~ .checkbox {\n          background-color: #494949; }\n    .react-dat-gui .cr.button {\n      border-left: 5px solid #c5bdad; }\n      .react-dat-gui .cr.button:hover {\n        background: #111; }\n      .react-dat-gui .cr.button span {\n        width: 100%;\n        cursor: pointer; }\n    .react-dat-gui .cr label, .react-dat-gui .cr span {\n      display: inline-block;\n      align-items: center;\n      min-width: 0;\n      width: 40%;\n      padding: 5px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      user-select: none; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      outline: none;\n      font-size: inherit; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EAsL5C;EAjMD;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA1Cc,EA0DjB;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,cAAc;IACd,iCAlDc;IAmDd,kBAAkB,EAkJrB;IAhML;MAiDY,+BA7DU,EAoGb;MAxFT;QAoDgB,cAAc;QACd,mBAAmB;QACnB,WAAW;QACX,0BAzEU;QA0EV,wBAAwB;QACxB,0BA7DK;QA8DL,kBAAkB;QAClB,kBAAkB,EAcrB;QAzEb;UA8DoB,0BAAyB,EAC5B;QA/DjB;UAkEoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa;UACb,0BAnFE,EAoFL;MAxEjB;QA4EgB,WAAW;QACX,eAzFM,EA0FT;MA9Eb;QAkFoB,eAAe,EAClB;MAnFjB;QAqFoB,WAAW,EACd;IAtFjB;MA2FY,+BArGU,EA2Gb;MAjGT;QA8FgB,WAAW;QACX,eAzGM,EA0GT;IAhGb;MAoGY,+BA/GW,EA+Jd;MApJT;QAuGgB,mBAAmB;QACnB,WAAW,EA2Cd;QAnJb;;UA4GoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa,EAChB;QAjHjB;UAoHoB,0BAAW;UACX,0BAvIM;UAwIN,oBA1HC;UA2HD,WAAW,EACd;QAxHjB;UA2HoB,UAAU;UACV,WAAW;UACX,WAAW,EACd;QA9HjB;UAiIoB,YAAY;UACZ,eAAe;UACf,mBAAmB;UACnB,YAAY;UACZ,cAAc;UACd,eAAe;UACf,aAAa;UACb,oBAAmB,EACtB;QAzIjB;UA4IoB,0BAAyB,EAC5B;QA7IjB;;UAiJoB,0BAAyB,EAC5B;IAlJjB;MAuJY,+BA7JS,EAuKZ;MAjKT;QA0JgB,iBAAiB,EACpB;MA3Jb;QA8JgB,YAAY;QACZ,gBAAgB,EACnB;IAhKb;MAoKY,sBAAsB;MACtB,oBAAoB;MACpB,aAAa;MACb,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB;MACxB,kBAAkB,EACrB;IA7KT;MAgLY,oBApLS;MAqLT,0BAnMc;MAoMd,iBAAiB;MACjB,iBAAiB;MACjB,cAAc;MACd,mBAAmB,EAUtB;MA/LT;QAwLgB,oBAAmB,EACtB;MAzLb;QA4LgB,oBAAmB;QACnB,YAAY,EACf","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$button-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 11px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $background-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: flex;\n        border-bottom: 1px solid $border-color;\n        user-select: none;\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            .slider {\n                display: none;\n                position: relative;\n                width: 40%;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                user-select: none;\n                cursor: ew-resize;\n\n                &:hover, &.is-active {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                .slider-bar {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: $number-color;\n                }\n            }\n            \n            input[type=text] {\n                width: 60%;\n                color: $number-color;\n            }\n            \n            &.has-slider {\n                .slider {\n                    display: block;\n                }\n                input[type=text] {\n                    width: 20%;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                width: 60%;\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            border-left: $border-left-size solid $boolean-color;\n\n            .checkbox-wrapper {\n                position: relative;\n                width: 60%;\n\n                .checkbox,\n                input[type=checkbox] {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                }\n\n                .checkbox {\n                    width: calc(1.2em + 10px);\n                    border: 3px solid $background-color;\n                    background: $input-color;\n                    z-index: 0;\n                }\n\n                input[type=checkbox] {\n                    margin: 0;\n                    opacity: 0;\n                    z-index: 1;\n                }\n\n                input[type=checkbox]:checked ~ .checkbox:after {\n                    content: '';\n                    display: block;\n                    position: absolute;\n                    top: 0.35em;\n                    right: 0.35em;\n                    bottom: 0.35em;\n                    left: 0.35em;\n                    background: lighten($boolean-color, 5%);\n                }\n\n                input[type=checkbox]:hover ~ .checkbox {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                input[type=checkbox]:focus ~ .checkbox,\n                input[type=checkbox]:active ~ .checkbox {\n                    background-color: lighten($input-color, $active-lighten);\n                }\n            }\n        }\n\n        &.button {\n            border-left: $border-left-size solid $button-color;\n\n            &:hover {\n                background: #111;\n            }\n\n            span {\n                width: 100%;\n                cursor: pointer;\n            }\n        }\n\n        label, span {\n            display: inline-block;\n            align-items: center;\n            min-width: 0;\n            width: 40%;\n            padding: 5px;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n            user-select: none;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            outline: none;\n            font-size: inherit;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -37855,6 +37889,76 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DatButton = function (_React$Component) {
+	    _inherits(DatButton, _React$Component);
+	
+	    function DatButton(props, context) {
+	        _classCallCheck(this, DatButton);
+	
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatButton).call(this, props, context));
+	
+	        _this.handleClick = _this.handleClick.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(DatButton, [{
+	        key: "shouldComponentUpdate",
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            return nextProps.label !== this.props.label;
+	        }
+	    }, {
+	        key: "handleClick",
+	        value: function handleClick(event) {}
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var label = this.props.label;
+	
+	            return _react2.default.createElement(
+	                "li",
+	                { className: "cr button" },
+	                _react2.default.createElement(
+	                    "span",
+	                    { onClick: this.props.onClick },
+	                    label
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return DatButton;
+	}(_react2.default.Component);
+	
+	DatButton.propTypes = {
+	    label: _react.PropTypes.string,
+	    onClick: _react.PropTypes.func
+	};
+	exports.default = DatButton;
 
 /***/ }
 /******/ ]);
