@@ -4,7 +4,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
+exports.DatButton = exports.DatBoolean = exports.DatNumber = exports.DatString = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -32,6 +32,15 @@ Object.defineProperty(exports, 'DatBoolean', {
     enumerable: true,
     get: function get() {
         return _interopRequireDefault(_DatBoolean).default;
+    }
+});
+
+var _DatButton = require('./components/DatButton');
+
+Object.defineProperty(exports, 'DatButton', {
+    enumerable: true,
+    get: function get() {
+        return _interopRequireDefault(_DatButton).default;
     }
 });
 
@@ -120,7 +129,7 @@ Dat.defaultProps = {
 };
 exports.default = Dat;
 
-},{"./components/DatBoolean":2,"./components/DatNumber":3,"./components/DatString":4,"lodash":6}],2:[function(require,module,exports){
+},{"./components/DatBoolean":2,"./components/DatButton":3,"./components/DatNumber":4,"./components/DatString":5,"lodash":7}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -245,7 +254,75 @@ DatBoolean.propTypes = {
 exports.default = DatBoolean;
 module.exports = exports['default'];
 
-},{"lodash":6}],3:[function(require,module,exports){
+},{"lodash":7}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = (window.React);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DatButton = function (_React$Component) {
+    _inherits(DatButton, _React$Component);
+
+    function DatButton(props, context) {
+        _classCallCheck(this, DatButton);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatButton).call(this, props, context));
+
+        _this.handleClick = _this.handleClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(DatButton, [{
+        key: "shouldComponentUpdate",
+        value: function shouldComponentUpdate(nextProps, nextState) {
+            return nextProps.label !== this.props.label;
+        }
+    }, {
+        key: "handleClick",
+        value: function handleClick(event) {}
+    }, {
+        key: "render",
+        value: function render() {
+            var label = this.props.label;
+
+            return _react2.default.createElement(
+                "li",
+                { className: "cr button" },
+                _react2.default.createElement(
+                    "span",
+                    { onClick: this.props.onClick },
+                    label
+                )
+            );
+        }
+    }]);
+
+    return DatButton;
+}(_react2.default.Component);
+
+DatButton.propTypes = {
+    label: _react.PropTypes.string,
+    onClick: _react.PropTypes.func
+};
+exports.default = DatButton;
+module.exports = exports["default"];
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -501,7 +578,7 @@ DatNumber.propTypes = {
 exports.default = DatNumber;
 module.exports = exports['default'];
 
-},{"classnames":5,"lodash":6}],4:[function(require,module,exports){
+},{"classnames":6,"lodash":7}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -627,7 +704,7 @@ DatString.propTypes = {
 exports.default = DatString;
 module.exports = exports['default'];
 
-},{"lodash":6}],5:[function(require,module,exports){
+},{"lodash":7}],6:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -677,7 +754,7 @@ module.exports = exports['default'];
 	}
 }());
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function (global){
 /**
  * @license

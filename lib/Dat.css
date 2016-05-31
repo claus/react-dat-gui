@@ -98,11 +98,14 @@
         .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:focus ~ .checkbox,
         .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:active ~ .checkbox {
           background-color: #494949; }
-    .react-dat-gui .cr.function {
-      border-left: 5px solid #e61d5f; }
-      .react-dat-gui .cr.function:hover {
+    .react-dat-gui .cr.button {
+      border-left: 5px solid #c5bdad; }
+      .react-dat-gui .cr.button:hover {
         background: #111; }
-    .react-dat-gui .cr label {
+      .react-dat-gui .cr.button span {
+        width: 100%;
+        cursor: pointer; }
+    .react-dat-gui .cr label, .react-dat-gui .cr span {
       display: inline-block;
       align-items: center;
       min-width: 0;
