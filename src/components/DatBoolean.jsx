@@ -1,4 +1,6 @@
-import { isFinite, isString, result } from 'lodash';
+import result from 'lodash.result';
+import isFinite from 'lodash.isfinite';
+import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
 
 class DatBoolean extends React.Component {

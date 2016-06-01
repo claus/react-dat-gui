@@ -10,14 +10,14 @@ class App extends React.Component {
         super(props, context);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.state ={
+        this.state = {
             flashCounter: 0,
             data: {
                 string: 'Hello World',
                 number: 66,
                 boolean: false,
             },
-        }
+        };
     }
 
     handleUpdate(data) {

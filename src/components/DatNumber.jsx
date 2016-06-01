@@ -1,5 +1,8 @@
 import cx from 'classnames';
-import { isFinite, isString, result } from 'lodash';
+import clamp from 'lodash.clamp';
+import result from 'lodash.result';
+import isFinite from 'lodash.isfinite';
+import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
 
 class DatNumber extends React.Component {
@@ -142,7 +145,7 @@ class DatNumber extends React.Component {
         const sliderRect = this.refs.slider.getBoundingClientRect();
         const x = mouseEvent.pageX - sliderRect.left;
         const w = sliderRect.width;
-        return this.applyConstraints(min + _.clamp(x / w, 0, 1) * (max - min));
+        return this.applyConstraints(min + clamp(x / w, 0, 1) * (max - min));
     }
 
     update() {

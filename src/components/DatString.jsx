@@ -1,4 +1,5 @@
-import { isString, result } from 'lodash';
+import result from 'lodash.result';
+import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
 
 class DatString extends React.Component {

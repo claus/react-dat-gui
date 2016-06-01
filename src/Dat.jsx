@@ -1,5 +1,7 @@
 import cx from 'classnames';
-import { set, cloneDeep, isUndefined } from 'lodash';
+import set from 'lodash.set';
+import cloneDeep from 'lodash.clonedeep';
+import isUndefined from 'lodash.isundefined';
 import React, { PropTypes, cloneElement } from 'react';
 
 class Dat extends React.Component {
