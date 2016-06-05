@@ -17,10 +17,6 @@ class DatBoolean extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            value: 0,
-            isSliderActive: false,
-        };
     }
 
     componentWillMount() {
