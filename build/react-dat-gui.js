@@ -102,16 +102,15 @@ var Dat = function (_React$Component) {
             var _props2 = this.props;
             var children = _props2.children;
             var data = _props2.data;
-            var labelWidth = _props2.labelWidth;
 
             return _react2.default.Children.toArray(children).map(function (child, i) {
                 var liveUpdate = (0, _lodash6.default)(child.props.liveUpdate) ? _this2.props.liveUpdate : child.props.liveUpdate;
+                var labelWidth = (0, _lodash6.default)(child.props.labelWidth) ? _this2.props.labelWidth : child.props.labelWidth;
                 return (0, _react.cloneElement)(child, {
-                    id: '__react_dat_gui_' + i + '__',
                     key: i,
                     data: data,
                     liveUpdate: liveUpdate,
-                    _labelWidth: labelWidth,
+                    labelWidth: labelWidth,
                     _onUpdateValue: _this2.handleUpdateValue
                 });
             });
@@ -143,12 +142,13 @@ Dat.propTypes = {
     children: _react.PropTypes.node.isRequired,
     onUpdate: _react.PropTypes.func.isRequired,
     liveUpdate: _react.PropTypes.bool,
+    labelWidth: _react.PropTypes.number,
     className: _react.PropTypes.string,
-    style: _react.PropTypes.object,
-    labelWidth: _react.PropTypes.number
+    style: _react.PropTypes.object
 };
 Dat.defaultProps = {
-    liveUpdate: true
+    liveUpdate: true,
+    labelWidth: 40
 };
 exports.default = Dat;
 
@@ -165,13 +165,9 @@ var _lodash = require('lodash.result');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _lodash3 = require('lodash.isfinite');
+var _lodash3 = require('lodash.isstring');
 
 var _lodash4 = _interopRequireDefault(_lodash3);
-
-var _lodash5 = require('lodash.isstring');
-
-var _lodash6 = _interopRequireDefault(_lodash5);
 
 var _react = (window.React);
 
@@ -194,10 +190,6 @@ var DatBoolean = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatBoolean).call(this, props, context));
 
         _this.handleChange = _this.handleChange.bind(_this);
-        _this.state = {
-            value: 0,
-            isSliderActive: false
-        };
         return _this;
     }
 
@@ -214,11 +206,6 @@ var DatBoolean = function (_React$Component) {
             this.setState({
                 value: this.getValue(nextProps)
             });
-        }
-    }, {
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
         }
     }, {
         key: 'getValue',
@@ -247,25 +234,25 @@ var DatBoolean = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var id = this.props.id;
-            var value = this.state.value;
+            var _props = this.props;
+            var path = _props.path;
+            var label = _props.label;
 
-            var label = (0, _lodash6.default)(this.props.label) ? this.props.label : this.props.path;
+            var labelText = (0, _lodash4.default)(label) ? label : path;
             return _react2.default.createElement(
                 'li',
                 { className: 'cr boolean' },
                 _react2.default.createElement(
                     'label',
-                    { htmlFor: id },
-                    label
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'checkbox-wrapper' },
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'label-text' },
+                        labelText
+                    ),
                     _react2.default.createElement('input', {
                         type: 'checkbox',
-                        id: id,
-                        checked: value,
+                        checked: this.state.value,
                         onChange: this.handleChange }),
                     _react2.default.createElement(
                         'div',
@@ -285,7 +272,6 @@ var DatBoolean = function (_React$Component) {
 }(_react2.default.Component);
 
 DatBoolean.propTypes = {
-    id: _react.PropTypes.string,
     data: _react.PropTypes.object,
     path: _react.PropTypes.string,
     label: _react.PropTypes.string,
@@ -295,14 +281,12 @@ DatBoolean.propTypes = {
 exports.default = DatBoolean;
 module.exports = exports['default'];
 
-},{"lodash.isfinite":14,"lodash.isstring":15,"lodash.result":17}],3:[function(require,module,exports){
+},{"lodash.isstring":15,"lodash.result":17}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = (window.React);
 
@@ -310,56 +294,25 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DatButton = function (_React$Component) {
-    _inherits(DatButton, _React$Component);
-
-    function DatButton(props, context) {
-        _classCallCheck(this, DatButton);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatButton).call(this, props, context));
-
-        _this.handleClick = _this.handleClick.bind(_this);
-        return _this;
-    }
-
-    _createClass(DatButton, [{
-        key: "shouldComponentUpdate",
-        value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.label !== this.props.label;
-        }
-    }, {
-        key: "handleClick",
-        value: function handleClick(event) {}
-    }, {
-        key: "render",
-        value: function render() {
-            var label = this.props.label;
-
-            return _react2.default.createElement(
-                "li",
-                { className: "cr button" },
-                _react2.default.createElement(
-                    "span",
-                    { onClick: this.props.onClick },
-                    label
-                )
-            );
-        }
-    }]);
-
-    return DatButton;
-}(_react2.default.Component);
+var DatButton = function DatButton(_ref) {
+    var label = _ref.label;
+    var onClick = _ref.onClick;
+    return _react2.default.createElement(
+        "li",
+        { className: "cr button", onClick: onClick },
+        _react2.default.createElement(
+            "span",
+            { className: "label-text" },
+            label
+        )
+    );
+};
 
 DatButton.propTypes = {
     label: _react.PropTypes.string,
     onClick: _react.PropTypes.func
 };
+
 exports.default = DatButton;
 module.exports = exports["default"];
 
@@ -396,6 +349,10 @@ var _react = (window.React);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = (window.ReactDOM);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -416,13 +373,7 @@ var DatNumber = function (_React$Component) {
         _this.handleFocus = _this.handleFocus.bind(_this);
         _this.handleBlur = _this.handleBlur.bind(_this);
         _this.handleKeyDown = _this.handleKeyDown.bind(_this);
-        _this.handleMouseDown = _this.handleMouseDown.bind(_this);
-        _this.handleMouseMove = _this.handleMouseMove.bind(_this);
-        _this.handleMouseUp = _this.handleMouseUp.bind(_this);
-        _this.state = {
-            value: 0,
-            isSliderActive: false
-        };
+        _this.handleSliderUpdate = _this.handleSliderUpdate.bind(_this);
         return _this;
     }
 
@@ -441,22 +392,11 @@ var DatNumber = function (_React$Component) {
             });
         }
     }, {
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps._labelWidth !== this.props._labelWidth || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
-        }
-    }, {
         key: 'getValue',
         value: function getValue() {
             var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
 
             return this.applyConstraints((0, _lodash4.default)(props.data, props.path));
-        }
-    }, {
-        key: 'toNumber',
-        value: function toNumber(value) {
-            var float = parseFloat(value);
-            return isNaN(float) ? 0 : float;
         }
     }, {
         key: 'applyConstraints',
@@ -486,6 +426,12 @@ var DatNumber = function (_React$Component) {
                 }
             }
             return value;
+        }
+    }, {
+        key: 'toNumber',
+        value: function toNumber(value) {
+            var float = parseFloat(value);
+            return isNaN(float) ? 0 : float;
         }
     }, {
         key: 'handleChange',
@@ -523,47 +469,16 @@ var DatNumber = function (_React$Component) {
             }
         }
     }, {
-        key: 'handleMouseDown',
-        value: function handleMouseDown(event) {
+        key: 'handleSliderUpdate',
+        value: function handleSliderUpdate(value, isLive) {
             var _this4 = this;
 
-            var value = this.getSliderValue(event);
-            this.setState({ value: value, isSliderActive: true }, function () {
-                _this4.props.liveUpdate && _this4.update();
-            });
-            window.addEventListener('mousemove', this.handleMouseMove);
-            window.addEventListener('mouseup', this.handleMouseUp);
-        }
-    }, {
-        key: 'handleMouseMove',
-        value: function handleMouseMove(event) {
-            var _this5 = this;
-
-            var value = this.getSliderValue(event);
+            value = this.applyConstraints(value);
             this.setState({ value: value }, function () {
-                _this5.props.liveUpdate && _this5.update();
+                if (!isLive || _this4.props.liveUpdate) {
+                    _this4.update();
+                }
             });
-            event.preventDefault();
-        }
-    }, {
-        key: 'handleMouseUp',
-        value: function handleMouseUp(event) {
-            !this.props.liveUpdate && this.update();
-            this.setState({ isSliderActive: false });
-            window.removeEventListener('mousemove', this.handleMouseMove);
-            window.removeEventListener('mouseup', this.handleMouseUp);
-        }
-    }, {
-        key: 'getSliderValue',
-        value: function getSliderValue(mouseEvent) {
-            var _props2 = this.props;
-            var min = _props2.min;
-            var max = _props2.max;
-
-            var sliderRect = this.refs.slider.getBoundingClientRect();
-            var x = mouseEvent.pageX - sliderRect.left;
-            var w = sliderRect.width;
-            return this.applyConstraints(min + (0, _lodash2.default)(x / w, 0, 1) * (max - min));
         }
     }, {
         key: 'update',
@@ -574,48 +489,51 @@ var DatNumber = function (_React$Component) {
             this.props.onUpdate && this.props.onUpdate(value);
         }
     }, {
+        key: 'renderSlider',
+        value: function renderSlider(width) {
+            return _react2.default.createElement(Slider, {
+                value: this.state.value,
+                min: this.props.min,
+                max: this.props.max,
+                width: width,
+                onUpdate: this.handleSliderUpdate });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _props3 = this.props;
-            var id = _props3.id;
-            var min = _props3.min;
-            var max = _props3.max;
-            var _labelWidth = _props3._labelWidth;
-            var _state = this.state;
-            var value = _state.value;
-            var isSliderActive = _state.isSliderActive;
+            var _props2 = this.props;
+            var min = _props2.min;
+            var max = _props2.max;
+            var path = _props2.path;
+            var label = _props2.label;
+            var labelWidth = _props2.labelWidth;
 
-            var label = (0, _lodash8.default)(this.props.label) ? this.props.label : this.props.path;
-            var hasSlider = (0, _lodash6.default)(min) && (0, _lodash6.default)(min);
-            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
-            var sliderStyle = _labelWidth ? { width: 2 * (100 - _labelWidth) / 3 + '%' } : {};
-            var inputStyle = _labelWidth ? { width: (hasSlider ? (100 - _labelWidth) / 3 : 100 - _labelWidth) + '%' } : {};
-            var sliderPercent = (this.applyConstraints(value) - min) * 100 / (max - min);
-            var sliderBarStyle = hasSlider ? { maxWidth: sliderPercent + '%' } : {};
-            var sliderClassName = (0, _classnames2.default)('slider', { 'is-active': isSliderActive });
-            var className = (0, _classnames2.default)('cr', 'number', { 'has-slider': hasSlider });
+            var labelText = (0, _lodash8.default)(label) ? label : path;
+            var hasSlider = (0, _lodash6.default)(min) && (0, _lodash6.default)(max);
+            var controlsWidth = 100 - labelWidth;
+            var inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+            var sliderWidth = controlsWidth - inputWidth;
             return _react2.default.createElement(
                 'li',
-                { className: className },
+                { className: 'cr number' },
                 _react2.default.createElement(
                     'label',
-                    { htmlFor: id, style: labelStyle },
-                    label
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: sliderClassName, style: sliderStyle, ref: 'slider', onMouseDown: this.handleMouseDown },
-                    _react2.default.createElement('div', { className: 'slider-bar', style: sliderBarStyle })
-                ),
-                _react2.default.createElement('input', {
-                    type: 'text',
-                    inputMode: 'numeric',
-                    style: inputStyle,
-                    id: id,
-                    value: value,
-                    onChange: this.handleChange,
-                    onFocus: this.handleFocus,
-                    onBlur: this.handleBlur })
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'label-text', style: { width: labelWidth + '%' } },
+                        labelText
+                    ),
+                    hasSlider ? this.renderSlider(sliderWidth) : null,
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        inputMode: 'numeric',
+                        value: this.state.value,
+                        style: { width: inputWidth + '%' },
+                        onChange: this.handleChange,
+                        onFocus: this.handleFocus,
+                        onBlur: this.handleBlur })
+                )
             );
         }
     }]);
@@ -624,17 +542,103 @@ var DatNumber = function (_React$Component) {
 }(_react2.default.Component);
 
 DatNumber.propTypes = {
-    id: _react.PropTypes.string,
+    min: _react.PropTypes.number,
+    max: _react.PropTypes.number,
+    step: _react.PropTypes.number,
     data: _react.PropTypes.object,
     path: _react.PropTypes.string,
     label: _react.PropTypes.string,
+    labelWidth: _react.PropTypes.number,
     liveUpdate: _react.PropTypes.bool,
     onUpdate: _react.PropTypes.func,
-    _onUpdateValue: _react.PropTypes.func,
-    _labelWidth: _react.PropTypes.number,
+    _onUpdateValue: _react.PropTypes.func
+};
+
+var Slider = function (_React$Component2) {
+    _inherits(Slider, _React$Component2);
+
+    function Slider(props, context) {
+        _classCallCheck(this, Slider);
+
+        var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(Slider).call(this, props, context));
+
+        _this5.handleMouseDown = _this5.handleMouseDown.bind(_this5);
+        _this5.handleMouseMove = _this5.handleMouseMove.bind(_this5);
+        _this5.handleMouseUp = _this5.handleMouseUp.bind(_this5);
+        return _this5;
+    }
+
+    _createClass(Slider, [{
+        key: 'handleMouseDown',
+        value: function handleMouseDown(event) {
+            this.update(event.pageX);
+            window.addEventListener('mousemove', this.handleMouseMove);
+            window.addEventListener('mouseup', this.handleMouseUp);
+        }
+    }, {
+        key: 'handleMouseMove',
+        value: function handleMouseMove(event) {
+            this.update(event.pageX);
+            event.preventDefault();
+        }
+    }, {
+        key: 'handleMouseUp',
+        value: function handleMouseUp(event) {
+            this.update(event.pageX, false);
+            window.removeEventListener('mousemove', this.handleMouseMove);
+            window.removeEventListener('mouseup', this.handleMouseUp);
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(event) {
+            // do not focus input field on slider click
+            event.preventDefault();
+        }
+    }, {
+        key: 'update',
+        value: function update(pageX) {
+            var isLive = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+            var _props3 = this.props;
+            var min = _props3.min;
+            var max = _props3.max;
+            var onUpdate = _props3.onUpdate;
+
+            var rect = _reactDom2.default.findDOMNode(this).getBoundingClientRect();
+            var x = pageX - rect.left;
+            var w = rect.right - rect.left;
+            onUpdate(min + (0, _lodash2.default)(x / w, 0, 1) * (max - min), isLive);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props4 = this.props;
+            var value = _props4.value;
+            var min = _props4.min;
+            var max = _props4.max;
+            var width = _props4.width;
+
+            var widthBg = (value - min) * 100 / (max - min);
+            var style = {
+                width: width + '%',
+                backgroundSize: widthBg + '% 100%'
+            };
+            return _react2.default.createElement('span', {
+                className: 'slider',
+                style: style,
+                onClick: this.handleClick,
+                onMouseDown: this.handleMouseDown });
+        }
+    }]);
+
+    return Slider;
+}(_react2.default.Component);
+
+Slider.propTypes = {
+    value: _react.PropTypes.number,
     min: _react.PropTypes.number,
     max: _react.PropTypes.number,
-    step: _react.PropTypes.number
+    width: _react.PropTypes.number,
+    onUpdate: _react.PropTypes.func
 };
 exports.default = DatNumber;
 module.exports = exports['default'];
@@ -696,11 +700,6 @@ var DatString = function (_React$Component) {
             });
         }
     }, {
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(nextProps, nextState) {
-            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps._labelWidth !== this.props._labelWidth || nextState.value !== this.state.value;
-        }
-    }, {
         key: 'getValue',
         value: function getValue() {
             var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
@@ -718,10 +717,24 @@ var DatString = function (_React$Component) {
             });
         }
     }, {
+        key: 'handleFocus',
+        value: function handleFocus(event) {
+            document.addEventListener('keydown', this.handleKeyDown);
+        }
+    }, {
         key: 'handleBlur',
         value: function handleBlur(event) {
+            document.removeEventListener('keydown', this.handleKeyDown);
             window.getSelection().removeAllRanges();
             !this.props.liveUpdate && this.update();
+        }
+    }, {
+        key: 'handleKeyDown',
+        value: function handleKeyDown(event) {
+            var key = event.keyCode || event.which;
+            if (key === 13) {
+                !this.props.liveUpdate && this.update();
+            }
         }
     }, {
         key: 'update',
@@ -735,28 +748,30 @@ var DatString = function (_React$Component) {
         key: 'render',
         value: function render() {
             var _props = this.props;
-            var id = _props.id;
-            var _labelWidth = _props._labelWidth;
-            var value = this.state.value;
+            var path = _props.path;
+            var label = _props.label;
+            var labelWidth = _props.labelWidth;
 
-            var label = (0, _lodash4.default)(this.props.label) ? this.props.label : this.props.path;
-            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
-            var inputStyle = _labelWidth ? { width: 100 - _labelWidth + '%' } : {};
+            var labelText = (0, _lodash4.default)(label) ? label : path;
             return _react2.default.createElement(
                 'li',
                 { className: 'cr string' },
                 _react2.default.createElement(
                     'label',
-                    { htmlFor: id, style: labelStyle },
-                    label
-                ),
-                _react2.default.createElement('input', {
-                    type: 'text',
-                    id: id,
-                    value: value,
-                    style: inputStyle,
-                    onChange: this.handleChange,
-                    onBlur: this.handleBlur })
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'label-text', style: { width: labelWidth + '%' } },
+                        labelText
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        value: this.state.value,
+                        style: { width: 100 - labelWidth + '%' },
+                        onChange: this.handleChange,
+                        onFocus: this.handleFocus,
+                        onBlur: this.handleBlur })
+                )
             );
         }
     }]);
@@ -765,14 +780,13 @@ var DatString = function (_React$Component) {
 }(_react2.default.Component);
 
 DatString.propTypes = {
-    id: _react.PropTypes.string,
     data: _react.PropTypes.object,
     path: _react.PropTypes.string,
     label: _react.PropTypes.string,
+    labelWidth: _react.PropTypes.number,
     liveUpdate: _react.PropTypes.bool,
     onUpdate: _react.PropTypes.func,
-    _onUpdateValue: _react.PropTypes.func,
-    _labelWidth: _react.PropTypes.number
+    _onUpdateValue: _react.PropTypes.func
 };
 exports.default = DatString;
 module.exports = exports['default'];

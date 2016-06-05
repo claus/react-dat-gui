@@ -15,7 +15,7 @@ class App extends React.Component {
             data: {
                 string: 'Hello World',
                 number: 66,
-                boolean: false,
+                boolean: true,
             },
         };
     }
@@ -46,6 +46,7 @@ class App extends React.Component {
                 <Dat data={data} onUpdate={this.handleUpdate}>
                     <DatString path="string" label="String" />
                     <DatNumber path="number" label="Number" min={0} max={100} step={1} />
+                    <DatNumber path="number" label="Number" />
                     <DatBoolean path="boolean" label="Boolean" />
                     <DatButton label="Button" onClick={this.handleClick} />
                 </Dat>

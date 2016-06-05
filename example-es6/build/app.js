@@ -68,7 +68,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(186);
+	__webpack_require__(187);
 	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
@@ -85,7 +85,7 @@
 	            data: {
 	                string: 'Hello World',
 	                number: 66,
-	                boolean: false
+	                boolean: true
 	            }
 	        };
 	        return _this;
@@ -134,6 +134,7 @@
 	                    { data: data, onUpdate: this.handleUpdate },
 	                    _react2.default.createElement(_Dat.DatString, { path: 'string', label: 'String' }),
 	                    _react2.default.createElement(_Dat.DatNumber, { path: 'number', label: 'Number', min: 0, max: 100, step: 1 }),
+	                    _react2.default.createElement(_Dat.DatNumber, { path: 'number', label: 'Number' }),
 	                    _react2.default.createElement(_Dat.DatBoolean, { path: 'boolean', label: 'Boolean' }),
 	                    _react2.default.createElement(_Dat.DatButton, { label: 'Button', onClick: this.handleClick })
 	                )
@@ -20445,7 +20446,7 @@
 	    }
 	});
 	
-	var _DatBoolean = __webpack_require__(179);
+	var _DatBoolean = __webpack_require__(180);
 	
 	Object.defineProperty(exports, 'DatBoolean', {
 	    enumerable: true,
@@ -20454,7 +20455,7 @@
 	    }
 	});
 	
-	var _DatButton = __webpack_require__(180);
+	var _DatButton = __webpack_require__(181);
 	
 	Object.defineProperty(exports, 'DatButton', {
 	    enumerable: true,
@@ -20467,15 +20468,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _lodash = __webpack_require__(181);
+	var _lodash = __webpack_require__(182);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _lodash3 = __webpack_require__(183);
+	var _lodash3 = __webpack_require__(184);
 	
 	var _lodash4 = _interopRequireDefault(_lodash3);
 	
-	var _lodash5 = __webpack_require__(185);
+	var _lodash5 = __webpack_require__(186);
 	
 	var _lodash6 = _interopRequireDefault(_lodash5);
 	
@@ -20521,16 +20522,15 @@
 	            var _props2 = this.props;
 	            var children = _props2.children;
 	            var data = _props2.data;
-	            var labelWidth = _props2.labelWidth;
 	
 	            return _react2.default.Children.toArray(children).map(function (child, i) {
 	                var liveUpdate = (0, _lodash6.default)(child.props.liveUpdate) ? _this2.props.liveUpdate : child.props.liveUpdate;
+	                var labelWidth = (0, _lodash6.default)(child.props.labelWidth) ? _this2.props.labelWidth : child.props.labelWidth;
 	                return (0, _react.cloneElement)(child, {
-	                    id: '__react_dat_gui_' + i + '__',
 	                    key: i,
 	                    data: data,
 	                    liveUpdate: liveUpdate,
-	                    _labelWidth: labelWidth,
+	                    labelWidth: labelWidth,
 	                    _onUpdateValue: _this2.handleUpdateValue
 	                });
 	            });
@@ -20562,12 +20562,13 @@
 	    children: _react.PropTypes.node.isRequired,
 	    onUpdate: _react.PropTypes.func.isRequired,
 	    liveUpdate: _react.PropTypes.bool,
+	    labelWidth: _react.PropTypes.number,
 	    className: _react.PropTypes.string,
-	    style: _react.PropTypes.object,
-	    labelWidth: _react.PropTypes.number
+	    style: _react.PropTypes.object
 	};
 	Dat.defaultProps = {
-	    liveUpdate: true
+	    liveUpdate: true,
+	    labelWidth: 40
 	};
 	exports.default = Dat;
 
@@ -20631,11 +20632,6 @@
 	            });
 	        }
 	    }, {
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps._labelWidth !== this.props._labelWidth || nextState.value !== this.state.value;
-	        }
-	    }, {
 	        key: 'getValue',
 	        value: function getValue() {
 	            var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
@@ -20653,10 +20649,24 @@
 	            });
 	        }
 	    }, {
+	        key: 'handleFocus',
+	        value: function handleFocus(event) {
+	            document.addEventListener('keydown', this.handleKeyDown);
+	        }
+	    }, {
 	        key: 'handleBlur',
 	        value: function handleBlur(event) {
+	            document.removeEventListener('keydown', this.handleKeyDown);
 	            window.getSelection().removeAllRanges();
 	            !this.props.liveUpdate && this.update();
+	        }
+	    }, {
+	        key: 'handleKeyDown',
+	        value: function handleKeyDown(event) {
+	            var key = event.keyCode || event.which;
+	            if (key === 13) {
+	                !this.props.liveUpdate && this.update();
+	            }
 	        }
 	    }, {
 	        key: 'update',
@@ -20670,28 +20680,30 @@
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props;
-	            var id = _props.id;
-	            var _labelWidth = _props._labelWidth;
-	            var value = this.state.value;
+	            var path = _props.path;
+	            var label = _props.label;
+	            var labelWidth = _props.labelWidth;
 	
-	            var label = (0, _lodash4.default)(this.props.label) ? this.props.label : this.props.path;
-	            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
-	            var inputStyle = _labelWidth ? { width: 100 - _labelWidth + '%' } : {};
+	            var labelText = (0, _lodash4.default)(label) ? label : path;
 	            return _react2.default.createElement(
 	                'li',
 	                { className: 'cr string' },
 	                _react2.default.createElement(
 	                    'label',
-	                    { htmlFor: id, style: labelStyle },
-	                    label
-	                ),
-	                _react2.default.createElement('input', {
-	                    type: 'text',
-	                    id: id,
-	                    value: value,
-	                    style: inputStyle,
-	                    onChange: this.handleChange,
-	                    onBlur: this.handleBlur })
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'label-text', style: { width: labelWidth + '%' } },
+	                        labelText
+	                    ),
+	                    _react2.default.createElement('input', {
+	                        type: 'text',
+	                        value: this.state.value,
+	                        style: { width: 100 - labelWidth + '%' },
+	                        onChange: this.handleChange,
+	                        onFocus: this.handleFocus,
+	                        onBlur: this.handleBlur })
+	                )
 	            );
 	        }
 	    }]);
@@ -20700,14 +20712,13 @@
 	}(_react2.default.Component);
 	
 	DatString.propTypes = {
-	    id: _react.PropTypes.string,
 	    data: _react.PropTypes.object,
 	    path: _react.PropTypes.string,
 	    label: _react.PropTypes.string,
+	    labelWidth: _react.PropTypes.number,
 	    liveUpdate: _react.PropTypes.bool,
 	    onUpdate: _react.PropTypes.func,
-	    _onUpdateValue: _react.PropTypes.func,
-	    _labelWidth: _react.PropTypes.number
+	    _onUpdateValue: _react.PropTypes.func
 	};
 	exports.default = DatString;
 
@@ -22024,7 +22035,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _lodash = __webpack_require__(190);
+	var _lodash = __webpack_require__(177);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -22032,7 +22043,7 @@
 	
 	var _lodash4 = _interopRequireDefault(_lodash3);
 	
-	var _lodash5 = __webpack_require__(177);
+	var _lodash5 = __webpack_require__(178);
 	
 	var _lodash6 = _interopRequireDefault(_lodash5);
 	
@@ -22043,6 +22054,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(38);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22064,13 +22079,7 @@
 	        _this.handleFocus = _this.handleFocus.bind(_this);
 	        _this.handleBlur = _this.handleBlur.bind(_this);
 	        _this.handleKeyDown = _this.handleKeyDown.bind(_this);
-	        _this.handleMouseDown = _this.handleMouseDown.bind(_this);
-	        _this.handleMouseMove = _this.handleMouseMove.bind(_this);
-	        _this.handleMouseUp = _this.handleMouseUp.bind(_this);
-	        _this.state = {
-	            value: 0,
-	            isSliderActive: false
-	        };
+	        _this.handleSliderUpdate = _this.handleSliderUpdate.bind(_this);
 	        return _this;
 	    }
 	
@@ -22089,22 +22098,11 @@
 	            });
 	        }
 	    }, {
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextProps._labelWidth !== this.props._labelWidth || nextProps.min !== this.props.value || nextProps.max !== this.props.value || nextProps.step !== this.props.value || nextState.value !== this.state.value;
-	        }
-	    }, {
 	        key: 'getValue',
 	        value: function getValue() {
 	            var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
 	
 	            return this.applyConstraints((0, _lodash4.default)(props.data, props.path));
-	        }
-	    }, {
-	        key: 'toNumber',
-	        value: function toNumber(value) {
-	            var float = parseFloat(value);
-	            return isNaN(float) ? 0 : float;
 	        }
 	    }, {
 	        key: 'applyConstraints',
@@ -22134,6 +22132,12 @@
 	                }
 	            }
 	            return value;
+	        }
+	    }, {
+	        key: 'toNumber',
+	        value: function toNumber(value) {
+	            var float = parseFloat(value);
+	            return isNaN(float) ? 0 : float;
 	        }
 	    }, {
 	        key: 'handleChange',
@@ -22171,47 +22175,16 @@
 	            }
 	        }
 	    }, {
-	        key: 'handleMouseDown',
-	        value: function handleMouseDown(event) {
+	        key: 'handleSliderUpdate',
+	        value: function handleSliderUpdate(value, isLive) {
 	            var _this4 = this;
 	
-	            var value = this.getSliderValue(event);
-	            this.setState({ value: value, isSliderActive: true }, function () {
-	                _this4.props.liveUpdate && _this4.update();
-	            });
-	            window.addEventListener('mousemove', this.handleMouseMove);
-	            window.addEventListener('mouseup', this.handleMouseUp);
-	        }
-	    }, {
-	        key: 'handleMouseMove',
-	        value: function handleMouseMove(event) {
-	            var _this5 = this;
-	
-	            var value = this.getSliderValue(event);
+	            value = this.applyConstraints(value);
 	            this.setState({ value: value }, function () {
-	                _this5.props.liveUpdate && _this5.update();
+	                if (!isLive || _this4.props.liveUpdate) {
+	                    _this4.update();
+	                }
 	            });
-	            event.preventDefault();
-	        }
-	    }, {
-	        key: 'handleMouseUp',
-	        value: function handleMouseUp(event) {
-	            !this.props.liveUpdate && this.update();
-	            this.setState({ isSliderActive: false });
-	            window.removeEventListener('mousemove', this.handleMouseMove);
-	            window.removeEventListener('mouseup', this.handleMouseUp);
-	        }
-	    }, {
-	        key: 'getSliderValue',
-	        value: function getSliderValue(mouseEvent) {
-	            var _props2 = this.props;
-	            var min = _props2.min;
-	            var max = _props2.max;
-	
-	            var sliderRect = this.refs.slider.getBoundingClientRect();
-	            var x = mouseEvent.pageX - sliderRect.left;
-	            var w = sliderRect.width;
-	            return this.applyConstraints(min + (0, _lodash2.default)(x / w, 0, 1) * (max - min));
 	        }
 	    }, {
 	        key: 'update',
@@ -22222,48 +22195,51 @@
 	            this.props.onUpdate && this.props.onUpdate(value);
 	        }
 	    }, {
+	        key: 'renderSlider',
+	        value: function renderSlider(width) {
+	            return _react2.default.createElement(Slider, {
+	                value: this.state.value,
+	                min: this.props.min,
+	                max: this.props.max,
+	                width: width,
+	                onUpdate: this.handleSliderUpdate });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props3 = this.props;
-	            var id = _props3.id;
-	            var min = _props3.min;
-	            var max = _props3.max;
-	            var _labelWidth = _props3._labelWidth;
-	            var _state = this.state;
-	            var value = _state.value;
-	            var isSliderActive = _state.isSliderActive;
+	            var _props2 = this.props;
+	            var min = _props2.min;
+	            var max = _props2.max;
+	            var path = _props2.path;
+	            var label = _props2.label;
+	            var labelWidth = _props2.labelWidth;
 	
-	            var label = (0, _lodash8.default)(this.props.label) ? this.props.label : this.props.path;
+	            var labelText = (0, _lodash8.default)(label) ? label : path;
 	            var hasSlider = (0, _lodash6.default)(min) && (0, _lodash6.default)(min);
-	            var labelStyle = _labelWidth ? { width: _labelWidth + '%' } : {};
-	            var sliderStyle = _labelWidth ? { width: 2 * (100 - _labelWidth) / 3 + '%' } : {};
-	            var inputStyle = _labelWidth ? { width: (hasSlider ? (100 - _labelWidth) / 3 : 100 - _labelWidth) + '%' } : {};
-	            var sliderPercent = (this.applyConstraints(value) - min) * 100 / (max - min);
-	            var sliderBarStyle = hasSlider ? { maxWidth: sliderPercent + '%' } : {};
-	            var sliderClassName = (0, _classnames2.default)('slider', { 'is-active': isSliderActive });
-	            var className = (0, _classnames2.default)('cr', 'number', { 'has-slider': hasSlider });
+	            var controlsWidth = 100 - labelWidth;
+	            var inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+	            var sliderWidth = controlsWidth - inputWidth;
 	            return _react2.default.createElement(
 	                'li',
-	                { className: className },
+	                { className: 'cr number' },
 	                _react2.default.createElement(
 	                    'label',
-	                    { htmlFor: id, style: labelStyle },
-	                    label
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: sliderClassName, style: sliderStyle, ref: 'slider', onMouseDown: this.handleMouseDown },
-	                    _react2.default.createElement('div', { className: 'slider-bar', style: sliderBarStyle })
-	                ),
-	                _react2.default.createElement('input', {
-	                    type: 'text',
-	                    inputMode: 'numeric',
-	                    style: inputStyle,
-	                    id: id,
-	                    value: value,
-	                    onChange: this.handleChange,
-	                    onFocus: this.handleFocus,
-	                    onBlur: this.handleBlur })
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'label-text', style: { width: labelWidth + '%' } },
+	                        labelText
+	                    ),
+	                    hasSlider ? this.renderSlider(sliderWidth) : null,
+	                    _react2.default.createElement('input', {
+	                        type: 'text',
+	                        inputMode: 'numeric',
+	                        value: this.state.value,
+	                        style: { width: inputWidth + '%' },
+	                        onChange: this.handleChange,
+	                        onFocus: this.handleFocus,
+	                        onBlur: this.handleBlur })
+	                )
 	            );
 	        }
 	    }]);
@@ -22272,17 +22248,103 @@
 	}(_react2.default.Component);
 	
 	DatNumber.propTypes = {
-	    id: _react.PropTypes.string,
+	    min: _react.PropTypes.number,
+	    max: _react.PropTypes.number,
+	    step: _react.PropTypes.number,
 	    data: _react.PropTypes.object,
 	    path: _react.PropTypes.string,
 	    label: _react.PropTypes.string,
+	    labelWidth: _react.PropTypes.number,
 	    liveUpdate: _react.PropTypes.bool,
 	    onUpdate: _react.PropTypes.func,
-	    _onUpdateValue: _react.PropTypes.func,
-	    _labelWidth: _react.PropTypes.number,
+	    _onUpdateValue: _react.PropTypes.func
+	};
+	
+	var Slider = function (_React$Component2) {
+	    _inherits(Slider, _React$Component2);
+	
+	    function Slider(props, context) {
+	        _classCallCheck(this, Slider);
+	
+	        var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(Slider).call(this, props, context));
+	
+	        _this5.handleMouseDown = _this5.handleMouseDown.bind(_this5);
+	        _this5.handleMouseMove = _this5.handleMouseMove.bind(_this5);
+	        _this5.handleMouseUp = _this5.handleMouseUp.bind(_this5);
+	        return _this5;
+	    }
+	
+	    _createClass(Slider, [{
+	        key: 'handleMouseDown',
+	        value: function handleMouseDown(event) {
+	            this.update(event.pageX);
+	            window.addEventListener('mousemove', this.handleMouseMove);
+	            window.addEventListener('mouseup', this.handleMouseUp);
+	        }
+	    }, {
+	        key: 'handleMouseMove',
+	        value: function handleMouseMove(event) {
+	            this.update(event.pageX);
+	            event.preventDefault();
+	        }
+	    }, {
+	        key: 'handleMouseUp',
+	        value: function handleMouseUp(event) {
+	            this.update(event.pageX, false);
+	            window.removeEventListener('mousemove', this.handleMouseMove);
+	            window.removeEventListener('mouseup', this.handleMouseUp);
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(event) {
+	            // do not focus input field on slider click
+	            event.preventDefault();
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update(pageX) {
+	            var isLive = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+	            var _props3 = this.props;
+	            var min = _props3.min;
+	            var max = _props3.max;
+	            var onUpdate = _props3.onUpdate;
+	
+	            var rect = _reactDom2.default.findDOMNode(this).getBoundingClientRect();
+	            var x = pageX - rect.left;
+	            var w = rect.right - rect.left;
+	            onUpdate(min + (0, _lodash2.default)(x / w, 0, 1) * (max - min));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props4 = this.props;
+	            var value = _props4.value;
+	            var min = _props4.min;
+	            var max = _props4.max;
+	            var width = _props4.width;
+	
+	            var widthBg = (value - min) * 100 / (max - min);
+	            var style = {
+	                width: width + '%',
+	                backgroundSize: widthBg + '% 100%'
+	            };
+	            return _react2.default.createElement('span', {
+	                className: 'slider',
+	                style: style,
+	                onClick: this.handleClick,
+	                onMouseDown: this.handleMouseDown });
+	        }
+	    }]);
+	
+	    return Slider;
+	}(_react2.default.Component);
+	
+	Slider.propTypes = {
+	    value: _react.PropTypes.number,
 	    min: _react.PropTypes.number,
 	    max: _react.PropTypes.number,
-	    step: _react.PropTypes.number
+	    width: _react.PropTypes.number,
+	    onUpdate: _react.PropTypes.func
 	};
 	exports.default = DatNumber;
 
@@ -22342,6 +22404,260 @@
 
 /***/ },
 /* 177 */
+/***/ function(module, exports) {
+
+	/**
+	 * lodash 4.0.2 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modularize exports="npm" -o ./`
+	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+	 * Released under MIT license <https://lodash.com/license>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 */
+	
+	/** Used as references for various `Number` constants. */
+	var NAN = 0 / 0;
+	
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]',
+	    genTag = '[object GeneratorFunction]',
+	    symbolTag = '[object Symbol]';
+	
+	/** Used to match leading and trailing whitespace. */
+	var reTrim = /^\s+|\s+$/g;
+	
+	/** Used to detect bad signed hexadecimal string values. */
+	var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+	
+	/** Used to detect binary string values. */
+	var reIsBinary = /^0b[01]+$/i;
+	
+	/** Used to detect octal string values. */
+	var reIsOctal = /^0o[0-7]+$/i;
+	
+	/** Built-in method references without a dependency on `root`. */
+	var freeParseInt = parseInt;
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+	
+	/**
+	 * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
+	 *
+	 * @private
+	 * @param {number} number The number to clamp.
+	 * @param {number} [lower] The lower bound.
+	 * @param {number} upper The upper bound.
+	 * @returns {number} Returns the clamped number.
+	 */
+	function baseClamp(number, lower, upper) {
+	  if (number === number) {
+	    if (upper !== undefined) {
+	      number = number <= upper ? number : upper;
+	    }
+	    if (lower !== undefined) {
+	      number = number >= lower ? number : lower;
+	    }
+	  }
+	  return number;
+	}
+	
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
+	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
+	  var tag = isObject(value) ? objectToString.call(value) : '';
+	  return tag == funcTag || tag == genTag;
+	}
+	
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(_.noop);
+	 * // => true
+	 *
+	 * _.isObject(null);
+	 * // => false
+	 */
+	function isObject(value) {
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+	
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+	
+	/**
+	 * Checks if `value` is classified as a `Symbol` primitive or object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isSymbol(Symbol.iterator);
+	 * // => true
+	 *
+	 * _.isSymbol('abc');
+	 * // => false
+	 */
+	function isSymbol(value) {
+	  return typeof value == 'symbol' ||
+	    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+	}
+	
+	/**
+	 * Converts `value` to a number.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to process.
+	 * @returns {number} Returns the number.
+	 * @example
+	 *
+	 * _.toNumber(3);
+	 * // => 3
+	 *
+	 * _.toNumber(Number.MIN_VALUE);
+	 * // => 5e-324
+	 *
+	 * _.toNumber(Infinity);
+	 * // => Infinity
+	 *
+	 * _.toNumber('3');
+	 * // => 3
+	 */
+	function toNumber(value) {
+	  if (typeof value == 'number') {
+	    return value;
+	  }
+	  if (isSymbol(value)) {
+	    return NAN;
+	  }
+	  if (isObject(value)) {
+	    var other = isFunction(value.valueOf) ? value.valueOf() : value;
+	    value = isObject(other) ? (other + '') : other;
+	  }
+	  if (typeof value != 'string') {
+	    return value === 0 ? value : +value;
+	  }
+	  value = value.replace(reTrim, '');
+	  var isBinary = reIsBinary.test(value);
+	  return (isBinary || reIsOctal.test(value))
+	    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+	    : (reIsBadHex.test(value) ? NAN : +value);
+	}
+	
+	/**
+	 * Clamps `number` within the inclusive `lower` and `upper` bounds.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Number
+	 * @param {number} number The number to clamp.
+	 * @param {number} [lower] The lower bound.
+	 * @param {number} upper The upper bound.
+	 * @returns {number} Returns the clamped number.
+	 * @example
+	 *
+	 * _.clamp(-10, -5, 5);
+	 * // => -5
+	 *
+	 * _.clamp(10, -5, 5);
+	 * // => 5
+	 */
+	function clamp(number, lower, upper) {
+	  if (upper === undefined) {
+	    upper = lower;
+	    lower = undefined;
+	  }
+	  if (upper !== undefined) {
+	    upper = toNumber(upper);
+	    upper = upper === upper ? upper : 0;
+	  }
+	  if (lower !== undefined) {
+	    lower = toNumber(lower);
+	    lower = lower === lower ? lower : 0;
+	  }
+	  return baseClamp(toNumber(number), lower, upper);
+	}
+	
+	module.exports = clamp;
+
+
+/***/ },
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22352,7 +22668,7 @@
 	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var root = __webpack_require__(178);
+	var root = __webpack_require__(179);
 	
 	/* Built-in method references for those with the same name as other `lodash` methods. */
 	var nativeIsFinite = root.isFinite;
@@ -22389,7 +22705,7 @@
 
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -22455,7 +22771,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(172)(module), (function() { return this; }())))
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22470,13 +22786,9 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _lodash3 = __webpack_require__(177);
+	var _lodash3 = __webpack_require__(174);
 	
 	var _lodash4 = _interopRequireDefault(_lodash3);
-	
-	var _lodash5 = __webpack_require__(174);
-	
-	var _lodash6 = _interopRequireDefault(_lodash5);
 	
 	var _react = __webpack_require__(1);
 	
@@ -22499,10 +22811,6 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatBoolean).call(this, props, context));
 	
 	        _this.handleChange = _this.handleChange.bind(_this);
-	        _this.state = {
-	            value: 0,
-	            isSliderActive: false
-	        };
 	        return _this;
 	    }
 	
@@ -22519,11 +22827,6 @@
 	            this.setState({
 	                value: this.getValue(nextProps)
 	            });
-	        }
-	    }, {
-	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.id !== this.props.id || nextProps.path !== this.props.path || nextProps.label !== this.props.label || nextState.value !== this.state.value;
 	        }
 	    }, {
 	        key: 'getValue',
@@ -22552,25 +22855,25 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var id = this.props.id;
-	            var value = this.state.value;
+	            var _props = this.props;
+	            var path = _props.path;
+	            var label = _props.label;
 	
-	            var label = (0, _lodash6.default)(this.props.label) ? this.props.label : this.props.path;
+	            var labelText = (0, _lodash4.default)(label) ? label : path;
 	            return _react2.default.createElement(
 	                'li',
 	                { className: 'cr boolean' },
 	                _react2.default.createElement(
 	                    'label',
-	                    { htmlFor: id },
-	                    label
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'checkbox-wrapper' },
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'label-text' },
+	                        labelText
+	                    ),
 	                    _react2.default.createElement('input', {
 	                        type: 'checkbox',
-	                        id: id,
-	                        checked: value,
+	                        checked: this.state.value,
 	                        onChange: this.handleChange }),
 	                    _react2.default.createElement(
 	                        'div',
@@ -22590,7 +22893,6 @@
 	}(_react2.default.Component);
 	
 	DatBoolean.propTypes = {
-	    id: _react.PropTypes.string,
 	    data: _react.PropTypes.object,
 	    path: _react.PropTypes.string,
 	    label: _react.PropTypes.string,
@@ -22600,7 +22902,7 @@
 	exports.default = DatBoolean;
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22609,68 +22911,35 @@
 	    value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DatButton = function (_React$Component) {
-	    _inherits(DatButton, _React$Component);
-	
-	    function DatButton(props, context) {
-	        _classCallCheck(this, DatButton);
-	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatButton).call(this, props, context));
-	
-	        _this.handleClick = _this.handleClick.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(DatButton, [{
-	        key: "shouldComponentUpdate",
-	        value: function shouldComponentUpdate(nextProps, nextState) {
-	            return nextProps.label !== this.props.label;
-	        }
-	    }, {
-	        key: "handleClick",
-	        value: function handleClick(event) {}
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            var label = this.props.label;
-	
-	            return _react2.default.createElement(
-	                "li",
-	                { className: "cr button" },
-	                _react2.default.createElement(
-	                    "span",
-	                    { onClick: this.props.onClick },
-	                    label
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return DatButton;
-	}(_react2.default.Component);
+	var DatButton = function DatButton(_ref) {
+	    var label = _ref.label;
+	    var onClick = _ref.onClick;
+	    return _react2.default.createElement(
+	        "li",
+	        { className: "cr button", onClick: onClick },
+	        _react2.default.createElement(
+	            "span",
+	            { className: "label-text" },
+	            label
+	        )
+	    );
+	};
 	
 	DatButton.propTypes = {
 	    label: _react.PropTypes.string,
 	    onClick: _react.PropTypes.func
 	};
+	
 	exports.default = DatButton;
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22681,7 +22950,7 @@
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
 	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 */
-	var baseSet = __webpack_require__(182);
+	var baseSet = __webpack_require__(183);
 	
 	/**
 	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
@@ -22719,7 +22988,7 @@
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23025,7 +23294,7 @@
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23036,7 +23305,7 @@
 	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseClone = __webpack_require__(184);
+	var baseClone = __webpack_require__(185);
 	
 	/**
 	 * This method is like `_.clone` except that it recursively clones `value`.
@@ -23062,7 +23331,7 @@
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -24854,7 +25123,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(172)(module), (function() { return this; }())))
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports) {
 
 	/**
@@ -24890,23 +25159,23 @@
 
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(187);
+	var content = __webpack_require__(188);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(189)(content, {});
+	var update = __webpack_require__(190)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./Dat.scss", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./Dat.scss");
+			module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js!./../node_modules/sass-loader/index.js?sourceMap!./Dat.scss", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js!./../node_modules/sass-loader/index.js?sourceMap!./Dat.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -24916,21 +25185,21 @@
 	}
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(188)();
+	exports = module.exports = __webpack_require__(189)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 12px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: flex;\n    border-bottom: 1px solid #272727;\n    user-select: none; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: none;\n        position: relative;\n        width: 40%;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        user-select: none;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:hover, .react-dat-gui .cr.number .slider.is-active {\n          background-color: #3c3c3c; }\n        .react-dat-gui .cr.number .slider .slider-bar {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%;\n          background-color: #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        width: 60%;\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number.has-slider .slider {\n        display: block; }\n      .react-dat-gui .cr.number.has-slider input[type=text] {\n        width: 20%; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        width: 60%;\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean label {\n        width: calc(100% - 1.2em - 10px); }\n      .react-dat-gui .cr.boolean .checkbox-wrapper {\n        position: relative;\n        width: calc(1.2em + 10px); }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox,\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          position: absolute;\n          top: 0;\n          left: 0;\n          width: 100%;\n          height: 100%; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          border: 3px solid #1a1a1a;\n          background: #303030;\n          z-index: 0;\n          left: auto;\n          right: 0; }\n          .react-dat-gui .cr.boolean .checkbox-wrapper .checkbox > .checkmark {\n            display: none;\n            width: 0.7em;\n            height: 0.7em;\n            stroke-width: 10px;\n            stroke: #99829f; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox] {\n          margin: 0;\n          opacity: 0;\n          z-index: 1; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:checked ~ .checkbox > .checkmark {\n          display: block; }\n        .react-dat-gui .cr.boolean .checkbox-wrapper input[type=checkbox]:hover ~ .checkbox {\n          background-color: #3c3c3c; }\n    .react-dat-gui .cr.button {\n      border-left: 5px solid #c5bdad; }\n      .react-dat-gui .cr.button:hover {\n        background: #111; }\n      .react-dat-gui .cr.button span {\n        width: 100%;\n        cursor: pointer; }\n    .react-dat-gui .cr label, .react-dat-gui .cr span {\n      display: inline-block;\n      align-items: center;\n      min-width: 0;\n      width: 40%;\n      padding: 5px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      user-select: none; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      outline: none;\n      font-size: inherit; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EA0L5C;EArMD;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA1Cc,EA0DjB;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,cAAc;IACd,iCAlDc;IAmDd,kBAAkB,EAsJrB;IApML;MAiDY,+BA7DU,EAoGb;MAxFT;QAoDgB,cAAc;QACd,mBAAmB;QACnB,WAAW;QACX,0BAzEU;QA0EV,wBAAwB;QACxB,0BA7DK;QA8DL,kBAAkB;QAClB,kBAAkB,EAcrB;QAzEb;UA8DoB,0BAAyB,EAC5B;QA/DjB;UAkEoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa;UACb,0BAnFE,EAoFL;MAxEjB;QA4EgB,WAAW;QACX,eAzFM,EA0FT;MA9Eb;QAkFoB,eAAe,EAClB;MAnFjB;QAqFoB,WAAW,EACd;IAtFjB;MA2FY,+BArGU,EA2Gb;MAjGT;QA8FgB,WAAW;QACX,eAzGM,EA0GT;IAhGb;MAoGY,+BA/GW,EAmKd;MAxJT;QAuGgB,iCAAW,EACd;MAxGb;QA2GgB,mBAAmB;QACnB,0BAAW,EA2Cd;QAvJb;;UAgHoB,mBAAmB;UACnB,OAAO;UACP,QAAQ;UACR,YAAY;UACZ,aAAa,EAChB;QArHjB;UAwHoB,cAAc;UACd,oBAAoB;UACpB,wBAAwB;UACxB,0BA7IM;UA8IN,oBAhIC;UAiID,WAAW;UACX,WAAW;UACX,SAAS,EASZ;UAxIjB;YAkIwB,cAAc;YACd,aAAa;YACb,cAAc;YACd,mBAAmB;YACnB,gBAAe,EAClB;QAvIrB;UA2IoB,UAAU;UACV,WAAW;UACX,WAAW,EACd;QA9IjB;UAiJoB,eAAe,EAClB;QAlJjB;UAqJoB,0BAAyB,EAC5B;IAtJjB;MA2JY,+BAjKS,EA2KZ;MArKT;QA8JgB,iBAAiB,EACpB;MA/Jb;QAkKgB,YAAY;QACZ,gBAAgB,EACnB;IApKb;MAwKY,sBAAsB;MACtB,oBAAoB;MACpB,aAAa;MACb,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB;MACxB,kBAAkB,EACrB;IAjLT;MAoLY,oBAxLS;MAyLT,0BAvMc;MAwMd,iBAAiB;MACjB,iBAAiB;MACjB,cAAc;MACd,mBAAmB,EAUtB;MAnMT;QA4LgB,oBAAmB,EACtB;MA7Lb;QAgMgB,oBAAmB;QACnB,YAAY,EACf","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$button-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 12px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $background-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: flex;\n        border-bottom: 1px solid $border-color;\n        user-select: none;\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            .slider {\n                display: none;\n                position: relative;\n                width: 40%;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                user-select: none;\n                cursor: ew-resize;\n\n                &:hover, &.is-active {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n\n                .slider-bar {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: $number-color;\n                }\n            }\n            \n            input[type=text] {\n                width: 60%;\n                color: $number-color;\n            }\n            \n            &.has-slider {\n                .slider {\n                    display: block;\n                }\n                input[type=text] {\n                    width: 20%;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                width: 60%;\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            border-left: $border-left-size solid $boolean-color;\n\n            label {\n                width: calc(100% - 1.2em - 10px);\n            }\n\n            .checkbox-wrapper {\n                position: relative;\n                width: calc(1.2em + 10px);\n\n                .checkbox,\n                input[type=checkbox] {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                }\n\n                .checkbox {\n                    display: flex;\n                    align-items: center;\n                    justify-content: center;\n                    border: 3px solid $background-color;\n                    background: $input-color;\n                    z-index: 0;\n                    left: auto;\n                    right: 0;\n\n                    > .checkmark {\n                        display: none;\n                        width: 0.7em;\n                        height: 0.7em;\n                        stroke-width: 10px;\n                        stroke: lighten($boolean-color, 10%);\n                    }\n                }\n\n                input[type=checkbox] {\n                    margin: 0;\n                    opacity: 0;\n                    z-index: 1;\n                }\n\n                input[type=checkbox]:checked ~ .checkbox > .checkmark {\n                    display: block;\n                }\n\n                input[type=checkbox]:hover ~ .checkbox {\n                    background-color: lighten($input-color, $hover-lighten);\n                }\n            }\n        }\n\n        &.button {\n            border-left: $border-left-size solid $button-color;\n\n            &:hover {\n                background: #111;\n            }\n\n            span {\n                width: 100%;\n                cursor: pointer;\n            }\n        }\n\n        label, span {\n            display: inline-block;\n            align-items: center;\n            min-width: 0;\n            width: 40%;\n            padding: 5px;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n            user-select: none;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            outline: none;\n            font-size: inherit;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".react-dat-gui {\n  position: fixed;\n  right: 16px;\n  top: 0;\n  width: 280px;\n  font-size: 12px;\n  font-family: 'Lucida Grande', sans-serif;\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-tap-highlight-color: transparent; }\n  .react-dat-gui *, .react-dat-gui *:before, .react-dat-gui *:after {\n    box-sizing: inherit; }\n  .react-dat-gui .dg {\n    margin: 0;\n    padding: 0;\n    color: #eee;\n    overflow: auto; }\n    .react-dat-gui .dg.main {\n      background: #272727; }\n      .react-dat-gui .dg.main::-webkit-scrollbar {\n        width: 5px;\n        background: #1a1a1a; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-corner {\n        height: 0;\n        display: none; }\n      .react-dat-gui .dg.main::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background: #676767; }\n  .react-dat-gui .cr {\n    display: block;\n    background-color: #1a1a1a;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none; }\n    .react-dat-gui .cr:not(:last-child) {\n      margin-bottom: 1px; }\n    .react-dat-gui .cr.number {\n      border-left: 5px solid #2FA1D6; }\n      .react-dat-gui .cr.number input[type=text] {\n        color: #2FA1D6; }\n      .react-dat-gui .cr.number .slider {\n        display: block;\n        position: relative;\n        border: 3px solid #1a1a1a;\n        border-right-width: 1px;\n        background-color: #303030;\n        background-image: linear-gradient(90deg, #2FA1D6, #2FA1D6);\n        background-size: 0% 100%;\n        background-repeat: no-repeat;\n        cursor: ew-resize; }\n        .react-dat-gui .cr.number .slider:before {\n          content: '\\A0';\n          display: block;\n          padding: 2px; }\n    .react-dat-gui .cr.string {\n      border-left: 5px solid #1ed36f; }\n      .react-dat-gui .cr.string input[type=text] {\n        color: #1ed36f; }\n    .react-dat-gui .cr.boolean {\n      position: relative;\n      border-left: 5px solid #806787; }\n      .react-dat-gui .cr.boolean .label-text {\n        display: block;\n        padding: 5px 0; }\n      .react-dat-gui .cr.boolean .checkbox, .react-dat-gui .cr.boolean input[type=checkbox] {\n        position: absolute;\n        top: 2px;\n        right: 2px;\n        bottom: 2px;\n        width: 2.2em; }\n      .react-dat-gui .cr.boolean .checkbox {\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-align: center;\n            align-items: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n        border: 3px solid #1a1a1a;\n        background: #303030;\n        z-index: 0; }\n        .react-dat-gui .cr.boolean .checkbox > .checkmark {\n          display: none;\n          width: 0.7em;\n          height: 0.7em;\n          stroke-width: 7px;\n          stroke: #b09fb5; }\n      .react-dat-gui .cr.boolean input[type=checkbox] {\n        height: calc(100% - 4px);\n        margin: 0;\n        opacity: 0;\n        z-index: 1; }\n      .react-dat-gui .cr.boolean input[type=checkbox]:hover ~ .checkbox {\n        background-color: #3c3c3c; }\n      .react-dat-gui .cr.boolean input[type=checkbox]:checked ~ .checkbox > .checkmark {\n        display: block; }\n    .react-dat-gui .cr.button {\n      border-left: 5px solid #c5bdad; }\n      .react-dat-gui .cr.button:hover {\n        background: #111; }\n      .react-dat-gui .cr.button .label-text {\n        display: block;\n        width: 100%;\n        padding: 7px 2px 7px 8px;\n        cursor: pointer; }\n    .react-dat-gui .cr label {\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-align: baseline;\n          align-items: baseline;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n      width: 100%;\n      padding: 2px 2px 2px 8px; }\n    .react-dat-gui .cr .label-text {\n      width: 40%;\n      min-width: 0;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n    .react-dat-gui .cr input[type=text] {\n      background: #303030;\n      border: 3px solid #1a1a1a;\n      border-radius: 0;\n      padding: 2px 5px;\n      margin: 0;\n      outline: none;\n      font-size: inherit; }\n      .react-dat-gui .cr input[type=text]:hover {\n        background: #3c3c3c; }\n      .react-dat-gui .cr input[type=text]:focus {\n        background: #494949;\n        color: #fff; }\n      .react-dat-gui .cr input[type=text]::-ms-clear {\n        display: none; }\n", "", {"version":3,"sources":["/../src/Dat.scss"],"names":[],"mappings":"AAkBA;EACI,gBAAgB;EAChB,YAAY;EACZ,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,yCAAyC;EAEzC,uBAAuB;EACvB,oCAAoC;EACpC,mCAAmC;EACnC,yCAAyC,EAuL5C;EAlMD;IAcQ,oBAAoB,EACvB;EAfL;IAkBQ,UAAU;IACV,WAAW;IACX,YAAY;IACZ,eAAe,EAoBlB;IAzCL;MAwBY,oBA7BU,EA6Cb;MAxCT;QA2BgB,WAAW;QACX,oBA9CU,EA+Cb;MA7Bb;QAgCgB,UAAU;QACV,cAAc,EACjB;MAlCb;QAqCgB,mBAAmB;QACnB,oBAAmB,EACtB;EAvCb;IA4CQ,eAAe;IACf,0BA/DkB;IAgElB,0BAAkB;OAAlB,uBAAkB;QAAlB,sBAAkB;YAAlB,kBAAkB,EAmJrB;IAjML;MAiDY,mBAAmB,EACtB;IAlDT;MAqDY,+BAjEU,EAwFb;MA5ET;QAwDgB,eApEM,EAqET;MAzDb;QA4DgB,eAAe;QACf,mBAAmB;QACnB,0BAhFU;QAiFV,wBAAwB;QACxB,0BApEK;QAqEL,2DAAiC;QACjC,yBAAyB;QACzB,6BAA6B;QAC7B,kBAAkB,EAOrB;QA3Eb;UAuEoB,eAAe;UACf,eAAe;UACf,aAAa,EAChB;IA1EjB;MA+EY,+BAzFU,EA8Fb;MApFT;QAkFgB,eA5FM,EA6FT;IAnFb;MAuFY,mBAAmB;MACnB,+BAnGW,EAoJd;MAzIT;QA2FgB,eAAe;QACf,eAAe,EAClB;MA7Fb;QAiGgB,mBAAmB;QACnB,SAAS;QACT,WAAW;QACX,YAAY;QACZ,aAAa,EAChB;MAtGb;QAyGgB,qBAAc;QAAd,cAAc;QACd,uBAAoB;YAApB,oBAAoB;QACpB,sBAAwB;YAAxB,wBAAwB;QACxB,0BA9HU;QA+HV,oBAjHK;QAkHL,WAAW,EASd;QAvHb;UAiHoB,cAAc;UACd,aAAa;UACb,cAAc;UACd,kBAAkB;UAClB,gBAAe,EAClB;MAtHjB;QA0HgB,yBAAY;QACZ,UAAU;QACV,WAAW;QACX,WAAW,EACd;MA9Hb;QAiIgB,0BAAyB,EAC5B;MAlIb;QAsIoB,eAAe,EACjB;IAvIlB;MA4IY,+BAlJS,EA8JZ;MAxJT;QA+IgB,iBAAiB,EACpB;MAhJb;QAmJgB,eAAe;QACf,YAAY;QACZ,yBAAyB;QACzB,gBAAgB,EACnB;IAvJb;MA2JY,qBAAc;MAAd,cAAc;MACd,yBAAsB;UAAtB,sBAAsB;MACtB,qBAA4B;UAA5B,4BAA4B;MAC5B,YAAY;MACZ,yBAAyB,EAC5B;IAhKT;MAmKY,WAAW;MACX,aAAa;MACb,oBAAoB;MACpB,iBAAiB;MACjB,wBAAwB;MACxB,0BAAkB;SAAlB,uBAAkB;UAAlB,sBAAkB;cAAlB,kBAAkB,EACrB;IAzKT;MA4KY,oBAhLS;MAiLT,0BA/Lc;MAgMd,iBAAiB;MACjB,iBAAiB;MACjB,UAAU;MACV,cAAc;MACd,mBAAmB,EActB;MAhMT;QAqLgB,oBAAmB,EACtB;MAtLb;QAyLgB,oBAAmB;QACnB,YAAY,EACf;MA3Lb;QA8LgB,cAAc,EACjB","file":"Dat.scss","sourcesContent":["$background-color: #1a1a1a;\n\n$hover-lighten: 5%;\n$border-lighten: 5%;\n$active-lighten: 10%;\n\n$number-color: #2FA1D6;\n$boolean-color: #806787;\n$string-color: #1ed36f;\n$button-color: #e61d5f;\n$save-row-color: #dad5cb;\n\n$button-color: darken($save-row-color, 10%);\n$border-color: lighten($background-color, $border-lighten);\n$input-color: lighten($background-color, 8.5%);\n\n$border-left-size: 5px;\n\n.react-dat-gui {\n    position: fixed;\n    right: 16px;\n    top: 0;\n    width: 280px;\n    font-size: 12px;\n    font-family: 'Lucida Grande', sans-serif;\n\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-tap-highlight-color: transparent;\n\n    *, *:before, *:after {\n        box-sizing: inherit;\n    }\n\n    .dg {\n        margin: 0;\n        padding: 0;\n        color: #eee;\n        overflow: auto;\n\n        &.main {\n            background: $border-color;\n\n            &::-webkit-scrollbar {\n                width: 5px;\n                background: $background-color;\n            }\n\n            &::-webkit-scrollbar-corner {\n                height: 0;\n                display: none;\n            }\n\n            &::-webkit-scrollbar-thumb {\n                border-radius: 5px;\n                background: lighten($background-color, 30%);\n            }\n        }\n    }\n\n    .cr {\n        display: block;\n        background-color: $background-color;\n        user-select: none;\n\n        &:not(:last-child) {\n            margin-bottom: 1px;\n        }\n\n        &.number {\n            border-left: $border-left-size solid $number-color;\n            \n            input[type=text] {\n                color: $number-color;\n            }\n            \n            .slider {\n                display: block;\n                position: relative;\n                border: 3px solid $background-color;\n                border-right-width: 1px;\n                background-color: $input-color;\n                background-image: linear-gradient(90deg, $number-color, $number-color);\n                background-size: 0% 100%;\n                background-repeat: no-repeat;\n                cursor: ew-resize;\n\n                &:before {\n                    content: '\\A0';\n                    display: block;\n                    padding: 2px;\n                }\n            }\n        }\n\n        &.string {\n            border-left: $border-left-size solid $string-color;\n\n            input[type=text] {\n                color: $string-color;\n            }\n        }\n\n        &.boolean {\n            position: relative;\n            border-left: $border-left-size solid $boolean-color;\n\n            .label-text {\n                display: block;\n                padding: 5px 0;\n            }\n\n            .checkbox,\n            input[type=checkbox] {\n                position: absolute;\n                top: 2px;\n                right: 2px;\n                bottom: 2px;\n                width: 2.2em;\n            }\n\n            .checkbox {\n                display: flex;\n                align-items: center;\n                justify-content: center;\n                border: 3px solid $background-color;\n                background: $input-color;\n                z-index: 0;\n\n                > .checkmark {\n                    display: none;\n                    width: 0.7em;\n                    height: 0.7em;\n                    stroke-width: 7px;\n                    stroke: lighten($boolean-color, 20%);\n                }\n            }\n\n            input[type=checkbox] {\n                height: calc(100% - 4px);\n                margin: 0;\n                opacity: 0;\n                z-index: 1;\n            }\n\n            input[type=checkbox]:hover ~ .checkbox {\n                background-color: lighten($input-color, $hover-lighten);\n            }\n\n            input[type=checkbox]:checked ~ .checkbox {\n                 > .checkmark {\n                    display: block;\n                 }\n            }\n        }\n\n        &.button {\n            border-left: $border-left-size solid $button-color;\n\n            &:hover {\n                background: #111;\n            }\n\n            .label-text {\n                display: block;\n                width: 100%;\n                padding: 7px 2px 7px 8px;\n                cursor: pointer;\n            }\n        }\n\n        label {\n            display: flex;\n            align-items: baseline;\n            justify-content: flex-start;\n            width: 100%;\n            padding: 2px 2px 2px 8px;\n        }\n\n        .label-text {\n            width: 40%;\n            min-width: 0;\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n            user-select: none;\n        }\n\n        input[type=text] {\n            background: $input-color;\n            border: 3px solid $background-color;\n            border-radius: 0;\n            padding: 2px 5px;\n            margin: 0;\n            outline: none;\n            font-size: inherit;\n\n            &:hover {\n                background: lighten($input-color, $hover-lighten);\n            }\n\n            &:focus {\n                background: lighten($input-color, $active-lighten);\n                color: #fff;\n            }\n\n            &::-ms-clear {\n                display: none;\n            }\n        }\n    }\n}\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports) {
 
 	/*
@@ -24986,7 +25255,7 @@
 
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -25235,260 +25504,6 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
-
-
-/***/ },
-/* 190 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash 4.0.2 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modularize exports="npm" -o ./`
-	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
-	 * Released under MIT license <https://lodash.com/license>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 */
-	
-	/** Used as references for various `Number` constants. */
-	var NAN = 0 / 0;
-	
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]',
-	    genTag = '[object GeneratorFunction]',
-	    symbolTag = '[object Symbol]';
-	
-	/** Used to match leading and trailing whitespace. */
-	var reTrim = /^\s+|\s+$/g;
-	
-	/** Used to detect bad signed hexadecimal string values. */
-	var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-	
-	/** Used to detect binary string values. */
-	var reIsBinary = /^0b[01]+$/i;
-	
-	/** Used to detect octal string values. */
-	var reIsOctal = /^0o[0-7]+$/i;
-	
-	/** Built-in method references without a dependency on `root`. */
-	var freeParseInt = parseInt;
-	
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
-	
-	/**
-	 * The base implementation of `_.clamp` which doesn't coerce arguments to numbers.
-	 *
-	 * @private
-	 * @param {number} number The number to clamp.
-	 * @param {number} [lower] The lower bound.
-	 * @param {number} upper The upper bound.
-	 * @returns {number} Returns the clamped number.
-	 */
-	function baseClamp(number, lower, upper) {
-	  if (number === number) {
-	    if (upper !== undefined) {
-	      number = number <= upper ? number : upper;
-	    }
-	    if (lower !== undefined) {
-	      number = number >= lower ? number : lower;
-	    }
-	  }
-	  return number;
-	}
-	
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified,
-	 *  else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
-	  var tag = isObject(value) ? objectToString.call(value) : '';
-	  return tag == funcTag || tag == genTag;
-	}
-	
-	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(_.noop);
-	 * // => true
-	 *
-	 * _.isObject(null);
-	 * // => false
-	 */
-	function isObject(value) {
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-	
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-	
-	/**
-	 * Checks if `value` is classified as a `Symbol` primitive or object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified,
-	 *  else `false`.
-	 * @example
-	 *
-	 * _.isSymbol(Symbol.iterator);
-	 * // => true
-	 *
-	 * _.isSymbol('abc');
-	 * // => false
-	 */
-	function isSymbol(value) {
-	  return typeof value == 'symbol' ||
-	    (isObjectLike(value) && objectToString.call(value) == symbolTag);
-	}
-	
-	/**
-	 * Converts `value` to a number.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to process.
-	 * @returns {number} Returns the number.
-	 * @example
-	 *
-	 * _.toNumber(3);
-	 * // => 3
-	 *
-	 * _.toNumber(Number.MIN_VALUE);
-	 * // => 5e-324
-	 *
-	 * _.toNumber(Infinity);
-	 * // => Infinity
-	 *
-	 * _.toNumber('3');
-	 * // => 3
-	 */
-	function toNumber(value) {
-	  if (typeof value == 'number') {
-	    return value;
-	  }
-	  if (isSymbol(value)) {
-	    return NAN;
-	  }
-	  if (isObject(value)) {
-	    var other = isFunction(value.valueOf) ? value.valueOf() : value;
-	    value = isObject(other) ? (other + '') : other;
-	  }
-	  if (typeof value != 'string') {
-	    return value === 0 ? value : +value;
-	  }
-	  value = value.replace(reTrim, '');
-	  var isBinary = reIsBinary.test(value);
-	  return (isBinary || reIsOctal.test(value))
-	    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
-	    : (reIsBadHex.test(value) ? NAN : +value);
-	}
-	
-	/**
-	 * Clamps `number` within the inclusive `lower` and `upper` bounds.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Number
-	 * @param {number} number The number to clamp.
-	 * @param {number} [lower] The lower bound.
-	 * @param {number} upper The upper bound.
-	 * @returns {number} Returns the clamped number.
-	 * @example
-	 *
-	 * _.clamp(-10, -5, 5);
-	 * // => -5
-	 *
-	 * _.clamp(10, -5, 5);
-	 * // => 5
-	 */
-	function clamp(number, lower, upper) {
-	  if (upper === undefined) {
-	    upper = lower;
-	    lower = undefined;
-	  }
-	  if (upper !== undefined) {
-	    upper = toNumber(upper);
-	    upper = upper === upper ? upper : 0;
-	  }
-	  if (lower !== undefined) {
-	    lower = toNumber(lower);
-	    lower = lower === lower ? lower : 0;
-	  }
-	  return baseClamp(toNumber(number), lower, upper);
-	}
-	
-	module.exports = clamp;
 
 
 /***/ }
