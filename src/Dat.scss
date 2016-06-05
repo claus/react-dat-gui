@@ -147,10 +147,10 @@ $border-left-size: 5px;
 
                     > .checkmark {
                         display: none;
-                        width: 0.7em;
-                        height: 0.7em;
-                        stroke-width: 10px;
-                        stroke: lighten($boolean-color, 10%);
+                        width: 0.6em;
+                        height: 0.6em;
+                        stroke-width: 7px;
+                        stroke: lighten($boolean-color, 20%);
                     }
                 }
 
