@@ -69,9 +69,9 @@
       .react-dat-gui .cr.boolean .checkbox,
       .react-dat-gui .cr.boolean input[type=checkbox] {
         position: absolute;
-        top: 2px;
+        top: 1px;
         right: 2px;
-        bottom: 2px;
+        bottom: 1px;
         width: 2em; }
       .react-dat-gui .cr.boolean .checkbox {
         display: -webkit-box;
@@ -88,8 +88,8 @@
         z-index: 0; }
         .react-dat-gui .cr.boolean .checkbox > .checkmark {
           display: none;
-          width: 0.7em;
-          height: 0.7em;
+          width: 0.6em;
+          height: 0.6em;
           stroke-width: 7px;
           stroke: #b09fb5; }
       .react-dat-gui .cr.boolean input[type=checkbox] {
@@ -108,7 +108,7 @@
       .react-dat-gui .cr.button .label-text {
         display: block;
         width: 100%;
-        padding: 7px 2px 7px 8px;
+        padding: 6px 2px 6px 8px;
         cursor: pointer; }
     .react-dat-gui .cr label {
       display: -webkit-box;
@@ -121,7 +121,7 @@
           -ms-flex-pack: start;
               justify-content: flex-start;
       width: 100%;
-      padding: 2px 2px 2px 8px; }
+      padding: 1px 2px 1px 8px; }
     .react-dat-gui .cr .label-text {
       width: 40%;
       min-width: 0;

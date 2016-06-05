@@ -115,9 +115,9 @@ $border-left-size: 5px;
             .checkbox,
             input[type=checkbox] {
                 position: absolute;
-                top: 2px;
+                top: 1px;
                 right: 2px;
-                bottom: 2px;
+                bottom: 1px;
                 width: 2em;
             }
 
@@ -131,8 +131,8 @@ $border-left-size: 5px;
 
                 > .checkmark {
                     display: none;
-                    width: 0.7em;
-                    height: 0.7em;
+                    width: 0.6em;
+                    height: 0.6em;
                     stroke-width: 7px;
                     stroke: lighten($boolean-color, 20%);
                 }
@@ -166,7 +166,7 @@ $border-left-size: 5px;
             .label-text {
                 display: block;
                 width: 100%;
-                padding: 7px 2px 7px 8px;
+                padding: 6px 2px 6px 8px;
                 cursor: pointer;
             }
         }
@@ -176,7 +176,7 @@ $border-left-size: 5px;
             align-items: baseline;
             justify-content: flex-start;
             width: 100%;
-            padding: 2px 2px 2px 8px;
+            padding: 1px 2px 1px 8px;
         }
 
         .label-text {
