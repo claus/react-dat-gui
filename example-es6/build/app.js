@@ -20613,7 +20613,9 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatString).call(this, props, context));
 	
 	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleFocus = _this.handleFocus.bind(_this);
 	        _this.handleBlur = _this.handleBlur.bind(_this);
+	        _this.handleKeyDown = _this.handleKeyDown.bind(_this);
 	        return _this;
 	    }
 	

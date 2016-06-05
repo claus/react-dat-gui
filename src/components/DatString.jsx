@@ -17,7 +17,9 @@ class DatString extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleChange = this.handleChange.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     componentWillMount() {
