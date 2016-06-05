@@ -196,7 +196,7 @@ class Slider extends React.Component {
         const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
         const x = pageX - rect.left;
         const w = rect.right - rect.left;
-        onUpdate(min + clamp(x / w, 0, 1) * (max - min));
+        onUpdate(min + clamp(x / w, 0, 1) * (max - min), isLive);
     }
 
     render() {
