@@ -4,11 +4,6 @@ import cloneDeep from 'lodash.clonedeep';
 import isUndefined from 'lodash.isundefined';
 import React, { PropTypes, cloneElement } from 'react';
 
-function uuid(a) {
-    // https://gist.github.com/jed/982883
-    return a ? (a^Math.random()*16>>a/4).toString(16) : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, uuid);
-}
-
 class Dat extends React.Component {
 
     static propTypes = {
@@ -24,6 +19,7 @@ class Dat extends React.Component {
     static defaultProps = {
         liveUpdate: true,
     };
+
 
     constructor(props, context) {
         super(props, context);
@@ -41,7 +37,6 @@ class Dat extends React.Component {
         return React.Children.toArray(children).map((child, i) => {
             const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
             return cloneElement(child, {
-                id: uuid(),
                 key: i,
                 data,
                 liveUpdate,

@@ -4,11 +4,11 @@ import result from 'lodash.result';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
+import { createId } from '../utils';
 
 class DatNumber extends React.Component {
 
     static propTypes = {
-        id: PropTypes.string,
         data: PropTypes.object,
         path: PropTypes.string,
         label: PropTypes.string,
@@ -31,13 +31,13 @@ class DatNumber extends React.Component {
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
         this.state = {
-            value: 0,
             isSliderActive: false,
         };
     }
 
     componentWillMount() {
         this.setState({
+            id : createId(),
             value: this.getValue()
         });
     }
@@ -144,8 +144,8 @@ class DatNumber extends React.Component {
     }
 
     render() {
-        const { id, min, max, _labelWidth } = this.props;
-        const { value, isSliderActive } = this.state;
+        const { min, max, _labelWidth } = this.props;
+        const { value, isSliderActive, id } = this.state;
         const label = isString(this.props.label) ? this.props.label : this.props.path;
         const hasSlider = isFinite(min) && isFinite(min);
         const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};

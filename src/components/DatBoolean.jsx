@@ -2,11 +2,11 @@ import result from 'lodash.result';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
+import { createId } from '../utils';
 
 class DatBoolean extends React.Component {
 
     static propTypes = {
-        id: PropTypes.string,
         data: PropTypes.object,
         path: PropTypes.string,
         label: PropTypes.string,
@@ -25,6 +25,7 @@ class DatBoolean extends React.Component {
 
     componentWillMount() {
         this.setState({
+            id: createId(),
             value: this.getValue()
         });
     }
@@ -52,8 +53,7 @@ class DatBoolean extends React.Component {
     }
 
     render() {
-        const { id } = this.props;
-        const { value } = this.state;
+        const { value, id } = this.state;
         const label = isString(this.props.label) ? this.props.label : this.props.path;
         return (
             <li className="cr boolean">

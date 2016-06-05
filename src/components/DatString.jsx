@@ -1,11 +1,11 @@
 import result from 'lodash.result';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
+import { createId } from '../utils';
 
 class DatString extends React.Component {
 
     static propTypes = {
-        id: PropTypes.string,
         data: PropTypes.object,
         path: PropTypes.string,
         label: PropTypes.string,
@@ -23,6 +23,7 @@ class DatString extends React.Component {
 
     componentWillMount() {
         this.setState({
+            id: createId(),
             value: this.getValue()
         });
     }
@@ -56,8 +57,8 @@ class DatString extends React.Component {
     }
 
     render() {
-        const { id, _labelWidth } = this.props;
-        const { value } = this.state;
+        const { _labelWidth } = this.props;
+        const { value, id } = this.state;
         const label = isString(this.props.label) ? this.props.label : this.props.path;
         const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};
         const inputStyle = _labelWidth ? { width: `${100 - _labelWidth}%` } : {};
