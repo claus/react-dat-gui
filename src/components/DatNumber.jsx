@@ -128,7 +128,7 @@ class DatNumber extends React.Component {
     render() {
         const { min, max, path, label, labelWidth } = this.props;
         const labelText = isString(label) ? label : path;
-        const hasSlider = isFinite(min) && isFinite(min);
+        const hasSlider = isFinite(min) && isFinite(max);
         const controlsWidth = 100 - labelWidth;
         const inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
         const sliderWidth = controlsWidth - inputWidth;
