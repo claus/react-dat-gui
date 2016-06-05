@@ -1,8 +1,6 @@
 import result from 'lodash.result';
-import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
-import { createId } from '../utils';
 
 class DatBoolean extends React.Component {
 
@@ -21,7 +19,6 @@ class DatBoolean extends React.Component {
 
     componentWillMount() {
         this.setState({
-            id: createId(),
             value: this.getValue()
         });
     }
@@ -49,23 +46,22 @@ class DatBoolean extends React.Component {
     }
 
     render() {
-        const { value, id } = this.state;
-        const label = isString(this.props.label) ? this.props.label : this.props.path;
+        const { path, label } = this.props;
+        const labelText = isString(label) ? label : path;
         return (
             <li className="cr boolean">
-                <label htmlFor={id}>{label}</label>
-                <div className="checkbox-wrapper">
+                <label>
+                    <span className="label-text">{labelText}</span>
                     <input
                         type="checkbox"
-                        id={id}
-                        checked={value}
+                        checked={this.state.value}
                         onChange={this.handleChange} />
                     <div className="checkbox">
                         <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                             <path d="M0,0L50,50M50,0L0,50Z" />
                         </svg>
                     </div>
-                </div>
+                </label>
             </li>
         );
     }

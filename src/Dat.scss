@@ -40,7 +40,7 @@ $border-left-size: 5px;
         overflow: auto;
 
         &.main {
-            background: $background-color;
+            background: $border-color;
 
             &::-webkit-scrollbar {
                 width: 5px;
@@ -60,48 +60,36 @@ $border-left-size: 5px;
     }
 
     .cr {
-        display: flex;
-        border-bottom: 1px solid $border-color;
+        display: block;
+        background-color: $background-color;
         user-select: none;
+
+        &:not(:last-child) {
+            margin-bottom: 1px;
+        }
 
         &.number {
             border-left: $border-left-size solid $number-color;
             
-            .slider {
-                display: none;
-                position: relative;
-                width: 40%;
-                border: 3px solid $background-color;
-                border-right-width: 1px;
-                background-color: $input-color;
-                user-select: none;
-                cursor: ew-resize;
-
-                &:hover, &.is-active {
-                    background-color: lighten($input-color, $hover-lighten);
-                }
-
-                .slider-bar {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: $number-color;
-                }
-            }
-            
             input[type=text] {
-                width: 60%;
                 color: $number-color;
             }
             
-            &.has-slider {
-                .slider {
+            .slider {
+                display: block;
+                position: relative;
+                border: 3px solid $background-color;
+                border-right-width: 1px;
+                background-color: $input-color;
+                background-image: linear-gradient(90deg, $number-color, $number-color);
+                background-size: 0% 100%;
+                background-repeat: no-repeat;
+                cursor: ew-resize;
+
+                &:before {
+                    content: '\A0';
                     display: block;
-                }
-                input[type=text] {
-                    width: 20%;
+                    padding: 2px;
                 }
             }
         }
@@ -110,63 +98,60 @@ $border-left-size: 5px;
             border-left: $border-left-size solid $string-color;
 
             input[type=text] {
-                width: 60%;
                 color: $string-color;
             }
         }
 
         &.boolean {
+            position: relative;
             border-left: $border-left-size solid $boolean-color;
 
-            label {
-                width: calc(100% - 1.2em - 10px);
+            .label-text {
+                display: block;
+                padding: 5px 0;
             }
 
-            .checkbox-wrapper {
-                position: relative;
-                width: calc(1.2em + 10px);
+            .checkbox,
+            input[type=checkbox] {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                bottom: 2px;
+                width: 2.2em;
+            }
 
-                .checkbox,
-                input[type=checkbox] {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
+            .checkbox {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 3px solid $background-color;
+                background: $input-color;
+                z-index: 0;
+
+                > .checkmark {
+                    display: none;
+                    width: 0.7em;
+                    height: 0.7em;
+                    stroke-width: 7px;
+                    stroke: lighten($boolean-color, 20%);
                 }
+            }
 
-                .checkbox {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 3px solid $background-color;
-                    background: $input-color;
-                    z-index: 0;
-                    left: auto;
-                    right: 0;
+            input[type=checkbox] {
+                height: calc(100% - 4px);
+                margin: 0;
+                opacity: 0;
+                z-index: 1;
+            }
 
-                    > .checkmark {
-                        display: none;
-                        width: 0.6em;
-                        height: 0.6em;
-                        stroke-width: 7px;
-                        stroke: lighten($boolean-color, 20%);
-                    }
-                }
+            input[type=checkbox]:hover ~ .checkbox {
+                background-color: lighten($input-color, $hover-lighten);
+            }
 
-                input[type=checkbox] {
-                    margin: 0;
-                    opacity: 0;
-                    z-index: 1;
-                }
-
-                input[type=checkbox]:checked ~ .checkbox > .checkmark {
+            input[type=checkbox]:checked ~ .checkbox {
+                 > .checkmark {
                     display: block;
-                }
-
-                input[type=checkbox]:hover ~ .checkbox {
-                    background-color: lighten($input-color, $hover-lighten);
-                }
+                 }
             }
         }
 
@@ -177,18 +162,25 @@ $border-left-size: 5px;
                 background: #111;
             }
 
-            span {
+            .label-text {
+                display: block;
                 width: 100%;
+                padding: 7px 2px 7px 8px;
                 cursor: pointer;
             }
         }
 
-        label, span {
-            display: inline-block;
-            align-items: center;
-            min-width: 0;
+        label {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 2px 2px 2px 8px;
+        }
+
+        .label-text {
             width: 40%;
-            padding: 5px;
+            min-width: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

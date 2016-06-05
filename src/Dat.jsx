@@ -11,15 +11,15 @@ class Dat extends React.Component {
         children: PropTypes.node.isRequired,
         onUpdate: PropTypes.func.isRequired,
         liveUpdate: PropTypes.bool,
+        labelWidth: PropTypes.number,
         className: PropTypes.string,
         style: PropTypes.object,
-        labelWidth: PropTypes.number,
     };
 
     static defaultProps = {
         liveUpdate: true,
+        labelWidth: 40,
     };
-
 
     constructor(props, context) {
         super(props, context);
@@ -33,14 +33,15 @@ class Dat extends React.Component {
     }
 
     renderChildren() {
-        const { children, data, labelWidth } = this.props;
+        const { children, data } = this.props;
         return React.Children.toArray(children).map((child, i) => {
             const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
+            const labelWidth = isUndefined(child.props.labelWidth) ? this.props.labelWidth : child.props.labelWidth;
             return cloneElement(child, {
                 key: i,
                 data,
                 liveUpdate,
-                _labelWidth: labelWidth,
+                labelWidth,
                 _onUpdateValue: this.handleUpdateValue,
             });
         });

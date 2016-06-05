@@ -1,7 +1,6 @@
 import result from 'lodash.result';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
-import { createId } from '../utils';
 
 class DatString extends React.Component {
 
@@ -9,10 +8,10 @@ class DatString extends React.Component {
         data: PropTypes.object,
         path: PropTypes.string,
         label: PropTypes.string,
+        labelWidth: PropTypes.number,
         liveUpdate: PropTypes.bool,
         onUpdate: PropTypes.func,
         _onUpdateValue: PropTypes.func,
-        _labelWidth: PropTypes.number,
     };
 
     constructor(props, context) {
@@ -23,7 +22,6 @@ class DatString extends React.Component {
 
     componentWillMount() {
         this.setState({
-            id: createId(),
             value: this.getValue()
         });
     }
@@ -45,9 +43,21 @@ class DatString extends React.Component {
         });
     }
 
+    handleFocus(event) {
+        document.addEventListener('keydown', this.handleKeyDown);
+    }
+
     handleBlur(event) {
+        document.removeEventListener('keydown', this.handleKeyDown);
         window.getSelection().removeAllRanges();
         !this.props.liveUpdate && this.update();
+    }
+
+    handleKeyDown(event) {
+        const key = event.keyCode || event.which;
+        if (key === 13) {
+            !this.props.liveUpdate && this.update();
+        }
     }
 
     update() {
@@ -57,21 +67,20 @@ class DatString extends React.Component {
     }
 
     render() {
-        const { _labelWidth } = this.props;
-        const { value, id } = this.state;
-        const label = isString(this.props.label) ? this.props.label : this.props.path;
-        const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};
-        const inputStyle = _labelWidth ? { width: `${100 - _labelWidth}%` } : {};
+        const { path, label, labelWidth } = this.props;
+        const labelText = isString(label) ? label : path;
         return (
             <li className="cr string">
-                <label htmlFor={id} style={labelStyle}>{label}</label>
-                <input
-                    type="text"
-                    id={id}
-                    value={value}
-                    style={inputStyle}
-                    onChange={this.handleChange}
-                    onBlur={this.handleBlur} />
+                <label>
+                    <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+                    <input
+                        type="text"
+                        value={this.state.value}
+                        style={{ width: `${100 - labelWidth}%` }}
+                        onChange={this.handleChange}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur} />
+                </label>
             </li>
         );
     }

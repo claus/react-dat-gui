@@ -4,21 +4,21 @@ import result from 'lodash.result';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
-import { createId } from '../utils';
+import ReactDOM from 'react-dom';
 
 class DatNumber extends React.Component {
 
     static propTypes = {
-        data: PropTypes.object,
-        path: PropTypes.string,
-        label: PropTypes.string,
-        liveUpdate: PropTypes.bool,
-        onUpdate: PropTypes.func,
-        _onUpdateValue: PropTypes.func,
-        _labelWidth: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
         step: PropTypes.number,
+        data: PropTypes.object,
+        path: PropTypes.string,
+        label: PropTypes.string,
+        labelWidth: PropTypes.number,
+        liveUpdate: PropTypes.bool,
+        onUpdate: PropTypes.func,
+        _onUpdateValue: PropTypes.func,
     };
 
     constructor(props, context) {
@@ -27,17 +27,11 @@ class DatNumber extends React.Component {
         this.handleFocus = this.handleFocus.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseUp = this.handleMouseUp.bind(this);
-        this.state = {
-            isSliderActive: false,
-        };
+        this.handleSliderUpdate = this.handleSliderUpdate.bind(this);
     }
 
     componentWillMount() {
         this.setState({
-            id : createId(),
             value: this.getValue()
         });
     }
@@ -50,11 +44,6 @@ class DatNumber extends React.Component {
 
     getValue(props = this.props) {
         return this.applyConstraints(result(props.data, props.path));
-    }
-
-    toNumber(value) {
-        const float = parseFloat(value);
-        return isNaN(float) ? 0 : float;
     }
 
     applyConstraints(value) {
@@ -76,6 +65,11 @@ class DatNumber extends React.Component {
             }
         }
         return value;
+    }
+
+    toNumber(value) {
+        const float = parseFloat(value);
+        return isNaN(float) ? 0 : float;
     }
 
     handleChange(event) {
@@ -105,36 +99,13 @@ class DatNumber extends React.Component {
         }
     }
 
-    handleMouseDown(event) {
-        const value = this.getSliderValue(event);
-        this.setState({ value, isSliderActive: true }, () => {
-            this.props.liveUpdate && this.update();
-        });
-        window.addEventListener('mousemove', this.handleMouseMove);
-        window.addEventListener('mouseup', this.handleMouseUp);
-    }
-
-    handleMouseMove(event) {
-        const value = this.getSliderValue(event);
+    handleSliderUpdate(value, isLive) {
+        value = this.applyConstraints(value);
         this.setState({ value }, () => {
-            this.props.liveUpdate && this.update();
+            if (!isLive || this.props.liveUpdate) {
+                this.update();
+            }
         });
-        event.preventDefault();
-    }
-
-    handleMouseUp(event) {
-        !this.props.liveUpdate && this.update();
-        this.setState({ isSliderActive: false });
-        window.removeEventListener('mousemove', this.handleMouseMove);
-        window.removeEventListener('mouseup', this.handleMouseUp);
-    }
-
-    getSliderValue(mouseEvent) {
-        const { min, max } = this.props;
-        const sliderRect = this.refs.slider.getBoundingClientRect();
-        const x = mouseEvent.pageX - sliderRect.left;
-        const w = sliderRect.width;
-        return this.applyConstraints(min + clamp(x / w, 0, 1) * (max - min));
     }
 
     update() {
@@ -143,34 +114,104 @@ class DatNumber extends React.Component {
         this.props.onUpdate && this.props.onUpdate(value);
     }
 
-    render() {
-        const { min, max, _labelWidth } = this.props;
-        const { value, isSliderActive, id } = this.state;
-        const label = isString(this.props.label) ? this.props.label : this.props.path;
-        const hasSlider = isFinite(min) && isFinite(min);
-        const labelStyle = _labelWidth ? { width: `${_labelWidth}%` } : {};
-        const sliderStyle = _labelWidth ? { width: `${2 * (100 - _labelWidth) / 3}%` } : {};
-        const inputStyle = _labelWidth ? { width: `${hasSlider ? (100 - _labelWidth) / 3 : 100 - _labelWidth}%` } : {};
-        const sliderPercent = (this.applyConstraints(value) - min) * 100 / (max - min);
-        const sliderBarStyle = hasSlider ? { maxWidth: `${sliderPercent}%` } : {};
-        const sliderClassName = cx('slider', { 'is-active': isSliderActive })
-        const className = cx('cr', 'number', { 'has-slider': hasSlider });
+    renderSlider(width) {
         return (
-            <li className={className}>
-                <label htmlFor={id} style={labelStyle}>{label}</label>
-                <div className={sliderClassName} style={sliderStyle} ref="slider" onMouseDown={this.handleMouseDown}>
-                    <div className="slider-bar" style={sliderBarStyle} />
-                </div>
-                <input
-                    type="text"
-                    inputMode="numeric"
-                    style={inputStyle}
-                    id={id}
-                    value={value}
-                    onChange={this.handleChange}
-                    onFocus={this.handleFocus}
-                    onBlur={this.handleBlur} />
+            <Slider
+                value={this.state.value}
+                min={this.props.min}
+                max={this.props.max}
+                width={width}
+                onUpdate={this.handleSliderUpdate} />
+        );
+    }
+
+    render() {
+        const { min, max, path, label, labelWidth } = this.props;
+        const labelText = isString(label) ? label : path;
+        const hasSlider = isFinite(min) && isFinite(min);
+        const controlsWidth = 100 - labelWidth;
+        const inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+        const sliderWidth = controlsWidth - inputWidth;
+        return (
+            <li className="cr number">
+                <label>
+                    <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+                    {hasSlider ? this.renderSlider(sliderWidth) : null}
+                    <input
+                        type="text"
+                        inputMode="numeric"
+                        value={this.state.value}
+                        style={{ width: `${inputWidth}%` }}
+                        onChange={this.handleChange}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur} />
+                </label>
             </li>
+        );
+    }
+
+}
+
+class Slider extends React.Component {
+
+    static propTypes = {
+        value: PropTypes.number,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        width: PropTypes.number,
+        onUpdate: PropTypes.func,
+    };
+
+    constructor(props, context) {
+        super(props, context);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
+    }
+
+    handleMouseDown(event) {
+        this.update(event.pageX);
+        window.addEventListener('mousemove', this.handleMouseMove);
+        window.addEventListener('mouseup', this.handleMouseUp);
+    }
+
+    handleMouseMove(event) {
+        this.update(event.pageX);
+        event.preventDefault();
+    }
+
+    handleMouseUp(event) {
+        this.update(event.pageX, false);
+        window.removeEventListener('mousemove', this.handleMouseMove);
+        window.removeEventListener('mouseup', this.handleMouseUp);
+    }
+
+    handleClick(event) {
+        // do not focus input field on slider click
+        event.preventDefault();
+    }
+
+    update(pageX, isLive = true) {
+        const { min, max, onUpdate } = this.props;
+        const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+        const x = pageX - rect.left;
+        const w = rect.right - rect.left;
+        onUpdate(min + clamp(x / w, 0, 1) * (max - min));
+    }
+
+    render() {
+        const { value, min, max, width } = this.props;
+        const widthBg = (value - min) * 100 / (max - min);
+        const style = {
+            width: `${width}%`,
+            backgroundSize: `${widthBg}% 100%`
+        };
+        return (
+            <span
+                className="slider"
+                style={style}
+                onClick={this.handleClick}
+                onMouseDown={this.handleMouseDown} />
         );
     }
 
