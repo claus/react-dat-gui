@@ -20,12 +20,13 @@
   },
   "scripts": {
     "dev": "webpack --watch --inline",
-    "prepublish": "npm run pre:babel && npm run pre:browserify && npm run pre:uglify && npm run pre:scss && npm run pre:scss:min",
+    "prepublish": "npm run pre:babel && npm run pre:browserify && npm run pre:uglify && npm run pre:css:sass && npm run pre:css:prefix && npm run pre:css:min",
     "pre:babel": "babel ./src --out-dir ./lib --source-maps --presets es2015,react,stage-2 --plugins babel-plugin-transform-class-properties,babel-plugin-add-module-exports",
     "pre:browserify": "browserify ./lib/Dat.js -o ./build/react-dat-gui.js --transform browserify-global-shim --standalone ReactDatGui",
     "pre:uglify": "uglifyjs ./build/react-dat-gui.js --compress --mangle --output ./build/react-dat-gui.min.js --source-map ./build/react-dat.gui.min.js.map",
-    "pre:scss": "node-sass --source-map ./lib/Dat.css.map ./src/Dat.scss ./lib/Dat.css && node-sass ./src/Dat.scss ./build/react-dat-gui.css",
-    "pre:scss:min": "node-sass --output-style compressed --source-map ./build/react-dat-gui.min.css.map ./src/Dat.scss ./build/react-dat-gui.min.css"
+    "pre:css:sass": "node-sass --source-map ./lib/Dat.css.map ./src/Dat.scss ./lib/Dat.css",
+    "pre:css:prefix": "postcss --use autoprefixer -b 'last 2 versions' -o ./lib/Dat.css ./lib/Dat.css",
+    "pre:css:min": "postcss --use cssnano -o ./build/react-dat-gui.min.css ./lib/Dat.css"
   },
   "dependencies": {
     "classnames": "2.2.5",
@@ -38,6 +39,7 @@
     "lodash.set": "^4.2.0"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel": "6.5.2",
     "babel-cli": "6.9.0",
     "babel-core": "6.9.1",
@@ -51,7 +53,12 @@
     "browserify": "13.0.1",
     "browserify-global-shim": "1.0.3",
     "css-loader": "^0.23.1",
+    "cssnano": "^3.6.2",
     "node-sass": "3.7.0",
+    "postcss": "^5.0.21",
+    "postcss-cli": "^2.5.2",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "react": "15.1.0",
     "react-dom": "15.1.0",
     "sass-loader": "3.2.0",

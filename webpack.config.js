@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 var path = require('path');
 
 var host = 'localhost';
@@ -26,7 +28,7 @@ var config = {
             },
             {
                 test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+                loaders: ["style", "css?sourceMap", "postcss", "sass?sourceMap"]
             }
         ]
     },
@@ -36,6 +38,9 @@ var config = {
     },
     sassLoader: {
         includePaths: [path.resolve(__dirname, "./src")]
+    },
+    postcss: function () {
+        return [precss, autoprefixer({ browsers: ['last 2 versions'] })];
     }
 };
 
