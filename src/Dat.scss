@@ -211,6 +211,10 @@ $border-left-size: 5px;
                 background: lighten($input-color, $active-lighten);
                 color: #fff;
             }
+
+            &::-ms-clear {
+                display: none;
+            }
         }
     }
 }
