@@ -361,6 +361,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function toNumber(value) {
+    var float = parseFloat(value);
+    return isNaN(float) ? 0 : float;
+}
+
 var DatNumber = function (_React$Component) {
     _inherits(DatNumber, _React$Component);
 
@@ -411,7 +416,7 @@ var DatNumber = function (_React$Component) {
             var isMin = false;
             var isMax = false;
 
-            value = this.toNumber(value);
+            value = toNumber(value);
             if (hasMin && value <= min) {
                 value = min;
                 isMin = true;
@@ -426,12 +431,6 @@ var DatNumber = function (_React$Component) {
                 }
             }
             return value;
-        }
-    }, {
-        key: 'toNumber',
-        value: function toNumber(value) {
-            var float = parseFloat(value);
-            return isNaN(float) ? 0 : float;
         }
     }, {
         key: 'handleChange',
@@ -569,6 +568,20 @@ var Slider = function (_React$Component2) {
     }
 
     _createClass(Slider, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.setState({
+                value: toNumber(this.props.value)
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({
+                value: toNumber(nextProps.value)
+            });
+        }
+    }, {
         key: 'handleMouseDown',
         value: function handleMouseDown(event) {
             this.update(event.pageX);
@@ -606,21 +619,23 @@ var Slider = function (_React$Component2) {
             var rect = _reactDom2.default.findDOMNode(this).getBoundingClientRect();
             var x = pageX - rect.left;
             var w = rect.right - rect.left;
-            onUpdate(min + (0, _lodash2.default)(x / w, 0, 1) * (max - min), isLive);
+            var value = min + (0, _lodash2.default)(x / w, 0, 1) * (max - min);
+            this.setState({ value: value }, function () {
+                onUpdate(value, isLive);
+            });
         }
     }, {
         key: 'render',
         value: function render() {
             var _props4 = this.props;
-            var value = _props4.value;
             var min = _props4.min;
             var max = _props4.max;
             var width = _props4.width;
 
-            var widthBg = (value - min) * 100 / (max - min);
+            var widthBackground = (0, _lodash2.default)((this.state.value - min) * 100 / (max - min), 0, 100);
             var style = {
                 width: width + '%',
-                backgroundSize: widthBg + '% 100%'
+                backgroundSize: widthBackground + '% 100%'
             };
             return _react2.default.createElement('span', {
                 className: 'slider',
@@ -634,7 +649,7 @@ var Slider = function (_React$Component2) {
 }(_react2.default.Component);
 
 Slider.propTypes = {
-    value: _react.PropTypes.number,
+    value: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
     min: _react.PropTypes.number,
     max: _react.PropTypes.number,
     width: _react.PropTypes.number,

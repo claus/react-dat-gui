@@ -6,6 +6,11 @@ import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
+function toNumber(value) {
+    const float = parseFloat(value);
+    return isNaN(float) ? 0 : float;
+}
+
 class DatNumber extends React.Component {
 
     static propTypes = {
@@ -50,7 +55,7 @@ class DatNumber extends React.Component {
         const { min, max, step } = this.props;
         const [ hasMin, hasMax, hasStep ] = [ isFinite(min), isFinite(max), isFinite(step) ];
         let [ isMin, isMax ] = [ false, false ];
-        value = this.toNumber(value);
+        value = toNumber(value);
         if (hasMin && value <= min) {
             value = min;
             isMin = true;
@@ -65,11 +70,6 @@ class DatNumber extends React.Component {
             }
         }
         return value;
-    }
-
-    toNumber(value) {
-        const float = parseFloat(value);
-        return isNaN(float) ? 0 : float;
     }
 
     handleChange(event) {
@@ -155,7 +155,7 @@ class DatNumber extends React.Component {
 class Slider extends React.Component {
 
     static propTypes = {
-        value: PropTypes.number,
+        value: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
         min: PropTypes.number,
         max: PropTypes.number,
         width: PropTypes.number,
@@ -167,6 +167,18 @@ class Slider extends React.Component {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({
+            value: toNumber(this.props.value)
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: toNumber(nextProps.value)
+        });
     }
 
     handleMouseDown(event) {
@@ -196,15 +208,18 @@ class Slider extends React.Component {
         const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
         const x = pageX - rect.left;
         const w = rect.right - rect.left;
-        onUpdate(min + clamp(x / w, 0, 1) * (max - min), isLive);
+        const value = min + clamp(x / w, 0, 1) * (max - min);
+        this.setState({ value }, () => {
+            onUpdate(value, isLive);
+        });
     }
 
     render() {
-        const { value, min, max, width } = this.props;
-        const widthBg = (value - min) * 100 / (max - min);
+        const { min, max, width } = this.props;
+        const widthBackground = clamp((this.state.value - min) * 100 / (max - min), 0, 100);
         const style = {
             width: `${width}%`,
-            backgroundSize: `${widthBg}% 100%`
+            backgroundSize: `${widthBackground}% 100%`
         };
         return (
             <span
@@ -214,7 +229,6 @@ class Slider extends React.Component {
                 onMouseDown={this.handleMouseDown} />
         );
     }
-
 }
 
 export default DatNumber;
