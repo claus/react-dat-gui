@@ -12,10 +12,6 @@ class DatButton extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.label !== this.props.label;
-    }
-
     handleClick(event) {
     }
 

@@ -48,17 +48,6 @@ class DatNumber extends React.Component {
         });
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.id !== this.props.id ||
-               nextProps.path !== this.props.path ||
-               nextProps.label !== this.props.label ||
-               nextProps._labelWidth !== this.props._labelWidth ||
-               nextProps.min !== this.props.value ||
-               nextProps.max !== this.props.value ||
-               nextProps.step !== this.props.value ||
-               nextState.value !== this.state.value;
-    }
-
     getValue(props = this.props) {
         return this.applyConstraints(result(props.data, props.path));
     }

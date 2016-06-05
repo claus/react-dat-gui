@@ -35,13 +35,6 @@ class DatBoolean extends React.Component {
         });
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.id !== this.props.id ||
-               nextProps.path !== this.props.path ||
-               nextProps.label !== this.props.label ||
-               nextState.value !== this.state.value;
-    }
-
     getValue(props = this.props) {
         return result(props.data, props.path);
     }

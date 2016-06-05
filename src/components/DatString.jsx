@@ -33,14 +33,6 @@ class DatString extends React.Component {
         });
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.id !== this.props.id ||
-               nextProps.path !== this.props.path ||
-               nextProps.label !== this.props.label ||
-               nextProps._labelWidth !== this.props._labelWidth ||
-               nextState.value !== this.state.value;
-    }
-
     getValue(props = this.props) {
         return result(props.data, props.path);
     }
