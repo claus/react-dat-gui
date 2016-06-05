@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>React dat.GUI Demo</title>
+        <link href="../build/react-dat-gui.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="../build/react-dat-gui.min.js"></script>
+        <script>
+
+            var DatFactory = React.createFactory(ReactDatGui.default);
+            var DatStringFactory = React.createFactory(ReactDatGui.DatString);
+            var DatNumberFactory = React.createFactory(ReactDatGui.DatNumber);
+            var DatBooleanFactory = React.createFactory(ReactDatGui.DatBoolean);
+
+            var App = React.createClass({
+
+                getInitialState: function() {
+                    return {
+                        data: {
+                            string: 'Hello World',
+                            number: 66,
+                            boolean: false
+                        }
+                    };
+                },
+
+                handleUpdate: function(data) {
+                    console.log('handleUpdate', data);
+                    this.setState({
+                        data: data
+                    });
+                },
+
+                render: function() {
+                    return DatFactory({ data: this.state.data, onUpdate: this.handleUpdate }, [
+                        DatStringFactory({ path: 'string', label: 'String', key: 1 }),
+                        DatNumberFactory({ path: 'number', label: 'Number', min: 0, max: 100, step: 1, key: 2 }),
+                        DatBooleanFactory({ path: 'boolean', label: 'Boolean', key: 3 }),
+                    ]);
+                }
+
+            });
+
+            var AppFactory = React.createFactory(App);
+            
+            ReactDOM.render(
+                AppFactory(),
+                document.getElementById('app')
+            );
+
+        </script>
+    </body>
+</html>
