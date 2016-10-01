@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dat, { DatString, DatNumber, DatBoolean, DatButton } from '../../src/Dat.jsx';
+import Dat, { DatString, DatNumber, DatBoolean, DatButton, DatSelect } from '../../src/Dat.jsx';
 
 require('../../src/Dat.scss');
 
@@ -16,8 +16,15 @@ class App extends React.Component {
                 string: 'Hello World',
                 number: 66,
                 boolean: true,
+                select: '1',
             },
         };
+
+        this.items = [
+            {label: 'Option 1', value: '1'},
+            {label: 'Option 2', value: '2'},
+            {label: 'Option 3', value: '3'},
+        ]
     }
 
     handleUpdate(data) {
@@ -49,6 +56,7 @@ class App extends React.Component {
                     <DatNumber path="number" label="Number" />
                     <DatBoolean path="boolean" label="Boolean" />
                     <DatButton label="Button" onClick={this.handleClick} />
+                    <DatSelect path="select" label="Select" items={this.items} />
                 </Dat>
             </div>
         );

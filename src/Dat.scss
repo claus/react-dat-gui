@@ -7,6 +7,7 @@ $active-lighten: 10%;
 $number-color: #2FA1D6;
 $boolean-color: #806787;
 $string-color: #1ed36f;
+$select-color: #f1c40f;
 $button-color: #e61d5f;
 $save-row-color: #dad5cb;
 
@@ -100,6 +101,12 @@ $border-left-size: 5px;
             input[type=text] {
                 color: $string-color;
             }
+        }
+
+        &.select {
+            border-left: $border-left-size solid $select-color;
+
+            padding: 3px 0 4px;
         }
 
         &.boolean {
