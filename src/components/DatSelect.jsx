@@ -2,7 +2,7 @@ import result from 'lodash.result';
 import isString from 'lodash.isstring';
 import React, { PropTypes } from 'react';
 
-class DatString extends React.Component {
+class DatSelect extends React.Component {
 
     static propTypes = {
         items: PropTypes.arrayOf(PropTypes.shape({
@@ -74,4 +74,4 @@ class DatString extends React.Component {
 
 }
 
-export default DatString;
+export default DatSelect;
