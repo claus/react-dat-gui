@@ -7,8 +7,8 @@ const DatButton = ({ label, onClick }) => (
 );
 
 DatButton.propTypes = {
-    label: PropTypes.string,
-    onClick: PropTypes.func,
+  label: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default DatButton;

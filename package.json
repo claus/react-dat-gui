@@ -19,14 +19,12 @@
     "url": "git@github.com:claus/react-dat-gui.git"
   },
   "scripts": {
-    "dev": "webpack --watch --inline",
-    "prepublish": "npm run pre:babel && npm run pre:browserify && npm run pre:uglify && npm run pre:css:sass && npm run pre:css:prefix && npm run pre:css:min",
-    "pre:babel": "babel ./src --out-dir ./lib --source-maps --presets es2015,react,stage-2 --plugins babel-plugin-transform-class-properties,babel-plugin-add-module-exports",
-    "pre:browserify": "browserify ./lib/Dat.js -o ./build/react-dat-gui.js --transform browserify-global-shim --standalone ReactDatGui",
-    "pre:uglify": "uglifyjs ./build/react-dat-gui.js --compress --mangle --output ./build/react-dat-gui.min.js --source-map ./build/react-dat.gui.min.js.map",
-    "pre:css:sass": "node-sass --source-map ./lib/Dat.css.map ./src/Dat.scss ./lib/Dat.css",
-    "pre:css:prefix": "postcss --use autoprefixer -b 'last 2 versions' -o ./lib/Dat.css ./lib/Dat.css",
-    "pre:css:min": "postcss --use cssnano -o ./build/react-dat-gui.min.css ./lib/Dat.css"
+    "build": "webpack --env build",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
+    "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
+    "lint": "eslint src test build",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "classnames": "2.2.5",
@@ -36,7 +34,11 @@
     "lodash.isstring": "^4.0.1",
     "lodash.isundefined": "^3.0.1",
     "lodash.result": "^4.4.0",
-    "lodash.set": "^4.2.0"
+    "lodash.set": "^4.2.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-color": "^2.13.8",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -59,17 +61,16 @@
     "postcss-cli": "^2.5.2",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
-    "react": "15.1.0",
-    "react-dom": "15.1.0",
     "sass-loader": "3.2.0",
     "style-loader": "^0.13.1",
     "uglify-js": "2.6.2",
     "watch": "0.18.0",
     "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1"
-  },
-  "browserify-global-shim": {
-    "react": "React",
-    "react-dom": "ReactDOM"
+    "webpack-dev-server": "1.14.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1"
   }
 }
