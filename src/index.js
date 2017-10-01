@@ -1,12 +1,12 @@
-import React, { PropTypes, cloneElement } from 'react';
+import React, { Component, cloneElement } from 'react';
 
+import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
 import isUndefined from 'lodash.isundefined';
 import set from 'lodash.set';
 
-class Dat extends React.Component {
-
+export default class Dat extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
@@ -22,22 +22,20 @@ class Dat extends React.Component {
     labelWidth: 40,
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.handleUpdateValue = this.handleUpdateValue.bind(this);
-  }
-
-  handleUpdateValue(path, value) {
+  handleUpdateValue = (path, value) => {
     const { data, onUpdate } = this.props;
     const dataUpdated = set(cloneDeep(data), path, value);
+
     onUpdate(dataUpdated);
   }
 
   renderChildren() {
     const { children, data } = this.props;
+
     return React.Children.toArray(children).map((child, i) => {
       const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
       const labelWidth = isUndefined(child.props.labelWidth) ? this.props.labelWidth : child.props.labelWidth;
+
       return cloneElement(child, {
         key: i,
         data,
@@ -51,18 +49,16 @@ class Dat extends React.Component {
   render() {
     const { style = {} } = this.props;
     const className = cx('react-dat-gui', this.props.className);
+
     return (
-            <div className={className} style={style}>
-                <ul className="dg main">
-                    {this.renderChildren()}
-                </ul>
-            </div>
+      <div className={className} style={style}>
+          <ul className="dg main">
+              {this.renderChildren()}
+          </ul>
+      </div>
     );
   }
-
 }
-
-export default Dat;
 
 export { default as DatString } from './components/DatString';
 export { default as DatNumber } from './components/DatNumber';

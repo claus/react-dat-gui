@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
 
-class DatString extends React.Component {
-
+export default class DatString extends Component {
   static propTypes = {
     data: PropTypes.object,
     path: PropTypes.string,
@@ -14,14 +14,6 @@ class DatString extends React.Component {
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
 
   componentWillMount() {
     this.setState({
@@ -39,25 +31,27 @@ class DatString extends React.Component {
     return result(props.data, props.path);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const value = event.target.value;
+
     this.setState({ value }, () => {
       this.props.liveUpdate && this.update();
     });
   }
 
-  handleFocus() {
+  handleFocus = () => {
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
-  handleBlur() {
+  handleBlur = () => {
     document.removeEventListener('keydown', this.handleKeyDown);
     window.getSelection().removeAllRanges();
     !this.props.liveUpdate && this.update();
   }
 
-  handleKeyDown(event) {
+  handleKeyDown = event => {
     const key = event.keyCode || event.which;
+
     if (key === 13) {
       !this.props.liveUpdate && this.update();
     }
@@ -65,6 +59,7 @@ class DatString extends React.Component {
 
   update() {
     const { value } = this.state;
+
     this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
     this.props.onUpdate && this.props.onUpdate(value);
   }
@@ -72,22 +67,21 @@ class DatString extends React.Component {
   render() {
     const { path, label, labelWidth } = this.props;
     const labelText = isString(label) ? label : path;
+
     return (
-            <li className="cr string">
-                <label>
-                    <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
-                    <input
-                        type="text"
-                        value={this.state.value}
-                        style={{ width: `${100 - labelWidth}%` }}
-                        onChange={this.handleChange}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur} />
-                </label>
-            </li>
+      <li className="cr string">
+          <label>
+            <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+            <input
+              type="text"
+              value={this.state.value}
+              style={{ width: `${100 - labelWidth}%` }}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+            />
+          </label>
+      </li>
     );
   }
-
 }
-
-export default DatString;

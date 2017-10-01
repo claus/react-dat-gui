@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
 
-class DatBoolean extends React.Component {
+export default class DatBoolean extends Component {
 
   static propTypes = {
     data: PropTypes.object,
@@ -12,11 +13,6 @@ class DatBoolean extends React.Component {
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
   };
-
-  constructor(props, context) {
-    super(props, context);
-    this.handleChange = this.handleChange.bind(this);
-  }
 
   componentWillMount() {
     this.setState({
@@ -34,7 +30,7 @@ class DatBoolean extends React.Component {
     return result(props.data, props.path);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({ value: event.target.checked }, () => {
       this.update();
     });
@@ -42,6 +38,7 @@ class DatBoolean extends React.Component {
 
   update() {
     const { value } = this.state;
+
     this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
     this.props.onUpdate && this.props.onUpdate(value);
   }
@@ -49,24 +46,22 @@ class DatBoolean extends React.Component {
   render() {
     const { path, label } = this.props;
     const labelText = isString(label) ? label : path;
+
     return (
-            <li className="cr boolean">
-                <label>
-                    <span className="label-text">{labelText}</span>
-                    <input
-                        type="checkbox"
-                        checked={this.state.value}
-                        onChange={this.handleChange} />
-                    <div className="checkbox">
-                        <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                            <path d="M0,0L50,50M50,0L0,50Z" />
-                        </svg>
-                    </div>
-                </label>
-            </li>
+      <li className="cr boolean">
+          <label>
+              <span className="label-text">{labelText}</span>
+              <input
+                  type="checkbox"
+                  checked={this.state.value}
+                  onChange={this.handleChange} />
+              <div className="checkbox">
+                  <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                      <path d="M0,0L50,50M50,0L0,50Z" />
+                  </svg>
+              </div>
+          </label>
+      </li>
     );
   }
-
 }
-
-export default DatBoolean;
