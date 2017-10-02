@@ -113,7 +113,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       user-select: none; }
-    .react-dat-gui .cr input[type=text] {
+    .react-dat-gui .cr input[type=text], .react-dat-gui .cr input[type=number] {
       background: #303030;
       border: 3px solid #1a1a1a;
       border-radius: 0;
@@ -121,12 +121,12 @@
       margin: 0;
       outline: none;
       font-size: inherit; }
-      .react-dat-gui .cr input[type=text]:hover {
+      .react-dat-gui .cr input[type=text]:hover, .react-dat-gui .cr input[type=number]:hover {
         background: #3c3c3c; }
-      .react-dat-gui .cr input[type=text]:focus {
+      .react-dat-gui .cr input[type=text]:focus, .react-dat-gui .cr input[type=number]:focus {
         background: #494949;
         color: #fff; }
-      .react-dat-gui .cr input[type=text]::-ms-clear {
+      .react-dat-gui .cr input[type=text]::-ms-clear, .react-dat-gui .cr input[type=number]::-ms-clear {
         display: none; }
 
 /*# sourceMappingURL=react-dat-gui.css.map*/

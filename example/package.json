@@ -4,9 +4,17 @@
   "private": true,
   "dependencies": {
     "react": "^16.0.0",
+    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#e1b26fb",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
-    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#develop"
+    "classnames": "2.2.5",
+    "lodash.clamp": "^4.0.2",
+    "lodash.clonedeep": "^4.3.2",
+    "lodash.isfinite": "^3.3.1",
+    "lodash.isstring": "^4.0.1",
+    "lodash.isundefined": "^3.0.1",
+    "lodash.result": "^4.4.0",
+    "lodash.set": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

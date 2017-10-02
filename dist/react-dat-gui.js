@@ -2194,7 +2194,8 @@ var DatBoolean = function (_Component) {
           _react2.default.createElement('input', {
             type: 'checkbox',
             checked: this.state.value,
-            onChange: this.handleChange }),
+            onChange: this.handleChange
+          }),
           _react2.default.createElement(
             'div',
             { className: 'checkbox' },
@@ -2351,7 +2352,7 @@ var DatNumber = function (_Component) {
       var constrained = _this.applyConstraints(value);
       var shouldUpdate = !isLive || _this.props.liveUpdate;
 
-      _this.setState({ constrained: constrained }, function () {
+      _this.setState({ value: constrained }, function () {
         if (shouldUpdate) {
           _this.update();
         }

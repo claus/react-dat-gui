@@ -70,11 +70,11 @@ $border-left-size: 5px;
 
         &.number {
             border-left: $border-left-size solid $number-color;
-            
+
             input[type=text] {
                 color: $number-color;
             }
-            
+
             .slider {
                 display: block;
                 position: relative;
@@ -188,7 +188,7 @@ $border-left-size: 5px;
             user-select: none;
         }
 
-        input[type=text] {
+        input[type=text], input[type=number] {
             background: $input-color;
             border: 3px solid $background-color;
             border-radius: 0;
