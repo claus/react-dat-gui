@@ -1,25 +1,27 @@
 /*global __dirname, require, module*/
 
-const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const path = require('path');
-const env = require('yargs').argv.env; // use --env with webpack 2
-let libraryName = 'react-dat-gui';
-let plugins = [], outputFile;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + '.min.js';
-} else {
-  outputFile = libraryName + '.js';
-}
+let libraryName = 'react-dat-gui';
+
+let plugins = [
+  new ExtractTextPlugin({
+    // define where to save the file
+    filename: `${libraryName}.css`,
+    allChunks: true,
+  }),
+];
 
 const config = {
-  entry: __dirname + '/src/index.js',
+  entry: {
+    'react-dat-gui.js': __dirname + '/src/index.js',
+    'react-dat-gui.css': __dirname + '/src/style/Dat.scss',
+  },
   devtool: 'source-map',
   output: {
     path: __dirname + '/dist',
-    filename: outputFile,
+    filename: '[name]',
     library: 'Dat',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -28,19 +30,31 @@ const config = {
     rules: [
       {
         test: /(\.jsx|\.js)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/
+        use: 'babel-loader',
+        exclude: /(node_modules)/
       },
       {
         test: /(\.jsx|\.js)$/,
-        loader: 'eslint-loader',
+        use: 'eslint-loader',
         exclude: /node_modules/
-      }
+      },
+      {
+        // regular css files
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: 'css-loader?importLoaders=1',
+        }),
+      },
+      {
+        // sass / scss loader for webpack
+        test: /\.(sass|scss)$/,
+        use: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+      },
     ]
   },
   resolve: {
     modules: [path.resolve('./src'), path.resolve('./node_modules')],
-    extensions: ['.json', '.js']
+    extensions: ['.json', '.js', '.scss']
   },
   plugins: plugins
 };
