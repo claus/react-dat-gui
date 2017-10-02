@@ -11,15 +11,18 @@
     "lodash.isundefined": "^3.0.1",
     "lodash.result": "^4.4.0",
     "lodash.set": "^4.2.0",
+    "node-sass": "^4.5.3",
     "react": "^16.0.0",
-    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#8a133a2",
+    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#e962543",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start | npm run scss:watch",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "scss": "node-sass -o src/dev/style/css/ src/dev/style",
+    "scss:watch": "node-sass -w src/dev/style -o src/dev/style/css/ src/dev/style"
   }
 }

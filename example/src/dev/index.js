@@ -52,9 +52,9 @@ export default class Dat extends Component {
 
     return (
       <div className={className} style={style}>
-        <ul className="dg main">
-          {this.renderChildren()}
-        </ul>
+          <ul className="dg main">
+              {this.renderChildren()}
+          </ul>
       </div>
     );
   }

@@ -1,11 +1,20 @@
-import Dat, { DatBoolean, DatButton, DatNumber, DatString } from './dat';
+// Uncomment out the imports below (and comment out the node modules imports) to use the example to dev changes react-dat-gui code
+// You will need to run `npm run example:seed` to get the latest code into the example directory
+
+// import Dat, { DatBoolean, DatButton, DatNumber, DatString } from './dev';
+// import './dev/style/css/Dat.css';
+
+import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
+
+import Dat, { DatBoolean, DatButton, DatNumber, DatString } from 'react-dat-gui';
 import React, { Component } from 'react';
 
 class App extends Component {
   state = {
     data: {
       string: 'Hello World',
-      number: 66,
+      minMaxNumber: 66,
+      number: 80,
       boolean: true,
       random: Math.random()
     },
@@ -28,21 +37,24 @@ class App extends Component {
       <main>
         <section>
           <div>
-            {data.string}
+            <b>String value:</b> {data.string}
           </div>
           <div>
-            {data.number}
+            <b>Slider value:</b> {data.minMaxNumber}
           </div>
           <div>
-            {(data.boolean) ? 'true' : 'false'}
+            <b>Number value:</b> {data.minMaxNumber}
           </div>
           <div>
-            Click the button for a random number: {data.random}
+            <b>Checkbox value:</b> {(data.boolean) ? 'true' : 'false'}
+          </div>
+          <div>
+            <b>Click the button for a random number:</b> {data.random}
           </div>
         </section>
         <Dat data={data} onUpdate={this.handleUpdate}>
           <DatString path="string" label="String" />
-          <DatNumber path="number" label="Number" min={0} max={100} step={1} />
+          <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
           <DatNumber path="number" label="Number" />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />

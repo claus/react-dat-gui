@@ -21,6 +21,8 @@
   "scripts": {
     "build": "webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
+    "example": "npm run start --prefix example",
+    "example:seed": "sh scripts/seed-example",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "lint": "eslint src test build",

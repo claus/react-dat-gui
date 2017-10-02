@@ -1,5 +1,3 @@
-import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
-
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
