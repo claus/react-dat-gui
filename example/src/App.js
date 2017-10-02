@@ -1,7 +1,7 @@
 // Uncomment out the imports below (and comment out the node modules imports) to use the example to dev changes react-dat-gui code
 // You will need to run `npm run example:seed` to get the latest code into the example directory
 
-import './dev/style/css/dat.css';
+import './dev/style/dat.css';
 
 import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from './dev';
 import React, { Component } from 'react';
