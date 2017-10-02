@@ -8,10 +8,14 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-[*.{json}]
+[*.json]
 indent_style = space
 indent_size = 2
 
 [*.js]
+indent_size = 2
+indent_style = space
+
+[*.scss]
 indent_size = 2
 indent_style = space

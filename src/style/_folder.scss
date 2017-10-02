@@ -1,0 +1,36 @@
+.react-dat-gui li.folder {
+  display: block;
+  padding: 0;
+
+  .title {
+    font-weight: bold;
+    user-select: none;
+    display: block;
+    cursor: pointer;
+    padding: 5px 5px 5px 16px;
+    background: $folder-open;
+  }
+
+  ul {
+    margin-left: $nest-margin;
+    width: calc(100% - #{$nest-margin});
+  }
+
+  &.closed {
+
+    .title {
+      background: $folder-closed;
+    }
+
+    ul {
+      display: none;
+    }
+  }
+
+  ul {
+
+    li {
+      background-color: $background-color;
+    }
+  }
+}

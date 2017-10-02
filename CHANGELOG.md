@@ -1,5 +1,16 @@
 # Release Notes
 
+## (2017-10-02) `v0.0.15`
+
+### Changed
+
+* SCSS is now broken up into partials which align with the various components
+
+### Added
+
+* Added `DatFolder` component
+* Added this to the example
+
 ## (2017-10-02) `v0.0.14`
 
 ### Changed

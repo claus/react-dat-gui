@@ -34,7 +34,7 @@ import React, { Component } from 'react';
 should become
 
 ```
-import './dev/style/css/Dat.css';
+import './dev/style/css/dat.css';
 
 import Dat, { DatBoolean, DatButton, DatNumber, DatString } from './dev';
 import React, { Component } from 'react';

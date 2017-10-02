@@ -1,0 +1,53 @@
+.react-dat-gui .cr.boolean {
+  position: relative;
+  border-left: $border-left-size solid $boolean-color;
+
+  .label-text {
+    display: block;
+    padding: 5px 0;
+    width: calc(100% - 2em);
+  }
+
+  .checkbox,
+  input[type=checkbox] {
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    bottom: 1px;
+    width: 2em;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $background-color;
+    background: $input-color;
+    z-index: 0;
+
+    > .checkmark {
+      display: none;
+      width: 0.6em;
+      height: 0.6em;
+      stroke-width: 7px;
+      stroke: lighten($boolean-color, 20%);
+    }
+  }
+
+  input[type=checkbox] {
+    height: calc(100% - 4px);
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  input[type=checkbox]:hover ~ .checkbox {
+    background-color: lighten($input-color, $hover-lighten);
+  }
+
+  input[type=checkbox]:checked ~ .checkbox {
+    > .checkmark {
+      display: block;
+    }
+  }
+}
