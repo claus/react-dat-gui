@@ -16,7 +16,7 @@ let plugins = [
 const config = {
   entry: {
     'react-dat-gui.js': __dirname + '/src/index.js',
-    'react-dat-gui.css': __dirname + '/src/style/Dat.scss',
+    'react-dat-gui.css': __dirname + '/src/style/dat.scss',
   },
   devtool: 'source-map',
   output: {

@@ -1,0 +1,7 @@
+.react-dat-gui .cr.string {
+  border-left: $border-left-size solid $string-color;
+
+  input[type=text] {
+    color: $string-color;
+  }
+}

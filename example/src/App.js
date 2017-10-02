@@ -1,13 +1,15 @@
 // Uncomment out the imports below (and comment out the node modules imports) to use the example to dev changes react-dat-gui code
 // You will need to run `npm run example:seed` to get the latest code into the example directory
 
-// import Dat, { DatBoolean, DatButton, DatNumber, DatString } from './dev';
-// import './dev/style/css/Dat.css';
+import './dev/style/css/dat.css';
 
-import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
-
-import Dat, { DatBoolean, DatButton, DatNumber, DatString } from 'react-dat-gui';
+import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from './dev';
 import React, { Component } from 'react';
+
+// import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
+//
+// import Dat, { DatBoolean, DatButton, DatNumber, DatString } from 'react-dat-gui';
+
 
 class App extends Component {
   state = {
@@ -58,6 +60,10 @@ class App extends Component {
           <DatNumber path="number" label="Number" />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
+          <DatFolder title='Folder' data={data}>
+            <DatString path="string" label="String" />
+            <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
+          </DatFolder>
         </Dat>
       </main>
 

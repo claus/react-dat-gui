@@ -5,7 +5,6 @@ import isString from 'lodash.isstring';
 import result from 'lodash.result';
 
 export default class DatBoolean extends Component {
-
   static propTypes = {
     data: PropTypes.object,
     path: PropTypes.string,

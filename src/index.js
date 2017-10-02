@@ -52,9 +52,9 @@ export default class Dat extends Component {
 
     return (
       <div className={className} style={style}>
-          <ul className="dg main">
-              {this.renderChildren()}
-          </ul>
+        <ul className="dg main">
+          {this.renderChildren()}
+        </ul>
       </div>
     );
   }
@@ -64,3 +64,4 @@ export { default as DatString } from './components/DatString';
 export { default as DatNumber } from './components/DatNumber';
 export { default as DatBoolean } from './components/DatBoolean';
 export { default as DatButton } from './components/DatButton';
+export { default as DatFolder } from './components/DatFolder';

@@ -23,6 +23,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "scss": "node-sass -o src/dev/style/css/ src/dev/style",
-    "scss:watch": "node-sass -w src/dev/style -o src/dev/style/css/ src/dev/style"
+    "scss:watch": "node-sass -w src/dev/style -o src/dev/style/css"
   }
 }
