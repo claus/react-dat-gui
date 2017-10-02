@@ -1,14 +1,21 @@
 {
   "name": "react-dat-gui",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "dat.GUI reimagined for React",
   "main": "dist/react-dat-gui.js",
   "style": "dist/react-dat-gui.css",
-  "author": {
-    "name": "Claus Wahlers",
-    "email": "claus@codeazur.com.br",
-    "url": "https://github.com/claus"
-  },
+  "contributors": [
+    {
+      "name": "Claus Wahlers",
+      "email": "claus@codeazur.com.br",
+      "url": "https://github.com/claus"
+    },
+    {
+      "name": "Rohan Deshpande",
+      "email": "rohan@creativelifeform.com",
+      "url": "https://github.com/rohan-deshpande"
+    }
+  ],
   "license": "MIT",
   "keywords": [
     "react",
