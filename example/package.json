@@ -13,7 +13,7 @@
     "lodash.set": "^4.2.0",
     "node-sass": "^4.5.3",
     "react": "^16.0.0",
-    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#e962543",
+    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git#4521227",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
   },
