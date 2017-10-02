@@ -2471,7 +2471,7 @@ var DatNumber = function (_Component) {
           ),
           hasSlider ? this.renderSlider(sliderWidth) : null,
           _react2.default.createElement('input', {
-            type: 'text',
+            type: 'number',
             inputMode: 'numeric',
             value: this.state.value,
             style: { width: inputWidth + '%' },

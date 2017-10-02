@@ -71,7 +71,7 @@ $border-left-size: 5px;
         &.number {
             border-left: $border-left-size solid $number-color;
 
-            input[type=text] {
+            input[type=text], input[type=number] {
                 color: $number-color;
             }
 

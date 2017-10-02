@@ -35,7 +35,7 @@
       margin-bottom: 1px; }
     .react-dat-gui .cr.number {
       border-left: 5px solid #2FA1D6; }
-      .react-dat-gui .cr.number input[type=text] {
+      .react-dat-gui .cr.number input[type=text], .react-dat-gui .cr.number input[type=number] {
         color: #2FA1D6; }
       .react-dat-gui .cr.number .slider {
         display: block;

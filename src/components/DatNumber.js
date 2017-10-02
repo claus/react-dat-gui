@@ -141,7 +141,7 @@ export default class DatNumber extends Component {
           <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
           {hasSlider ? this.renderSlider(sliderWidth) : null}
           <input
-            type="text"
+            type="number"
             inputMode="numeric"
             value={this.state.value}
             style={{ width: `${inputWidth}%` }}

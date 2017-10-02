@@ -17,7 +17,7 @@ class App extends Component {
 
   handleClick = () => {
     const data = {...this.state.data, random: Math.random()};
-    
+
     this.setState({ data });
   }
 
