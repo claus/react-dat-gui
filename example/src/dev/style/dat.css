@@ -125,7 +125,7 @@
   display: block; }
 
 .react-dat-gui .cr.button {
-  border-left: 5px solid #c5bdad; }
+  border-left: 5px solid #e61d5f; }
 
 .react-dat-gui .cr.button:hover {
   background: #111; }
@@ -185,3 +185,9 @@
 
 .react-dat-gui .cr.string input[type=text] {
   color: #1ed36f; }
+
+.react-dat-gui .cr.select {
+  border-left: 5px solid #F4D450; }
+
+.react-dat-gui .cr.select label {
+  padding: 6px 2px 6px 8px; }

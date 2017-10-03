@@ -1,14 +1,15 @@
 // Uncomment out the imports below (and comment out the node modules imports) to use this example to develop changes/additions to react-dat-gui.
 // You will need to run `npm run example:seed` to get the latest code into the example/src/dev module directory
 
-// import './dev/style/dat.css';
-//
-// import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from './dev';
+import './dev/style/dat.css';
 
-import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
-
-import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from 'react-dat-gui';
+import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatSelect, DatString } from './dev';
 import React, { Component } from 'react';
+
+// import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
+//
+// import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from 'react-dat-gui';
+
 
 class App extends Component {
   state = {
@@ -17,6 +18,7 @@ class App extends Component {
       minMaxNumber: 66,
       number: 80,
       boolean: true,
+      select: 'one',
       random: Math.random(),
       nested: {
         string: 'Goodbye Cruel World'
@@ -53,6 +55,9 @@ class App extends Component {
             <b>Checkbox value:</b> {(data.boolean) ? 'true' : 'false'}
           </div>
           <div>
+            <b>Select value:</b> {data.select}
+          </div>
+          <div>
             <b>Click the button for a random number:</b> {data.random}
           </div>
           <div>
@@ -65,6 +70,7 @@ class App extends Component {
           <DatNumber path="number" label="Number" />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
+          <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>
           <DatFolder title='Folder'>
             <DatString path="string" label="String" />
             <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
