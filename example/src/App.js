@@ -71,6 +71,9 @@ class App extends Component {
             <DatFolder title='Nested Folder'>
               <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
               <DatString path="nested.string" label="String" />
+              <DatFolder title="Another Nested Folder">
+                <DatString path="nested.string" label="Nested String" />
+              </DatFolder>
             </DatFolder>
           </DatFolder>
         </Dat>
