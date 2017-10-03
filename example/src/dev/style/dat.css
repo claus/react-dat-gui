@@ -158,9 +158,6 @@
 .react-dat-gui li.folder.closed ul {
   display: none; }
 
-.react-dat-gui li.folder ul li {
-  background-color: #1a1a1a; }
-
 .react-dat-gui .cr.number {
   border-left: 5px solid #2FA1D6; }
 

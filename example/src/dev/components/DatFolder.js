@@ -12,6 +12,10 @@ export default class DatFolder extends Component {
     title: PropTypes.string.isRequired,
   }
 
+  static defaultProps = {
+    title: 'Folder',
+  }
+
   handleClick = () => {
     const closed = !this.state.closed;
 
@@ -19,7 +23,11 @@ export default class DatFolder extends Component {
   }
 
   renderChildren() {
-    return React.Children.map(this.props.children, child => cloneElement(child, {...this.props}));
+    // Disable this rule to take title out of the props so nested folders can have unique titles.
+    // eslint-disable-next-line no-unused-vars
+    const { children, title, ...rest } = this.props;
+
+    return React.Children.map(children, child => cloneElement(child, {...rest}));
   }
 
   render() {
