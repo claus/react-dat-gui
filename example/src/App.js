@@ -17,7 +17,10 @@ class App extends Component {
       minMaxNumber: 66,
       number: 80,
       boolean: true,
-      random: Math.random()
+      random: Math.random(),
+      nested: {
+        string: 'Goodbye Cruel World'
+      }
     },
   }
 
@@ -52,6 +55,9 @@ class App extends Component {
           <div>
             <b>Click the button for a random number:</b> {data.random}
           </div>
+          <div>
+            <b>Nested string value:</b> {data.nested.string}
+          </div>
         </section>
         <Dat data={data} onUpdate={this.handleUpdate}>
           <DatString path="string" label="String" />
@@ -59,9 +65,13 @@ class App extends Component {
           <DatNumber path="number" label="Number" />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
-          <DatFolder title='Folder' data={data}>
+          <DatFolder title='Folder'>
             <DatString path="string" label="String" />
             <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
+            <DatFolder title='Nested Folder'>
+              <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
+              <DatString path="nested.string" label="String" />
+            </DatFolder>
           </DatFolder>
         </Dat>
       </main>

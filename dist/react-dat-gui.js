@@ -2348,6 +2348,8 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2380,10 +2382,15 @@ var DatFolder = function (_Component) {
   _createClass(DatFolder, [{
     key: 'renderChildren',
     value: function renderChildren() {
-      var _this2 = this;
+      // Disable this rule to take title out of the props so nested folders can have unique titles.
+      // eslint-disable-next-line no-unused-vars
+      var _props = this.props,
+          children = _props.children,
+          title = _props.title,
+          rest = _objectWithoutProperties(_props, ['children', 'title']);
 
-      return _react2.default.Children.map(this.props.children, function (child) {
-        return (0, _react.cloneElement)(child, _extends({}, _this2.props));
+      return _react2.default.Children.map(children, function (child) {
+        return (0, _react.cloneElement)(child, _extends({}, rest));
       });
     }
   }, {
@@ -2419,6 +2426,9 @@ var DatFolder = function (_Component) {
 
 DatFolder.propTypes = {
   title: _propTypes2.default.string.isRequired
+};
+DatFolder.defaultProps = {
+  title: 'Folder'
 };
 exports.default = DatFolder;
 module.exports = exports['default'];

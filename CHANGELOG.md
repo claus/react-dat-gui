@@ -1,5 +1,15 @@
 # Release Notes
 
+## (2017-10-03) `v0.0.16`
+
+### Added
+
+* Support for nested folders via `DatFolder`
+
+### Changed  
+
+* Example `App.js` has been updated to include a nested folder example
+
 ## (2017-10-02) `v0.0.15`
 
 ### Changed
