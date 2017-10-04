@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
+import ColorPicker from './Picker/';
 import PropTypes from 'prop-types';
-import { SketchPicker } from 'react-color';
 import isString from 'lodash.isstring';
 import reactCSS from 'reactcss';
 import result from 'lodash.result';
@@ -71,7 +71,7 @@ export default class DatColor extends Component {
     return (!displayColorPicker) ? null : (
       <div style={ styles.popover }>
         <div style={ styles.cover } onClick={ this.handleClose }/>
-        <SketchPicker color={ value } onChange={ this.handleChange } />
+        <ColorPicker color={ value } onChange={ this.handleChange } />
       </div>
     );
   }
@@ -99,7 +99,7 @@ export default class DatColor extends Component {
         popover: {
           position: 'absolute',
           zIndex: '2',
-          left: '0px'
+          right: '4px'
         },
         cover: {
           position: 'fixed',
@@ -112,7 +112,7 @@ export default class DatColor extends Component {
     });
 
     return (
-      <li className="cr color">
+      <li className="cr color" style={{borderLeftColor: `${value}`}}>
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
           <div style={{ width: `${100 - labelWidth}%`, backgroundColor: `${value}` }}>

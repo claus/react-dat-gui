@@ -80,6 +80,7 @@ class App extends Component {
               <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
               <DatString path="nested.string" label="String" />
               <DatFolder title="Another Nested Folder">
+                <DatColor label="Color" path='color'/>
                 <DatString path="nested.string" label="Nested String" />
               </DatFolder>
             </DatFolder>
