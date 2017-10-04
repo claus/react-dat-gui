@@ -13,9 +13,11 @@
     "lodash.set": "^4.2.0",
     "node-sass": "^4.5.3",
     "react": "^16.0.0",
+    "react-color": "^2.13.8",
     "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "reactcss": "^1.2.3"
   },
   "scripts": {
     "start": "react-scripts start | npm run scss:watch",
