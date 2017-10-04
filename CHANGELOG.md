@@ -1,5 +1,15 @@
 # Release Notes
 
+## (2017-10-04) `v0.0.17`
+
+### Added
+
+* `DatSelect` component
+
+### Changed
+
+* Example updated with `DatSelect` included
+
 ## (2017-10-03) `v0.0.16`
 
 ### Added
