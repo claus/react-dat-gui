@@ -115,9 +115,9 @@ export default class DatColor extends Component {
       <li className="cr color">
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
-          <div>
-            <div style={ styles.swatch } onClick={ this.handleClick }>
-              <div style={ styles.color } />
+          <div style={{ width: `${100 - labelWidth}%`, backgroundColor: `${value}` }}>
+            <div className='swatch' onClick={ this.handleClick }>
+              {value}
             </div>
             {this.renderPicker(styles)}
           </div>

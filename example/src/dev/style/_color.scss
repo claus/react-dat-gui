@@ -1,0 +1,13 @@
+.react-dat-gui .cr.color {
+  border-left: $border-left-size solid $background-color;
+
+  .swatch {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.7) 0px 1px 1px;
+    padding: $input-padding;
+    border: $input-border;
+    cursor: pointer;
+  }
+}

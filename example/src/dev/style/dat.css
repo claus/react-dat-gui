@@ -191,3 +191,15 @@
 
 .react-dat-gui .cr.select label {
   padding: 6px 2px 6px 8px; }
+
+.react-dat-gui .cr.color {
+  border-left: 5px solid #1a1a1a; }
+
+.react-dat-gui .cr.color .swatch {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.7) 0px 1px 1px;
+  padding: 2px 5px;
+  border: 3px solid #1a1a1a;
+  cursor: pointer; }
