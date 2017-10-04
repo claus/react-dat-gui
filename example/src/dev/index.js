@@ -65,3 +65,4 @@ export { default as DatNumber } from './components/DatNumber';
 export { default as DatBoolean } from './components/DatBoolean';
 export { default as DatButton } from './components/DatButton';
 export { default as DatFolder } from './components/DatFolder';
+export { default as DatSelect } from './components/DatSelect';

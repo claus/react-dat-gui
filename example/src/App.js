@@ -3,11 +3,11 @@
 
 // import './dev/style/dat.css';
 //
-// import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from './dev';
+// import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatSelect, DatString } from './dev';
 
 import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
 
-import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatString } from 'react-dat-gui';
+import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatSelect, DatString } from 'react-dat-gui';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -17,6 +17,7 @@ class App extends Component {
       minMaxNumber: 66,
       number: 80,
       boolean: true,
+      select: 'one',
       random: Math.random(),
       nested: {
         string: 'Goodbye Cruel World'
@@ -53,6 +54,9 @@ class App extends Component {
             <b>Checkbox value:</b> {(data.boolean) ? 'true' : 'false'}
           </div>
           <div>
+            <b>Select value:</b> {data.select}
+          </div>
+          <div>
             <b>Click the button for a random number:</b> {data.random}
           </div>
           <div>
@@ -65,6 +69,7 @@ class App extends Component {
           <DatNumber path="number" label="Number" />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
+          <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>
           <DatFolder title='Folder'>
             <DatString path="string" label="String" />
             <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
