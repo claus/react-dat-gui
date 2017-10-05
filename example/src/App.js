@@ -38,7 +38,12 @@ class App extends Component {
 
   render() {
     const { data } = this.state;
-    const swatchStyle = { width: '10px', height: '10px', display: 'inline-block' };
+    const swatchStyle = {
+      width: '10px',
+      height: '10px',
+      display: 'inline-block'
+    };
+
     return (
       <main>
         <section>
@@ -89,7 +94,6 @@ class App extends Component {
           </DatFolder>
         </Dat>
       </main>
-
     );
   }
 }
