@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     const { data } = this.state;
-
+    const swatchStyle = { width: '10px', height: '10px', display: 'inline-block' };
     return (
       <main>
         <section>
@@ -57,6 +57,9 @@ class App extends Component {
           </div>
           <div>
             <b>Select value:</b> {data.select}
+          </div>
+          <div>
+            <b>Picked color:</b> <div style={{...swatchStyle, backgroundColor: `${data.color}`}}></div>
           </div>
           <div>
             <b>Click the button for a random number:</b> {data.random}

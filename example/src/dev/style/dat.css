@@ -260,6 +260,9 @@
   height: 21px;
   text-align: center; }
 
+.react-dat-gui .cr.color .fields-wrap .fields .field input:focus {
+  outline: none; }
+
 .react-dat-gui .cr.color .fields-wrap .fields .field label {
   text-transform: uppercase;
   font-size: 11px;

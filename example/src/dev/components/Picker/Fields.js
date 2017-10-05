@@ -4,10 +4,6 @@ import { EditableInput } from 'react-color/lib/components/common';
 import color from 'react-color/lib/helpers/color';
 
 export default class Fields extends Component {
-  state = {
-    view: '',
-  }
-
   handleChange = (value, e) => {
     color.isValidHex(value) && this.props.onChange({
       hex: value,

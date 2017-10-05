@@ -54,7 +54,6 @@
   }
 
   .fields-wrap {
-    // padding-top: 16px;
     display: flex;
 
     .fields {
@@ -75,6 +74,10 @@
           box-shadow: inset 0 0 0 1px #dadada;
           height: 21px;
           text-align: center;
+
+          &:focus {
+            outline: none;
+          }
         }
 
         label {
