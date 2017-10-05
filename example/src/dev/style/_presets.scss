@@ -1,0 +1,15 @@
+.react-dat-gui .cr.presets {
+  background: $presets-color;
+
+  label {
+    padding: 6px 2px 6px 8px;
+
+    .label-text {
+      display: none;
+    }
+
+    select {
+      width: 100%;
+    }
+  }
+}
