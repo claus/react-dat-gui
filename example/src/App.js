@@ -3,11 +3,11 @@
 
 // import './dev/style/dat.css';
 //
-// import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatSelect, DatString } from './dev';
+// import Dat, { DatBoolean, DatButton, DatColor, DatFolder, DatNumber, DatSelect, DatString } from './dev';
 
 import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
 
-import Dat, { DatBoolean, DatButton, DatFolder, DatNumber, DatSelect, DatString } from 'react-dat-gui';
+import Dat, { DatBoolean, DatButton, DatColor, DatFolder, DatNumber, DatSelect, DatString } from 'react-dat-gui';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
       number: 80,
       boolean: true,
       select: 'one',
+      color: '#2FA1D6',
       random: Math.random(),
       nested: {
         string: 'Goodbye Cruel World'
@@ -37,6 +38,11 @@ class App extends Component {
 
   render() {
     const { data } = this.state;
+    const swatchStyle = {
+      width: '10px',
+      height: '10px',
+      display: 'inline-block'
+    };
 
     return (
       <main>
@@ -57,6 +63,9 @@ class App extends Component {
             <b>Select value:</b> {data.select}
           </div>
           <div>
+            <b>Picked color:</b> <div style={{...swatchStyle, backgroundColor: `${data.color}`}}></div>
+          </div>
+          <div>
             <b>Click the button for a random number:</b> {data.random}
           </div>
           <div>
@@ -70,6 +79,7 @@ class App extends Component {
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
           <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>
+          <DatColor label="Color" path='color'/>
           <DatFolder title='Folder'>
             <DatString path="string" label="String" />
             <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
@@ -77,13 +87,13 @@ class App extends Component {
               <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
               <DatString path="nested.string" label="String" />
               <DatFolder title="Another Nested Folder">
+                <DatColor label="Color" path='color'/>
                 <DatString path="nested.string" label="Nested String" />
               </DatFolder>
             </DatFolder>
           </DatFolder>
         </Dat>
       </main>
-
     );
   }
 }

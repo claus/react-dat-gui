@@ -1,5 +1,16 @@
 # Release Notes
 
+## (2017-10-05) `v0.0.18`
+
+### Added  
+
+* `DatColor` component - this allows color pickers, powered by `react-color` to be rendered for mutating colors
+* Added `example:promote` script for pushing development code up from `example/src/dev` into `src`
+
+### Changed
+
+* Example updated with `DatColor` included
+
 ## (2017-10-04) `v0.0.17`
 
 ### Added
