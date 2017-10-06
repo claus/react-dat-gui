@@ -49,15 +49,17 @@ export default class DatPresets extends Component {
 
   render() {
     const { path, label, labelWidth } = this.props;
-    const { selected, options } = this.state;
+    const { options } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
       <li className="cr presets">
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+            {labelText}
+          </span>
           <select
-            value={selected}
+            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
             {

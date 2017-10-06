@@ -30,9 +30,7 @@ export default class DatBoolean extends Component {
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.checked }, () => {
-      this.update();
-    });
+    this.setState({ value: event.target.checked }, this.update);
   }
 
   update() {

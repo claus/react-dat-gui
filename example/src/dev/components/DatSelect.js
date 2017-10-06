@@ -60,7 +60,9 @@ export default class DatSelect extends Component {
     return (
       <li className="cr select">
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+            {labelText}
+          </span>
           <select
             value={value}
             style={{ width: `${100 - labelWidth}%` }}

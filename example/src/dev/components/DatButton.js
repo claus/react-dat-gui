@@ -4,7 +4,9 @@ import React from 'react';
 
 const DatButton = ({ label, onClick }) => (
   <li className="cr button" onClick={onClick}>
-    <span className="label-text">{label}</span>
+    <span className="label-text">
+      {label}
+    </span>
   </li>
 );
 

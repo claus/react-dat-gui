@@ -204,6 +204,18 @@
   border: 3px solid #1a1a1a;
   cursor: pointer; }
 
+.react-dat-gui .cr.color .popover {
+  position: absolute;
+  z-index: 2;
+  right: 4px; }
+
+.react-dat-gui .cr.color .cover {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px; }
+
 .react-dat-gui .cr.color .picker {
   background: '#fff';
   border-radius: 2px;
@@ -290,13 +302,10 @@
   transform: translate(-6px, -6px); }
 
 .react-dat-gui .cr.presets {
-  background: #dad5cb; }
+  border-left: 5px solid #dad5cb; }
 
 .react-dat-gui .cr.presets label {
   padding: 6px 2px 6px 8px; }
-
-.react-dat-gui .cr.presets label .label-text {
-  display: none; }
 
 .react-dat-gui .cr.presets label select {
   width: 100%; }
