@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ColorPicker from './Picker/';
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
-import reactCSS from 'reactcss';
 import result from 'lodash.result';
 
 export default class DatColor extends Component {
@@ -65,12 +64,12 @@ export default class DatColor extends Component {
     this.props.onUpdate && this.props.onUpdate(value);
   }
 
-  renderPicker(styles) {
+  renderPicker() {
     const { value, displayColorPicker } = this.state;
 
     return (!displayColorPicker) ? null : (
-      <div style={ styles.popover }>
-        <div style={ styles.cover } onClick={ this.handleClose }/>
+      <div className='popover'>
+        <div className='cover' onClick={ this.handleClose }/>
         <ColorPicker color={ value } onChange={ this.handleChange } />
       </div>
     );
@@ -80,36 +79,6 @@ export default class DatColor extends Component {
     const { path, label, labelWidth } = this.props;
     const { value } = this.state;
     const labelText = isString(label) ? label : path;
-    const styles = reactCSS({
-      'default': {
-        color: {
-          width: '36px',
-          height: '14px',
-          borderRadius: '2px',
-          backgroundColor: `${value}`,
-        },
-        swatch: {
-          padding: '5px',
-          background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
-          cursor: 'pointer',
-        },
-        popover: {
-          position: 'absolute',
-          zIndex: '2',
-          right: '4px'
-        },
-        cover: {
-          position: 'fixed',
-          top: '0px',
-          right: '0px',
-          bottom: '0px',
-          left: '0px',
-        },
-      },
-    });
 
     return (
       <li className="cr color" style={{borderLeftColor: `${value}`}}>
@@ -119,7 +88,7 @@ export default class DatColor extends Component {
             <div className='swatch' onClick={ this.handleClick }>
               {value}
             </div>
-            {this.renderPicker(styles)}
+            {this.renderPicker()}
           </div>
         </label>
       </li>

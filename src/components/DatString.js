@@ -71,7 +71,9 @@ export default class DatString extends Component {
     return (
       <li className="cr string">
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+            {labelText}
+          </span>
           <input
             type="text"
             value={this.state.value}

@@ -28,17 +28,20 @@ export default class Slider extends Component {
 
   handleMouseDown = event => {
     this.update(event.pageX);
+
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('mouseup', this.handleMouseUp);
   }
 
   handleMouseMove = event => {
     this.update(event.pageX);
+
     event.preventDefault();
   }
 
   handleMouseUp = event => {
     this.update(event.pageX, false);
+
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseup', this.handleMouseUp);
   }

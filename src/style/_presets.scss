@@ -1,0 +1,11 @@
+.react-dat-gui .cr.presets {
+  border-left: $border-left-size solid $presets-color;
+
+  label {
+    padding: 6px 2px 6px 8px;
+
+    select {
+      width: 100%;
+    }
+  }
+}
