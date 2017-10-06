@@ -1,5 +1,17 @@
 # Release Notes
 
+## (2017-10-06) `v0.0.19`
+
+### Added
+
+* `DatPresets` component - this allows you to set presets for your DatGUI component and switch between them easily
+
+### Changed
+
+* Removed final reference to `reactcss`, this can be completely removed from dependencies now
+* Removed unnecessary arrow functions in some `setState` callbacks
+* Fixed bug where `DatNumber` input updates weren't updating sliders
+
 ## (2017-10-05) `v0.0.18`
 
 ### Added  
