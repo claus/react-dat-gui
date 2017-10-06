@@ -3,11 +3,29 @@
 
 // import './dev/style/dat.css';
 //
-// import Dat, { DatBoolean, DatButton, DatColor, DatFolder, DatNumber, DatSelect, DatString } from './dev';
+// import Dat, {
+//   DatBoolean,
+//   DatButton,
+//   DatColor,
+//   DatFolder,
+//   DatNumber,
+//   DatPresets,
+//   DatSelect,
+//   DatString,
+// } from './dev';
 
 import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
 
-import Dat, { DatBoolean, DatButton, DatColor, DatFolder, DatNumber, DatSelect, DatString } from 'react-dat-gui';
+import Dat, {
+  DatBoolean,
+  DatButton,
+  DatColor,
+  DatFolder,
+  DatNumber,
+  DatPresets,
+  DatSelect,
+  DatString,
+} from 'react-dat-gui';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -43,6 +61,23 @@ class App extends Component {
       height: '10px',
       display: 'inline-block'
     };
+    const presetA = {
+      string: 'Preset A',
+      minMaxNumber: 33,
+      number: 40,
+      boolean: false,
+      select: 'one',
+      color: '#e61d5f',
+      random: Math.random(),
+      nested: {
+        string: 'Sup'
+      }
+    };
+    const presets = [
+      { 'A': { ...data, ...presetA } },
+      { 'B': { ...data, string: 'Preset B' } },
+      { 'C': { ...data, string: 'Preset C' } },
+    ];
 
     return (
       <main>
@@ -73,6 +108,7 @@ class App extends Component {
           </div>
         </section>
         <Dat data={data} onUpdate={this.handleUpdate}>
+          <DatPresets label='Presets' options={presets} onUpdate={this.handleUpdate} />
           <DatString path="string" label="String" />
           <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
           <DatNumber path="number" label="Number" />

@@ -64,7 +64,7 @@ export default class DatNumber extends Component {
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value }, this.update);
   }
 
   handleFocus = () => {
@@ -77,9 +77,7 @@ export default class DatNumber extends Component {
     document.removeEventListener('keydown', this.handleKeyDown);
     window.getSelection().removeAllRanges();
 
-    this.setState({ value }, () => {
-      this.update();
-    });
+    this.setState({ value }, this.update);
   }
 
   handleKeyDown = event => {
@@ -88,9 +86,7 @@ export default class DatNumber extends Component {
     if (key === 13) {
       const value = this.applyConstraints(this.state.value);
 
-      this.setState({ value }, () => {
-        this.update();
-      });
+      this.setState({ value }, this.update);
     }
   }
 

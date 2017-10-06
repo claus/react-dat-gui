@@ -54,15 +54,17 @@ export default class DatSelect extends Component {
 
   render() {
     const { path, label, labelWidth } = this.props;
-    const { selected, options } = this.state;
+    const { value, options } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr string">
+      <li className="cr select">
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
+          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+            {labelText}
+          </span>
           <select
-            value={selected}
+            value={value}
             style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
