@@ -1,7 +1,20 @@
 // Uncomment out the imports below (and comment out the node modules imports) to use this example to develop changes/additions to react-dat-gui.
 // You will need to run `npm run example:seed` to get the latest code into the example/src/dev module directory
 
-import './dev/style/dat.css';
+// import './dev/style/dat.css';
+//
+// import Dat, {
+//   DatBoolean,
+//   DatButton,
+//   DatColor,
+//   DatFolder,
+//   DatNumber,
+//   DatPresets,
+//   DatSelect,
+//   DatString,
+// } from './dev';
+
+import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
 
 import Dat, {
   DatBoolean,
@@ -12,13 +25,8 @@ import Dat, {
   DatPresets,
   DatSelect,
   DatString,
-} from './dev';
+} from 'react-dat-gui';
 import React, { Component } from 'react';
-
-// import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
-//
-// import Dat, { DatBoolean, DatButton, DatColor, DatFolder, DatNumber, DatSelect, DatString } from 'react-dat-gui';
-
 
 class App extends Component {
   state = {
