@@ -2,8 +2,8 @@
   "name": "react-dat-gui",
   "version": "0.0.17",
   "description": "dat.GUI reimagined for React",
-  "main": "dist/react-dat-gui.js",
-  "style": "dist/react-dat-gui.css",
+  "main": "build/react-dat-gui.js",
+  "style": "build/react-dat-gui.css",
   "contributors": [
     {
       "name": "Claus Wahlers",
@@ -27,10 +27,10 @@
   },
   "scripts": {
     "build": "webpack --env build",
-    "dev": "webpack --progress --colors --watch --env dev",
+    "dev": "npm run start --prefix dev",
     "example": "npm run start --prefix example",
-    "example:seed": "sh scripts/example-seed",
-    "example:promote": "sh scripts/example-promote",
+    "dev:seed": "sh scripts/dev-seed && npm run dev",
+    "dev:promote": "sh scripts/dev-promote && npm run build",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "lint": "eslint src test build",

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-rm -rf src;
-cp -r example/src/dev src;
