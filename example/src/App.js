@@ -1,4 +1,4 @@
-import '../node_modules/react-dat-gui/dist/react-dat-gui.css';
+import '../node_modules/react-dat-gui/build/react-dat-gui.css';
 
 import Dat, {
   DatBoolean,
