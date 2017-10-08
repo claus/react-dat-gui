@@ -15,11 +15,6 @@
     background-size: 0% 100%;
     background-repeat: no-repeat;
     cursor: ew-resize;
-
-    &:before {
-      content: '\A0';
-      display: block;
-      padding: 2px;
-    }
+    height: 25px;
   }
 }

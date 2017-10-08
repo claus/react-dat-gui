@@ -14,7 +14,7 @@
   .popover {
     position: absolute;
     z-index: 2;
-    right: 4px;
+    right: 5px;
   }
 
   .cover {
@@ -27,11 +27,11 @@
 
   .picker {
     background: '#fff';
-    border-radius: 2px;
     box-shadow: 0 0 2px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.3);
     box-sizing: initial;
     width: auto;
     font-family: 'Menlo';
+    margin-top: -3px;
 
     .body {
       padding: 0px;
@@ -58,7 +58,6 @@
       width: 100%;
       padding-bottom: 55%;
       position: relative;
-      border-radius: 2px 2px 0 0;
       overflow: hidden;
 
       .saturation {
@@ -82,7 +81,6 @@
         input {
           font-size: 11px;
           color: #333;
-          width: 100%;
           border-radius: 2px;
           border: none;
           box-shadow: inset 0 0 0 1px #dadada;

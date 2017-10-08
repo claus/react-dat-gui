@@ -1,5 +1,13 @@
 # Release Notes
 
+## (2017-10-08) `v0.0.21`
+
+### Changed
+
+* Removed custom check box styling from `DatBoolean` component
+* Ensured sliders are the same height as number inputs
+* Minor style changes for consistency
+
 ## (2017-10-08) `v0.0.20`
 
 ### Changed  

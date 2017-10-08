@@ -48,7 +48,7 @@
 
 .react-dat-gui .cr label {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
   padding: 1px 2px 1px 8px; }
@@ -84,45 +84,15 @@
   position: relative;
   border-left: 5px solid #806787; }
 
+.react-dat-gui .cr.boolean label {
+  cursor: pointer; }
+
 .react-dat-gui .cr.boolean .label-text {
   display: block;
-  padding: 5px 0;
-  width: calc(100% - 2em); }
-
-.react-dat-gui .cr.boolean .checkbox,
-.react-dat-gui .cr.boolean input[type=checkbox] {
-  position: absolute;
-  top: 1px;
-  right: 2px;
-  bottom: 1px;
-  width: 2em; }
-
-.react-dat-gui .cr.boolean .checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #1a1a1a;
-  background: #303030;
-  z-index: 0; }
-
-.react-dat-gui .cr.boolean .checkbox > .checkmark {
-  display: none;
-  width: 0.6em;
-  height: 0.6em;
-  stroke-width: 7px;
-  stroke: #b09fb5; }
+  padding: 5px 0; }
 
 .react-dat-gui .cr.boolean input[type=checkbox] {
-  height: calc(100% - 4px);
-  margin: 0;
-  opacity: 0;
-  z-index: 1; }
-
-.react-dat-gui .cr.boolean input[type=checkbox]:hover ~ .checkbox {
-  background-color: #3c3c3c; }
-
-.react-dat-gui .cr.boolean input[type=checkbox]:checked ~ .checkbox > .checkmark {
-  display: block; }
+  margin: 0; }
 
 .react-dat-gui .cr.button {
   border-left: 5px solid #e61d5f; }
@@ -146,14 +116,14 @@
   display: block;
   cursor: pointer;
   padding: 5px 5px 5px 16px;
-  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat; }
+  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 48% no-repeat; }
 
 .react-dat-gui li.folder ul {
   margin-left: 4px;
   width: calc(100% - 4px); }
 
 .react-dat-gui li.folder.closed .title {
-  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==) 6px 10px no-repeat; }
+  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==) 6px 48% no-repeat; }
 
 .react-dat-gui li.folder.closed ul {
   display: none; }
@@ -173,12 +143,8 @@
   background-image: linear-gradient(90deg, #2FA1D6, #2FA1D6);
   background-size: 0% 100%;
   background-repeat: no-repeat;
-  cursor: ew-resize; }
-
-.react-dat-gui .cr.number .slider:before {
-  content: '\A0';
-  display: block;
-  padding: 2px; }
+  cursor: ew-resize;
+  height: 25px; }
 
 .react-dat-gui .cr.string {
   border-left: 5px solid #1ed36f; }
@@ -207,7 +173,7 @@
 .react-dat-gui .cr.color .popover {
   position: absolute;
   z-index: 2;
-  right: 4px; }
+  right: 5px; }
 
 .react-dat-gui .cr.color .cover {
   position: fixed;
@@ -218,11 +184,11 @@
 
 .react-dat-gui .cr.color .picker {
   background: '#fff';
-  border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
   box-sizing: initial;
   width: auto;
-  font-family: 'Menlo'; }
+  font-family: 'Menlo';
+  margin-top: -3px; }
 
 .react-dat-gui .cr.color .picker .body {
   padding: 0px; }
@@ -244,7 +210,6 @@
   width: 100%;
   padding-bottom: 55%;
   position: relative;
-  border-radius: 2px 2px 0 0;
   overflow: hidden; }
 
 .react-dat-gui .cr.color .picker .saturation-wrap .saturation {
@@ -265,7 +230,6 @@
 .react-dat-gui .cr.color .fields-wrap .fields .field input {
   font-size: 11px;
   color: #333;
-  width: 100%;
   border-radius: 2px;
   border: none;
   box-shadow: inset 0 0 0 1px #dadada;
