@@ -28,9 +28,9 @@
   "scripts": {
     "build": "webpack --env build",
     "dev": "npm run start --prefix dev",
-    "example": "npm run start --prefix example",
-    "dev:seed": "sh scripts/dev-seed && npm run dev",
+    "dev:migrate": "sh scripts/dev-migrate && npm run dev",
     "dev:promote": "sh scripts/dev-promote && npm run build",
+    "example": "npm run start --prefix example",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "lint": "eslint src test build",

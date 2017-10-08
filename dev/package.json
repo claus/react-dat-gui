@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "scss": "node-sass -o src/dev/style src/dev/style",
-    "scss:watch": "node-sass -w src/dev/style -o src/dev/style"
+    "scss": "node-sass -o src/react-dat-gui/style src/react-dat-gui/style",
+    "scss:watch": "node-sass -w src/react-dat-gui/style -o src/react-dat-gui/style"
   }
 }

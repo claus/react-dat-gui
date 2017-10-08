@@ -66,7 +66,7 @@ class App extends Component {
     return (
       <main>
         <h1>
-          <b>react-dat-gui</b>
+          <b style={{color: `${data.color}`}}>react-dat-gui</b>
         </h1>
         <h2>
           Use the controls and watch your changes happen in real time!
