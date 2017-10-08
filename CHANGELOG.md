@@ -1,5 +1,11 @@
 # Release Notes
 
+## (2017-10-08) `v0.0.20`
+
+### Changed  
+
+* Housekeeping in preparation for `v1.0.0`
+
 ## (2017-10-06) `v0.0.19`
 
 ### Added
