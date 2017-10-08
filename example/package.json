@@ -3,28 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "classnames": "2.2.5",
-    "lodash.clamp": "^4.0.2",
-    "lodash.clonedeep": "^4.3.2",
-    "lodash.isfinite": "^3.3.1",
-    "lodash.isstring": "^4.0.1",
-    "lodash.isundefined": "^3.0.1",
-    "lodash.result": "^4.4.0",
-    "lodash.set": "^4.2.0",
-    "node-sass": "^4.5.3",
     "react": "^16.0.0",
-    "react-color": "^2.13.8",
-    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
-    "reactcss": "^1.2.3"
+    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git"
   },
   "scripts": {
-    "start": "react-scripts start | npm run scss:watch",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "scss": "node-sass -o src/dev/style src/dev/style",
-    "scss:watch": "node-sass -w src/dev/style -o src/dev/style"
+    "eject": "react-scripts eject"
   }
 }

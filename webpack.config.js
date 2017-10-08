@@ -20,7 +20,7 @@ const config = {
   },
   devtool: 'source-map',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/build',
     filename: '[name]',
     library: 'Dat',
     libraryTarget: 'umd',

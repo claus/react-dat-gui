@@ -1,4 +1,4 @@
-import '../node_modules/react-dat-gui/build/react-dat-gui.css';
+import './react-dat-gui/style/dat.css';
 
 import Dat, {
   DatBoolean,
@@ -9,7 +9,7 @@ import Dat, {
   DatPresets,
   DatSelect,
   DatString,
-} from 'react-dat-gui';
+} from './react-dat-gui';
 import React, { Component } from 'react';
 
 class App extends Component {
