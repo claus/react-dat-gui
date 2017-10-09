@@ -1,5 +1,11 @@
 # Release Notes
 
+## (2017-10-09) `v1.0.1`
+
+### Changed
+
+* ES7 property initializers are now used to set initial state in all components rather than `componentWillMount`
+
 ## (2017-10-09) `v1.0.0`
 
 ### Added

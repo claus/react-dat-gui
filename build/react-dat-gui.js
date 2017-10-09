@@ -6325,19 +6325,14 @@ var DatBoolean = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatBoolean.__proto__ || Object.getPrototypeOf(DatBoolean)).call.apply(_ref, [this].concat(args))), _this), _this.handleChange = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatBoolean.__proto__ || Object.getPrototypeOf(DatBoolean)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: _this.getValue()
+    }, _this.handleChange = function (event) {
       _this.setState({ value: event.target.checked }, _this.update);
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(DatBoolean, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: this.getValue()
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
@@ -6520,13 +6515,6 @@ var DatColor = function (_Component) {
   }
 
   _createClass(DatColor, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: this.getValue()
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
@@ -6791,7 +6779,9 @@ var DatNumber = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatNumber.__proto__ || Object.getPrototypeOf(DatNumber)).call.apply(_ref, [this].concat(args))), _this), _this.handleChange = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatNumber.__proto__ || Object.getPrototypeOf(DatNumber)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: _this.getValue()
+    }, _this.handleChange = function (event) {
       _this.setState({ value: event.target.value }, _this.update);
     }, _this.handleFocus = function () {
       document.addEventListener('keydown', _this.handleKeyDown);
@@ -6823,13 +6813,6 @@ var DatNumber = function (_Component) {
   }
 
   _createClass(DatNumber, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: this.getValue()
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
@@ -7180,13 +7163,6 @@ var DatSelect = function (_Component) {
   }
 
   _createClass(DatSelect, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: this.getValue()
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
@@ -7320,7 +7296,9 @@ var DatString = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatString.__proto__ || Object.getPrototypeOf(DatString)).call.apply(_ref, [this].concat(args))), _this), _this.handleChange = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatString.__proto__ || Object.getPrototypeOf(DatString)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: _this.getValue()
+    }, _this.handleChange = function (event) {
       var value = event.target.value;
 
       _this.setState({ value: value }, function () {
@@ -7342,13 +7320,6 @@ var DatString = function (_Component) {
   }
 
   _createClass(DatString, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: this.getValue()
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
@@ -8732,7 +8703,9 @@ var Slider = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Slider.__proto__ || Object.getPrototypeOf(Slider)).call.apply(_ref, [this].concat(args))), _this), _this.handleMouseDown = function (event) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Slider.__proto__ || Object.getPrototypeOf(Slider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: (0, _utils.toNumber)(_this.props.value)
+    }, _this.handleMouseDown = function (event) {
       _this.update(event.pageX);
 
       window.addEventListener('mousemove', _this.handleMouseMove);
@@ -8753,13 +8726,6 @@ var Slider = function (_Component) {
   }
 
   _createClass(Slider, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        value: (0, _utils.toNumber)(this.props.value)
-      });
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
