@@ -31,10 +31,12 @@
     "dev:migrate": "sh scripts/dev-migrate && npm run dev",
     "dev:promote": "sh scripts/dev-promote && npm run build",
     "example": "npm run start --prefix example",
+    "example:deploy": "npm run deploy --prefix example",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "lint": "eslint src test build",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "toc": "markdown-toc README.md --no-firsth1 --maxdepth 3"
   },
   "dependencies": {
     "classnames": "2.2.5",
@@ -73,6 +75,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "extract-text-webpack-plugin": "^2.1.2",
+    "markdown-toc": "^1.2.0",
     "node-sass": "^4.0.0",
     "postcss": "^5.0.21",
     "postcss-cli": "^2.5.2",
