@@ -35758,21 +35758,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Dat = function (_Component) {
-  _inherits(Dat, _Component);
+var DatGui = function (_Component) {
+  _inherits(DatGui, _Component);
 
-  function Dat() {
+  function DatGui() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, Dat);
+    _classCallCheck(this, DatGui);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Dat.__proto__ || Object.getPrototypeOf(Dat)).call.apply(_ref, [this].concat(args))), _this), _this.handleUpdateValue = function (path, value) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatGui.__proto__ || Object.getPrototypeOf(DatGui)).call.apply(_ref, [this].concat(args))), _this), _this.handleUpdateValue = function (path, value) {
       var _this$props = _this.props,
           data = _this$props.data,
           onUpdate = _this$props.onUpdate;
@@ -35783,7 +35783,7 @@ var Dat = function (_Component) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Dat, [{
+  _createClass(DatGui, [{
     key: 'renderChildren',
     value: function renderChildren() {
       var _this2 = this;
@@ -35826,10 +35826,10 @@ var Dat = function (_Component) {
     }
   }]);
 
-  return Dat;
+  return DatGui;
 }(_react.Component);
 
-Dat.propTypes = {
+DatGui.propTypes = {
   data: _propTypes2.default.object.isRequired,
   children: _propTypes2.default.node.isRequired,
   onUpdate: _propTypes2.default.func.isRequired,
@@ -35838,11 +35838,11 @@ Dat.propTypes = {
   className: _propTypes2.default.string,
   style: _propTypes2.default.object
 };
-Dat.defaultProps = {
+DatGui.defaultProps = {
   liveUpdate: true,
   labelWidth: 40
 };
-exports.default = Dat;
+exports.default = DatGui;
 
 /***/ })
 /******/ ]);

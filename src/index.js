@@ -6,7 +6,7 @@ import cx from 'classnames';
 import isUndefined from 'lodash.isundefined';
 import set from 'lodash.set';
 
-export default class Dat extends Component {
+export default class DatGui extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,

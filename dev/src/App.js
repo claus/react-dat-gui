@@ -1,6 +1,6 @@
 import './react-dat-gui/style/dat.css';
 
-import Dat, {
+import DatGui, {
   DatBoolean,
   DatButton,
   DatColor,
@@ -97,7 +97,7 @@ class App extends Component {
             <b>Nested string value:</b> {data.nested.string}
           </div>
         </section>
-        <Dat data={data} onUpdate={this.handleUpdate}>
+        <DatGui data={data} onUpdate={this.handleUpdate}>
           <DatPresets label='Presets' options={presets} onUpdate={this.handleUpdate} />
           <DatString path="string" label="String" />
           <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
@@ -118,7 +118,7 @@ class App extends Component {
               </DatFolder>
             </DatFolder>
           </DatFolder>
-        </Dat>
+        </DatGui>
       </main>
     );
   }

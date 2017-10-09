@@ -1,5 +1,16 @@
 # Release Notes
 
+## (2017-10-09) `v1.0.0`
+
+### Added
+
+* A lot of documentation to the README
+* Deploy script to `./example` app which deploys to github pages
+
+### Changed
+
+* Changed default export from `Dat` to `DatGui`
+
 ## (2017-10-08) `v0.0.21`
 
 ### Changed

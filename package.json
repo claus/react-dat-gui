@@ -1,6 +1,6 @@
 {
   "name": "react-dat-gui",
-  "version": "0.0.21",
+  "version": "1.0.0",
   "description": "dat.GUI reimagined for React",
   "main": "build/react-dat-gui.js",
   "style": "build/react-dat-gui.css",
