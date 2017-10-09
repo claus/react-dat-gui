@@ -12,7 +12,6 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
 - [Docs](#docs)
   * [`DatGui`](#datgui)
   * [Components](#components)
-    + [Common props](#common-props)
     + [`DatBoolean`](#datboolean)
     + [`DatButton`](#datbutton)
     + [`DatColor`](#datcolor)
