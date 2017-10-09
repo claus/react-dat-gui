@@ -31,10 +31,12 @@
     "dev:migrate": "sh scripts/dev-migrate && npm run dev",
     "dev:promote": "sh scripts/dev-promote && npm run build",
     "example": "npm run start --prefix example",
+    "example:deploy": "npm run deploy --prefix example",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js",
     "lint": "eslint src test build",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "toc": "markdown-toc README.md --no-firsth1 --maxdepth 3"
   },
   "dependencies": {
     "classnames": "2.2.5",

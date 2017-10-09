@@ -11,7 +11,9 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
 - [Usage](#usage)
 - [Docs](#docs)
   * [`DatGui`](#datgui)
+    + [props](#props)
   * [Components](#components)
+    + [Common props](#common-props)
     + [`DatBoolean`](#datboolean)
     + [`DatButton`](#datbutton)
     + [`DatColor`](#datcolor)
@@ -20,14 +22,26 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
     + [`DatPresets`](#datpresets)
     + [`DatSelect`](#datselect)
     + [`DatString`](#datstring)
+- [Scripts](#scripts)
+    + [`build`](#build)
+    + [`dev`](#dev)
+    + [`dev:migrate`](#devmigrate)
+    + [`dev:promote`](#devpromote)
+    + [`example`](#example)
+    + [`example:deploy`](#exampledeploy)
+    + [`test`](#test)
+    + [`test:watch`](#testwatch)
+    + [`lint`](#lint)
+    + [`lint:fix`](#lintfix)
+    + [`toc`](#toc)
 - [What's missing](#whats-missing)
 - [Roadmap](#roadmap)
 
 ## Demo
 
-[Checkout the demo!](http://rohandeshpande.com/react-dat-gui)
+[Checkout the demo!](https://rohan-deshpande.github.io/react-dat-gui/)
 
-The demo is a deployed version of the latest production build of `./example`.
+The demo is a deployed version of the latest production build of `./example`. There's also a `dev` directory where you can prototype changes to the source code easily. Both of these have been bootstrapped with `create-react-app`.
 
 ## Installation
 
@@ -182,6 +196,54 @@ A select component for updating a value with one of the options supplied via the
 #### `DatString`
 
 A simple text input component that can be used to mutate strings.
+
+## Scripts
+
+There are a few NPM scripts in the root `package.json` for developing changes to the repo's source code as well as running tests and deploying the demo.
+
+#### `build`
+
+Builds the package for publishing.
+
+#### `dev`
+
+Runs the app in `./dev`.
+
+#### `dev:migrate`
+
+Migrates the code in `./src` to `./dev/src/react-dat-gui`. Handy for making sure you're developing with the latest source code.
+
+#### `dev:promote`
+
+Promotes the code in `./dev/src/react-dat-gui` back up to the root of the repo. Use this when you're happy with the changes you've been developing.
+
+#### `example`
+
+Runs the app in `./example`.
+
+#### `example:deploy`
+
+Deploys the production build of the app in `./example` to the `gh-pages` branch of this repo.
+
+#### `test`
+
+Runs unit tests.
+
+#### `test:watch`
+
+Runs unit tests and watches for changes.
+
+#### `lint`
+
+Runs `eslint` on the supplied path.
+
+#### `lint:fix`
+
+Runs `eslint --fix` on the supplied path.
+
+#### `toc`
+
+Prints the `README.md` table of contents into the console.
 
 ## What's missing
 
