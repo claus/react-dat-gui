@@ -4,6 +4,41 @@ This is a fully[*](#whats-missing) featured React port of Google's esteemed [dat
 
 For those that haven't used or seen dat.GUI before, it's basically a GUI for updating and interacting with objects in real time. It's used extensively in canvas or WebGL rendering demos/apps for libraries such as [three.js](http://threejs.org) but it can also be used to build browser based editing software.
 
+## TOC
+
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Docs](#docs)
+  * [`DatGui`](#datgui)
+    + [props](#props)
+      - [required](#required)
+      - [optional](#optional)
+  * [Components](#components)
+    + [Common props](#common-props)
+      - [required](#required-1)
+      - [optional](#optional-1)
+    + [`DatBoolean`](#datboolean)
+    + [`DatButton`](#datbutton)
+      - [props](#props-1)
+        * [required](#required-2)
+    + [`DatColor`](#datcolor)
+    + [`DatFolder`](#datfolder)
+      - [props](#props-2)
+        * [required](#required-3)
+    + [`DatNumber`](#datnumber)
+      - [props](#props-3)
+        * [optional](#optional-2)
+    + [`DatPresets`](#datpresets)
+      - [props](#props-4)
+        * [required](#required-4)
+    + [`DatSelect`](#datselect)
+      - [props](#props-5)
+        * [required](#required-5)
+    + [`DatString`](#datstring)
+- [What's missing](#whats-missing)
+- [Roadmap](#roadmap)
+
 ## Demo
 
 [Checkout the demo!](http://rohandeshpande.com/react-dat-gui)
@@ -126,7 +161,7 @@ Component which wraps other components to render them within an expandable/colla
  * `title: string` - The folder title eg., `<DatFolder title='MyAwesomeFolder' />`
  * `children: array` - The child components to render
 
-### DatNumber
+#### `DatNumber`
 
 A number component for updating numeric values. Will render a slider if `min`, `max` and `step` props are supplied.
 
@@ -138,7 +173,7 @@ A number component for updating numeric values. Will render a slider if `min`, `
 * `max: number` - The maximum range for the number  
 * `step: number` - The amount the number should increment each tick
 
-### `DatPresets`
+#### `DatPresets`
 
 Presets for the object which your `DatGui` is controlling can be supplied to this component as items in its `options` prop. A select field will be rendered which will allow you to easily switch between the presets.
 
@@ -150,7 +185,7 @@ Each item in this array will need to be in the format `{ 'presetName': ...data, 
 
 * `options: array` - An array of objects, each in the format `{ 'presetName': ...data, ...preset }`
 
-### `DatSelect`
+#### `DatSelect`
 
 A select component for updating a value with one of the options supplied via the `options` prop. The original value from the `path` will always be added to the passed options array as the first item.
 
@@ -160,13 +195,17 @@ A select component for updating a value with one of the options supplied via the
 
 * `options: array` - A simple array of options to select from eg., `<DatSelect path='fruits' options={['apple', 'orange', 'pear']} />`
 
-### `DatString`
+#### `DatString`
 
 A simple text input component that can be used to mutate strings.
 
 ## What's missing
 
-There are still a few features from the original implementation missing from this package. These are mainly related to saving and loading data as well as local storage. For the first, I think the fact that this is now an npm module sort of goes against it handling this sort of stuff. Google's original concept was basically a plug and play controller that could do everything, however in module form, it's expected that you'll most likely be integrating this with an existing application. In that case, you'll probably have pretty specific needs around how you would like to save/load data into your GUI. Local storage however is in the roadmap and will probably be done very soon.
+There are still a few features from the original implementation missing from this package. These are mainly related to saving and loading data as well as local storage.
+
+For the first, I think the fact that this is now an NPM module sort of goes against it handling this sort of stuff. Google's original concept was basically a plug and play controller that could do everything if you just slam it into the browser and pass it an object. However, in module form, it's expected that you'll most likely be integrating this with an existing application. In that case, you'll probably have pretty specific needs around how you would like to save/load data into your GUI and so it's been left out for now.
+
+Local storage however is in the roadmap and will probably be done very soon.
 
 ## Roadmap
 * Loading and storing both default and preset data via `localStorage`
