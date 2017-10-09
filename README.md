@@ -54,11 +54,11 @@ class App extends Component {
 
 This will give you a dat.GUI controller which can perform live mutations to the `data` in the `App` component's state.
 
-## Components
+## Docs
 
 ### `DatGui`
 
-This is the main container component for your GUI.
+This is the main container component for your GUI and is the default export from the package.
 
 #### props
 
@@ -75,85 +75,94 @@ This is the main container component for your GUI.
 * `className` - The class name to set on the `DatGui` div
 * `style` - The style object to set on the `DatGui` div
 
-### `DatBoolean`
+### Components
 
-todo
+All of the `react-dat-gui` components should be rendered as children of your `DatGui` parent component.
 
-#### props
+#### Common props
 
-##### required
+These components will have a number of props implicitly passed to them via the `DatGui` parent component's `renderChildren` method, but can also require other props to be passed explicitly to them.
 
-##### optional
-
-### `DatButton`
-
-todo
-
-#### props
+Below are docs for the required and optional props you can pass to each component. Check the `renderChildren` method of `src/index.js` to see which other props are passed down implicitly.
 
 ##### required
 
-##### optional
-
-### `DatColor`
-
-todo
-
-#### props
-
-##### required
+* `path: string` - the path to the value within the `data` object which the component will control, eg., considering your object was `{ foo: 'bar' }`: `<DatString path='foo' />`
+* Note, this prop is not required for the following components
+  * `DatButton`
+  * `DatFolder`
+  * `DatPresets`
 
 ##### optional
 
-### `DatFolder`
+* `label: string` - the label for the controller eg., `<DatString path='message' label='Message' />`
 
-todo
+#### `DatBoolean`
 
-#### props
+Used for controlling boolean values. Renders a checkbox input element.
 
-##### required
+#### `DatButton`
 
-##### optional
+Can be used for performing any kind of function. Simply pass an `onClick` prop to the component and it will fire whenever the rendered element is clicked.
+
+##### props
+
+###### required
+
+* `onClick :func` - the function to perform with the rendered element is clicked
+
+#### `DatColor`
+
+Uses [`react-color`](https://github.com/casesandberg/react-color/) to render a color picker component that will control color values.
+
+#### `DatFolder`
+
+Component which wraps other components to render them within an expandable/collapsable nested folder.
+
+##### props
+
+###### required
+
+ * `title: string` - The folder title eg., `<DatFolder title='MyAwesomeFolder' />`
+ * `children: array` - The child components to render
 
 ### DatNumber
 
 A number component for updating numeric values. Will render a slider if `min`, `max` and `step` props are supplied.
 
-#### props
+##### props
 
-##### required
+###### optional
 
-##### optional
+* `min: number` - The minimum range for the number
+* `max: number` - The maximum range for the number  
+* `step: number` - The amount the number should increment each tick
 
 ### `DatPresets`
 
-todo
+Presets for the object which your `DatGui` is controlling can be supplied to this component as items in its `options` prop. A select field will be rendered which will allow you to easily switch between the presets.
 
-#### props
+Each item in this array will need to be in the format `{ 'presetName': ...data, ...preset }` where `...data` is your initial data and `...preset` is your preset.
 
-##### required
+##### props
 
-##### optional
+###### required
+
+* `options: array` - An array of objects, each in the format `{ 'presetName': ...data, ...preset }`
 
 ### `DatSelect`
 
-todo
+A select component for updating a value with one of the options supplied via the `options` prop. The original value from the `path` will always be added to the passed options array as the first item.
 
-#### props
+##### props
 
-##### required
+###### required
 
-##### optional
+* `options: array` - A simple array of options to select from eg., `<DatSelect path='fruits' options={['apple', 'orange', 'pear']} />`
 
 ### `DatString`
 
 A simple text input component that can be used to mutate strings.
-
-#### props
-
-##### required
-
-##### optional
 
 ## What's missing
 
