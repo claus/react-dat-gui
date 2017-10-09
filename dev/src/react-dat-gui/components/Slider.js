@@ -14,10 +14,8 @@ export default class Slider extends Component {
     onUpdate: PropTypes.func,
   };
 
-  componentWillMount() {
-    this.setState({
-      value: toNumber(this.props.value)
-    });
+  state = {
+    value: toNumber(this.props.value),
   }
 
   componentWillReceiveProps(nextProps) {

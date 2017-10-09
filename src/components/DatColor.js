@@ -21,12 +21,6 @@ export default class DatColor extends Component {
     displayColorPicker: false,
   }
 
-  componentWillMount() {
-    this.setState({
-      value: this.getValue()
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState({
       value: this.getValue(nextProps)

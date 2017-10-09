@@ -15,10 +15,8 @@ export default class DatString extends Component {
     _onUpdateValue: PropTypes.func,
   };
 
-  componentWillMount() {
-    this.setState({
-      value: this.getValue()
-    });
+  state = {
+    value: this.getValue(),
   }
 
   componentWillReceiveProps(nextProps) {

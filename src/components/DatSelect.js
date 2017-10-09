@@ -18,13 +18,7 @@ export default class DatSelect extends Component {
 
   state = {
     value: '',
-    options: [this.getValue(), ...this.props.options]
-  }
-
-  componentWillMount() {
-    this.setState({
-      value: this.getValue()
-    });
+    options: [this.getValue(), ...this.props.options],
   }
 
   componentWillReceiveProps(nextProps) {
