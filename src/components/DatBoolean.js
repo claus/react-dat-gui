@@ -45,7 +45,9 @@ export default class DatBoolean extends Component {
     return (
       <li className="cr boolean">
         <label>
-          <span className="label-text">{labelText}</span>
+          <span className="label-text">
+            {labelText}
+          </span>
           <input
             type="checkbox"
             checked={this.state.value}

@@ -46,7 +46,7 @@ The demo is a deployed version of the latest production build of `./example`. Th
 ## Installation
 
 ```
-npm i -S react-dat-gui
+npm i -S rohan-deshpande/react-dat-gui
 ```
 
 ## Usage

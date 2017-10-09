@@ -62,9 +62,7 @@ export default class DatSelect extends Component {
             style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
-            {
-              options.map((item, index) => <option key={index} value={item}>{item}</option>)
-            }
+            {options.map((item, index) => <option key={index} value={item}>{item}</option>)}
           </select>
         </label>
       </li>
