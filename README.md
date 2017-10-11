@@ -39,14 +39,14 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
 
 ## Demo
 
-[Checkout the demo!](https://rohan-deshpande.github.io/react-dat-gui/)
+[Checkout the demo!](https://claus.github.io/react-dat-gui/)
 
 The demo is a deployed version of the latest production build of `./example`. There's also a `dev` directory where you can prototype changes to the source code easily. Both of these have been bootstrapped with `create-react-app`.
 
 ## Installation
 
 ```
-npm i -S rohan-deshpande/react-dat-gui
+npm install react-dat-gui --save
 ```
 
 ## Usage
@@ -256,3 +256,4 @@ Local storage however is in the roadmap and will probably be done very soon.
 ## Roadmap
 * Loading and storing both default and preset data via `localStorage`
 * Time travel with undo/redo buttons (edited)
+* Better support for floating point `DatNumber`s (rounding etc.)

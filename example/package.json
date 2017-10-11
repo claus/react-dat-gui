@@ -1,13 +1,13 @@
 {
   "name": "react-dat-gui-example",
-  "homepage": "https://rohan-deshpande.github.io/react-dat-gui",
+  "homepage": "https://claus.github.io/react-dat-gui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
-    "react-dat-gui": "git+https://github.com/rohan-deshpande/react-dat-gui.git"
+    "react-dat-gui": "claus/react-dat-gui"
   },
   "scripts": {
     "start": "react-scripts start",
