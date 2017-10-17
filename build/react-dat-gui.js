@@ -4656,6 +4656,17 @@ function toNumber(value) {
   return isNaN(float) ? 0 : float;
 }
 
+/**
+ * Polyfill for isInteger.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger#Polyfill
+ * @param {number} value
+ * @return {bool}
+ */
+var isInteger = exports.isInteger = Number.isInteger || function (value) {
+  return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
+};
+
 /***/ }),
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6735,6 +6746,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _utils = __webpack_require__(47);
+
 var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -6754,8 +6767,6 @@ var _lodash4 = _interopRequireDefault(_lodash3);
 var _lodash5 = __webpack_require__(13);
 
 var _lodash6 = _interopRequireDefault(_lodash5);
-
-var _utils = __webpack_require__(47);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6837,6 +6848,8 @@ var DatNumber = function (_Component) {
           hasMin = _ref2[0],
           hasMax = _ref2[1],
           hasStep = _ref2[2];
+
+      var decimalPlaces = hasStep && !(0, _utils.isInteger)(step) ? step.toString().split('.')[1].length : 0;
       var isMin = false,
           isMax = false;
 
@@ -6859,7 +6872,7 @@ var DatNumber = function (_Component) {
         }
       }
 
-      return value;
+      return value.toFixed(decimalPlaces);
     }
   }, {
     key: 'update',
@@ -6895,7 +6908,8 @@ var DatNumber = function (_Component) {
           max = _props3.max,
           path = _props3.path,
           label = _props3.label,
-          labelWidth = _props3.labelWidth;
+          labelWidth = _props3.labelWidth,
+          step = _props3.step;
 
       var labelText = (0, _lodash4.default)(label) ? label : path;
       var hasSlider = (0, _lodash2.default)(min) && (0, _lodash2.default)(max);
@@ -6917,6 +6931,7 @@ var DatNumber = function (_Component) {
           hasSlider ? this.renderSlider(sliderWidth) : null,
           _react2.default.createElement('input', {
             type: 'number',
+            step: step,
             inputMode: 'numeric',
             value: this.state.value,
             style: { width: inputWidth + '%' },
@@ -6940,6 +6955,7 @@ DatNumber.propTypes = {
   path: _propTypes2.default.string,
   label: _propTypes2.default.string,
   labelWidth: _propTypes2.default.number,
+  customLabelWidth: _propTypes2.default.number,
   liveUpdate: _propTypes2.default.bool,
   onUpdate: _propTypes2.default.func,
   _onUpdateValue: _propTypes2.default.func

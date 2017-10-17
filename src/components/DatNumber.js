@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { isInteger, toNumber } from './utils';
 
 import PropTypes from 'prop-types';
 import Slider from './Slider';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
-import { toNumber } from './utils';
 
 export default class DatNumber extends Component {
   static propTypes = {
@@ -16,6 +16,7 @@ export default class DatNumber extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     labelWidth: PropTypes.number,
+    customLabelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
@@ -38,6 +39,7 @@ export default class DatNumber extends Component {
   applyConstraints(value) {
     const { min, max, step } = this.props;
     const [ hasMin, hasMax, hasStep ] = [ isFinite(min), isFinite(max), isFinite(step) ];
+    const decimalPlaces = (hasStep && !isInteger(step)) ? step.toString().split('.')[1].length : 0;
     let [ isMin, isMax ] = [ false, false ];
 
     value = toNumber(value);
@@ -58,7 +60,7 @@ export default class DatNumber extends Component {
       }
     }
 
-    return value;
+    return value.toFixed(decimalPlaces);
   }
 
   handleChange = event => {
@@ -122,7 +124,7 @@ export default class DatNumber extends Component {
   }
 
   render() {
-    const { min, max, path, label, labelWidth } = this.props;
+    const { min, max, path, label, labelWidth, step } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
     const controlsWidth = 100 - labelWidth;
@@ -136,6 +138,7 @@ export default class DatNumber extends Component {
           {hasSlider ? this.renderSlider(sliderWidth) : null}
           <input
             type="number"
+            step={step}
             inputMode="numeric"
             value={this.state.value}
             style={{ width: `${inputWidth}%` }}
