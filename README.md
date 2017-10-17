@@ -177,6 +177,8 @@ A number component for updating numeric values. Will render a slider if `min`, `
 * `max: number` - The maximum range for the number  
 * `step: number` - The amount the number should increment each tick
 
+If your `step` prop is a float, `DatNumber` will ensure that your number field steps to the correct number of decimal places to align with the step that you've set.
+
 #### `DatPresets`
 
 Presets for the object which your `DatGui` is controlling can be supplied to this component as items in its `options` prop. A select field will be rendered which will allow you to easily switch between the presets.
