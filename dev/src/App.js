@@ -49,6 +49,7 @@ class App extends Component {
       string: 'Preset A',
       minMaxNumber: 33,
       number: 40,
+      float: 0.001,
       boolean: false,
       select: 'one',
       color: '#e61d5f',
@@ -82,6 +83,9 @@ class App extends Component {
             <b>Number value:</b> {data.number}
           </div>
           <div>
+            <b>Float value:</b> {data.float}
+          </div>
+          <div>
             <b>Checkbox value:</b> {(data.boolean) ? 'true' : 'false'}
           </div>
           <div>
@@ -102,6 +106,8 @@ class App extends Component {
           <DatString path="string" label="String" />
           <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
           <DatNumber path="number" label="Number" />
+          <DatNumber path="float" label="Float" min={0} max={100} step={0.001} />
+          <DatNumber path="float" label="Another Float" min={0} max={100} step={0.01} />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
           <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>
