@@ -1,5 +1,20 @@
 # Release Notes
 
+## (2017-12-09) `v1.0.3`
+
+### Added
+
+* Section on React version to README
+* Point regarding animations for `DatFolder` to Roadmap
+* License section to README
+
+## (2017-10-09) `v1.0.2`
+
+### Changed
+
+* Minor code formatting updates
+* Installation guidelines
+
 ## (2017-10-09) `v1.0.1`
 
 ### Changed
