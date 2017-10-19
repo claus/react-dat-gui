@@ -6932,6 +6932,8 @@ var DatNumber = function (_Component) {
           _react2.default.createElement('input', {
             type: 'number',
             step: step,
+            min: min,
+            max: max,
             inputMode: 'numeric',
             value: this.state.value,
             style: { width: inputWidth + '%' },

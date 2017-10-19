@@ -139,6 +139,8 @@ export default class DatNumber extends Component {
           <input
             type="number"
             step={step}
+            min={min}
+            max={max}
             inputMode="numeric"
             value={this.state.value}
             style={{ width: `${inputWidth}%` }}
