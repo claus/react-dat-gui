@@ -20,6 +20,7 @@ export default class DatNumber extends Component {
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
+    disableSlider: PropTypes.bool,
   };
 
   state = {
@@ -124,18 +125,18 @@ export default class DatNumber extends Component {
   }
 
   render() {
-    const { min, max, path, label, labelWidth, step } = this.props;
+    const { min, max, path, label, labelWidth, step, disableSlider } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
     const controlsWidth = 100 - labelWidth;
-    const inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+    const inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
     const sliderWidth = controlsWidth - inputWidth;
 
     return (
       <li className="cr number">
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
-          {hasSlider ? this.renderSlider(sliderWidth) : null}
+          {hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null}
           <input
             type="number"
             step={step}

@@ -6909,12 +6909,13 @@ var DatNumber = function (_Component) {
           path = _props3.path,
           label = _props3.label,
           labelWidth = _props3.labelWidth,
-          step = _props3.step;
+          step = _props3.step,
+          disableSlider = _props3.disableSlider;
 
       var labelText = (0, _lodash4.default)(label) ? label : path;
       var hasSlider = (0, _lodash2.default)(min) && (0, _lodash2.default)(max);
       var controlsWidth = 100 - labelWidth;
-      var inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+      var inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
       var sliderWidth = controlsWidth - inputWidth;
 
       return _react2.default.createElement(
@@ -6928,7 +6929,7 @@ var DatNumber = function (_Component) {
             { className: 'label-text', style: { width: labelWidth + '%' } },
             labelText
           ),
-          hasSlider ? this.renderSlider(sliderWidth) : null,
+          hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null,
           _react2.default.createElement('input', {
             type: 'number',
             step: step,
@@ -6960,7 +6961,8 @@ DatNumber.propTypes = {
   customLabelWidth: _propTypes2.default.number,
   liveUpdate: _propTypes2.default.bool,
   onUpdate: _propTypes2.default.func,
-  _onUpdateValue: _propTypes2.default.func
+  _onUpdateValue: _propTypes2.default.func,
+  disableSlider: _propTypes2.default.bool
 };
 exports.default = DatNumber;
 module.exports = exports['default'];

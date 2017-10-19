@@ -108,6 +108,7 @@ class App extends Component {
           <DatNumber path="number" label="Number" />
           <DatNumber path="float" label="Float" min={0} max={100} step={0.001} />
           <DatNumber path="float" label="Another Float" min={0} max={100} step={0.01} />
+          <DatNumber path="float" label="Min Max No Slider" min={0} max={100} step={0.01} disableSlider={true} />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
           <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>
