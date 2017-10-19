@@ -105,8 +105,8 @@ export default class DatNumber extends Component {
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
+    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, toNumber(value));
+    this.props.onUpdate && this.props.onUpdate(toNumber(value));
   }
 
   renderSlider(width) {

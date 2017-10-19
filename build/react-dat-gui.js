@@ -6880,8 +6880,8 @@ var DatNumber = function (_Component) {
       var value = this.state.value;
 
 
-      this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-      this.props.onUpdate && this.props.onUpdate(value);
+      this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, (0, _utils.toNumber)(value));
+      this.props.onUpdate && this.props.onUpdate((0, _utils.toNumber)(value));
     }
   }, {
     key: 'renderSlider',

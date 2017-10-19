@@ -83,6 +83,9 @@ class App extends Component {
             <b>Number value:</b> {data.number}
           </div>
           <div>
+            <b>Number value is a string:</b> {(typeof data.number === 'string') ? 'true' : 'false'}
+          </div>
+          <div>
             <b>Float value:</b> {data.float}
           </div>
           <div>
