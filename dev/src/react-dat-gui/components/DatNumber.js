@@ -72,6 +72,10 @@ export default class DatNumber extends Component {
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
+  /**
+   * @deprecated This has been deprecated for now and is no longer applied to the
+   * component onBlur.
+   */
   handleBlur = event => {
     const value = this.applyConstraints(event.target.value);
 
@@ -147,7 +151,6 @@ export default class DatNumber extends Component {
             style={{ width: `${inputWidth}%` }}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
           />
         </label>
       </li>

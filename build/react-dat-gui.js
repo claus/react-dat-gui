@@ -6874,6 +6874,12 @@ var DatNumber = function (_Component) {
 
       return value.toFixed(decimalPlaces);
     }
+
+    /**
+     * @deprecated This has been deprecated for now and is no longer applied to the
+     * component onBlur.
+     */
+
   }, {
     key: 'update',
     value: function update() {
@@ -6939,8 +6945,7 @@ var DatNumber = function (_Component) {
             value: this.state.value,
             style: { width: inputWidth + '%' },
             onChange: this.handleChange,
-            onFocus: this.handleFocus,
-            onBlur: this.handleBlur
+            onFocus: this.handleFocus
           })
         )
       );
