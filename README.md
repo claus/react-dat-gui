@@ -193,7 +193,7 @@ Each item in this array will need to be in the format `{ 'presetName': ...data, 
 
 #### `DatSelect`
 
-A select component for updating a value with one of the options supplied via the `options` prop. The original value from the `path` will always be added to the passed options array as the first item.
+A select component for updating a value with one of the options supplied via the `options` prop. The initial selected value will be taken from the mapped `path` prop.
 
 ##### props
 

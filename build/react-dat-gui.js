@@ -7153,8 +7153,6 @@ var _lodash4 = _interopRequireDefault(_lodash3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -7176,8 +7174,8 @@ var DatSelect = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatSelect.__proto__ || Object.getPrototypeOf(DatSelect)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      value: '',
-      options: [_this.getValue()].concat(_toConsumableArray(_this.props.options))
+      value: _this.getValue(),
+      options: _this.props.options
     }, _this.handleChange = function (event) {
       var value = event.target.value;
 

@@ -19,7 +19,7 @@ class App extends Component {
       minMaxNumber: 66,
       number: 80,
       boolean: true,
-      select: 'one',
+      select: 'three',
       color: '#2FA1D6',
       random: Math.random(),
       nested: {
