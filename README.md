@@ -54,7 +54,7 @@ npm install react-dat-gui --save
 First you'll need a wrapper component which will handle the updates from your dat.GUI, this component should pass the data for the GUI to control as well as an `onUpdate` function to the `DatGui` container component as props. Here's how you might do that:
 
 ```jsx
-import '../node_modules/react-dat-gui/build/react-dat-gui.css';
+import 'react-dat-gui/build/react-dat-gui.css';
 import React, { Component } from 'react';
 
 import DatGui, { DatBoolean, DatButton, DatNumber, DatString } from 'react-dat-gui';
