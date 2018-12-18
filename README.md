@@ -159,6 +159,10 @@ Component which wraps other components to render them within an expandable/colla
  * `title: string` - The folder title eg., `<DatFolder title='MyAwesomeFolder' />`
  * `children: array` - The child components to render
 
+###### optional
+
+ * `closed: boolean` - Whether the initial state of the folder is closed, defaults to `true`
+
 #### `DatNumber`
 
 A number component for updating numeric values. Will render a slider if `min`, `max` and `step` props are supplied.
