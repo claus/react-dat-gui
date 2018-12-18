@@ -38,8 +38,8 @@ export class DatFolder extends React.Component<DatFolderProps, any> { }
 export interface DatPresetsProps extends DatUnChangableFieldProps {
     onUpdate: (data: any) => any;
     options: {
-        presetName: string;
-        data: any; // Initial data
+        presetName?: string;
+        data?: any; // Initial data
         preset: any; // Your preset
     }
 }
