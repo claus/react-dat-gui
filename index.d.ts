@@ -4,7 +4,7 @@ import * as React from 'react';
 export interface DatGuiProps {
     data: any;                      // The data your dat.GUI controller will mutate
     onUpdate: (data: any) => any;   // The method which will be called whenever an update is handled by the controller
-    children: React.ReactElement<any>; // The dat.GUI components that make up the controller
+    children: any; // The dat.GUI components that make up the controller
     liveUpdate?: boolean;           // Determines if live updates should occur, defaults to true
     labelWidth?: number;            // The width of the labels in pixels, defaults to 40
     className?: string;             // The class name to set on the DatGui div
@@ -30,7 +30,7 @@ export class DatButton extends React.Component<DatButtonProps, any> { }
 
 export interface DatFolderProps extends DatUnChangableFieldProps {
     title: string;
-    children: React.ReactNode[];
+    children: any;
 }
 export class DatFolder extends React.Component<DatFolderProps, any> { }
 
@@ -42,6 +42,7 @@ export interface DatPresetsProps extends DatUnChangableFieldProps {
         preset: any; // Your preset
     }
 }
+export class DatPresets extends React.Component<DatPresetsProps, any> { }
 
 
 export interface DatBooleanProps extends DatChangableFieldProps { }
