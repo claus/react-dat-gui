@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 export interface DatGuiProps {
     data: any;                      // The data your dat.GUI controller will mutate
     onUpdate: (data: any) => any;   // The method which will be called whenever an update is handled by the controller
@@ -21,20 +20,19 @@ export class DatChangableFieldProps extends DatUnchangableFieldProps {
     path: string;
 }
 
-
 export interface DatButtonProps extends DatUnchangableFieldProps {
     onClick: (e: React.MouseEvent) => any;
 }
-export class DatButton extends React.Component<DatButtonProps, any> { }
 
+export class DatButton extends React.Component<DatButtonProps, any> { }
 
 export interface DatFolderProps extends DatUnchangableFieldProps {
     title: string;
     closed: boolean;
     children: any;
 }
-export class DatFolder extends React.Component<DatFolderProps, any> { }
 
+export class DatFolder extends React.Component<DatFolderProps, any> { }
 
 export interface DatPresetsProps extends DatUnchangableFieldProps {
     onUpdate: (data: any) => any;
@@ -44,32 +42,33 @@ export interface DatPresetsProps extends DatUnchangableFieldProps {
         preset: any; // Your preset
     }
 }
+
 export class DatPresets extends React.Component<DatPresetsProps, any> { }
 
-
 export interface DatBooleanProps extends DatChangableFieldProps { }
-export class DatBoolean extends React.Component<DatBooleanProps, any> { }
 
+export class DatBoolean extends React.Component<DatBooleanProps, any> { }
 
 export interface DatColorProps extends DatChangableFieldProps {
     [reactColorProp: string]: any;
 }
-export class DatColor extends React.Component<DatColorProps, any> { }
 
+export class DatColor extends React.Component<DatColorProps, any> { }
 
 export interface DatNumberProps extends DatChangableFieldProps {
     min: number;
     max: number;
     step: number;
 }
-export class DatNumber extends React.Component<DatNumberProps, any> { }
 
+export class DatNumber extends React.Component<DatNumberProps, any> { }
 
 export interface DatSelectProps extends DatChangableFieldProps {
     options: any[];
 }
+
 export class DatSelect extends React.Component<DatSelectProps, any> { }
 
-
 export interface DatStringProps extends DatChangableFieldProps { }
+
 export class DatString extends React.Component<DatStringProps, any> { }
