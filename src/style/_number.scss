@@ -3,6 +3,7 @@
 
   input[type=text], input[type=number] {
     color: $number-color;
+    height: $number-height;
   }
 
   .slider {
@@ -15,6 +16,6 @@
     background-size: 0% 100%;
     background-repeat: no-repeat;
     cursor: ew-resize;
-    height: 25px;
+    height: $number-height;
   }
 }

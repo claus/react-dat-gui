@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { isInteger, toNumber } from './utils';
 
 import PropTypes from 'prop-types';
 import Slider from './Slider';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
-import { toNumber } from './utils';
 
 export default class DatNumber extends Component {
   static propTypes = {
@@ -16,9 +16,11 @@ export default class DatNumber extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     labelWidth: PropTypes.number,
+    customLabelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
+    disableSlider: PropTypes.bool,
   };
 
   state = {
@@ -38,6 +40,7 @@ export default class DatNumber extends Component {
   applyConstraints(value) {
     const { min, max, step } = this.props;
     const [ hasMin, hasMax, hasStep ] = [ isFinite(min), isFinite(max), isFinite(step) ];
+    const decimalPlaces = (hasStep && !isInteger(step)) ? step.toString().split('.')[1].length : 0;
     let [ isMin, isMax ] = [ false, false ];
 
     value = toNumber(value);
@@ -58,7 +61,7 @@ export default class DatNumber extends Component {
       }
     }
 
-    return value;
+    return value.toFixed(decimalPlaces);
   }
 
   handleChange = event => {
@@ -69,6 +72,10 @@ export default class DatNumber extends Component {
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
+  /**
+   * @deprecated This has been deprecated for now and is no longer applied to the
+   * component onBlur.
+   */
   handleBlur = event => {
     const value = this.applyConstraints(event.target.value);
 
@@ -102,8 +109,8 @@ export default class DatNumber extends Component {
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
+    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, toNumber(value));
+    this.props.onUpdate && this.props.onUpdate(toNumber(value));
   }
 
   renderSlider(width) {
@@ -122,26 +129,28 @@ export default class DatNumber extends Component {
   }
 
   render() {
-    const { min, max, path, label, labelWidth } = this.props;
+    const { min, max, path, label, labelWidth, step, disableSlider } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
     const controlsWidth = 100 - labelWidth;
-    const inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+    const inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
     const sliderWidth = controlsWidth - inputWidth;
 
     return (
       <li className="cr number">
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
-          {hasSlider ? this.renderSlider(sliderWidth) : null}
+          {hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null}
           <input
             type="number"
+            step={step}
+            min={min}
+            max={max}
             inputMode="numeric"
             value={this.state.value}
             style={{ width: `${inputWidth}%` }}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
           />
         </label>
       </li>
