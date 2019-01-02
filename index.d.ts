@@ -13,29 +13,30 @@ export interface DatGuiProps {
 
 export default class DatGui extends React.Component<DatGuiProps, any> { }
 
-export class DatUnChangableFieldProps {
+export class DatUnchangableFieldProps {
     label?: string;
 }
 
-export class DatChangableFieldProps extends DatUnChangableFieldProps {
+export class DatChangableFieldProps extends DatUnchangableFieldProps {
     path: string;
 }
 
 
-export interface DatButtonProps extends DatUnChangableFieldProps {
+export interface DatButtonProps extends DatUnchangableFieldProps {
     onClick: (e: React.MouseEvent) => any;
 }
 export class DatButton extends React.Component<DatButtonProps, any> { }
 
 
-export interface DatFolderProps extends DatUnChangableFieldProps {
+export interface DatFolderProps extends DatUnchangableFieldProps {
     title: string;
+    closed: boolean;
     children: any;
 }
 export class DatFolder extends React.Component<DatFolderProps, any> { }
 
 
-export interface DatPresetsProps extends DatUnChangableFieldProps {
+export interface DatPresetsProps extends DatUnchangableFieldProps {
     onUpdate: (data: any) => any;
     options: {
         presetName?: string;
