@@ -8,6 +8,7 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
 
 - [Demo](#demo)
 - [Installation](#installation)
+  * [React Version](#react-version)
 - [Usage](#usage)
 - [Docs](#docs)
   * [`DatGui`](#datgui)
@@ -36,6 +37,7 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
     + [`toc`](#toc)
 - [What's missing](#whats-missing)
 - [Roadmap](#roadmap)
+- [License](#license)
 
 ## Demo
 
@@ -48,6 +50,10 @@ The demo is a deployed version of the latest production build of `./example`. Th
 ```
 npm install react-dat-gui --save
 ```
+
+### React Version
+
+React dat.GUI uses React and React-DOM `^16.0.0` aka React Fiber. It's recommended that you update your app's React version to align with this in order to avoid any issues.
 
 ## Usage
 
@@ -69,13 +75,13 @@ class App extends Component {
     }
   }
 
-  update = data => this.setState({ data })
+  handleUpdate = data => this.setState({ data })
 
   render() {
     const { data } = this.state;
 
     return (
-      <DatGui data={data} onUpdate={this.update}>
+      <DatGui data={data} onUpdate={this.handleUpdate}>
         <DatString path='package' label='Package' />
         <DatNumber path='power' label='Power' min={9000} max={9999} step={1} />
         <DatBoolean path='isAwesome' label='Awesome?' />
@@ -97,16 +103,16 @@ This is the main container component for your GUI and is the default export from
 
 ##### required
 
-* `data` - The data your dat.GUI controller will mutate
-* `onUpdate` - The method which will be called whenever an update is handled by the controller
-* `children` - The dat.GUI components that make up the controller
+* `data: object` - The data your dat.GUI controller will mutate
+* `onUpdate: func` - The method which will be called whenever an update is handled by the controller
+* `children: array` - The dat.GUI components that make up the controller
 
 ##### optional
 
-* `liveUpdate` - Determines if live updates should occur, defaults to `true`
-* `labelWidth` - The width of the labels in pixels, defaults to `40`
-* `className` - The class name to set on the `DatGui` div
-* `style` - The style object to set on the `DatGui` div
+* `liveUpdate: bool` - Determines if live updates should occur, defaults to `true`
+* `labelWidth: number` - The width of the labels in pixels, defaults to `40`
+* `className: string` - The class name to set on the `DatGui` div
+* `style: object` - The style object to set on the `DatGui` div
 
 ### Components
 
@@ -258,6 +264,12 @@ For the first, I think the fact that this is now an NPM module sort of goes agai
 Local storage however is in the roadmap and will probably be done very soon.
 
 ## Roadmap
+
 * Loading and storing both default and preset data via `localStorage`
-* Time travel with undo/redo buttons (edited)
+* Animations for `DatFolder` expanding/collapsing
+* Time travel with undo/redo buttons
 * Better support for floating point `DatNumber`s (rounding etc.)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
