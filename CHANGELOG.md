@@ -1,5 +1,11 @@
 # Changelog
 
+## (2019-01-02) `v2.0.1`
+
+### Added
+
+- `TypeScript` definitions
+
 ## (2019-01-02) `v2.0.0`
 
 ### Added
