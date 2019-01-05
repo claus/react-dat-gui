@@ -1,6 +1,6 @@
 # React dat.GUI
 
-[![npm version](https://badge.fury.io/js/react-dat-gui.svg)](https://badge.fury.io/js/react-dat-gui)
+[![](https://img.shields.io/npm/v/react-dat-gui.svg)](https://www.npmjs.com/package/react-dat-gui)
 
 This is a fully[*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all the core components you'll need to cleanly integrate dat.GUIs into your React app.
 
