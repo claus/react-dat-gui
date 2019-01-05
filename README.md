@@ -1,5 +1,7 @@
 # React dat.GUI
 
+[![npm version](https://badge.fury.io/js/react-dat-gui.svg)](https://badge.fury.io/js/react-dat-gui)
+
 This is a fully[*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all the core components you'll need to cleanly integrate dat.GUIs into your React app.
 
 For those that haven't used or seen dat.GUI before, it's basically a GUI for updating and interacting with objects in real time. It's used extensively in canvas or WebGL rendering demos/apps for libraries such as [three.js](http://threejs.org) but it can also be used to build browser based editing software.
