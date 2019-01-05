@@ -54,7 +54,6 @@
       background: #303030;
       border: 3px solid #1a1a1a;
       border-radius: 0;
-      padding: 2px 5px;
       margin: 0;
       outline: none;
       font-size: inherit; }
@@ -108,7 +107,8 @@
 .react-dat-gui .cr.number {
   border-left: 5px solid #2FA1D6; }
   .react-dat-gui .cr.number input[type=text], .react-dat-gui .cr.number input[type=number] {
-    color: #2FA1D6; }
+    color: #2FA1D6;
+    height: 25px; }
   .react-dat-gui .cr.number .slider {
     display: block;
     position: relative;
@@ -124,7 +124,8 @@
 .react-dat-gui .cr.string {
   border-left: 5px solid #1ed36f; }
   .react-dat-gui .cr.string input[type=text] {
-    color: #1ed36f; }
+    color: #1ed36f;
+    padding: 2px 5px; }
 
 .react-dat-gui .cr.select {
   border-left: 5px solid #F4D450; }

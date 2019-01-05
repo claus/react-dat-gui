@@ -19,7 +19,7 @@ class App extends Component {
       minMaxNumber: 66,
       number: 80,
       boolean: true,
-      select: 'one',
+      select: 'three',
       color: '#2FA1D6',
       random: Math.random(),
       nested: {
@@ -49,6 +49,7 @@ class App extends Component {
       string: 'Preset A',
       minMaxNumber: 33,
       number: 40,
+      float: 0.001,
       boolean: false,
       select: 'one',
       color: '#e61d5f',
@@ -82,6 +83,12 @@ class App extends Component {
             <b>Number value:</b> {data.number}
           </div>
           <div>
+            <b>Number value is a string:</b> {(typeof data.number === 'string') ? 'true' : 'false'}
+          </div>
+          <div>
+            <b>Float value:</b> {data.float}
+          </div>
+          <div>
             <b>Checkbox value:</b> {(data.boolean) ? 'true' : 'false'}
           </div>
           <div>
@@ -102,6 +109,9 @@ class App extends Component {
           <DatString path="string" label="String" />
           <DatNumber path="minMaxNumber" label="Number" min={0} max={100} step={1} />
           <DatNumber path="number" label="Number" />
+          <DatNumber path="float" label="Float" min={0} max={100} step={0.001} />
+          <DatNumber path="float" label="Another Float" min={0} max={100} step={0.01} />
+          <DatNumber path="float" label="Min Max No Slider" min={0} max={100} step={0.01} disableSlider={true} />
           <DatBoolean path="boolean" label="Boolean" />
           <DatButton label="Button" onClick={this.handleClick} />
           <DatSelect label="Select" path='select' options={['two', 'three', 'four']}/>

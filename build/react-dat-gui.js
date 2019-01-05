@@ -4794,6 +4794,17 @@ function toNumber(value) {
   return isNaN(float) ? 0 : float;
 }
 
+/**
+ * Polyfill for isInteger.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger#Polyfill
+ * @param {number} value
+ * @return {bool}
+ */
+var isInteger = exports.isInteger = Number.isInteger || function (value) {
+  return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
+};
+
 /***/ }),
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6537,6 +6548,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _utils = __webpack_require__(52);
+
 var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -6556,8 +6569,6 @@ var _lodash4 = _interopRequireDefault(_lodash3);
 var _lodash5 = __webpack_require__(12);
 
 var _lodash6 = _interopRequireDefault(_lodash5);
-
-var _utils = __webpack_require__(52);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6639,6 +6650,8 @@ var DatNumber = function (_Component) {
           hasMin = _ref2[0],
           hasMax = _ref2[1],
           hasStep = _ref2[2];
+
+      var decimalPlaces = hasStep && !(0, _utils.isInteger)(step) ? step.toString().split('.')[1].length : 0;
       var isMin = false,
           isMax = false;
 
@@ -6661,16 +6674,22 @@ var DatNumber = function (_Component) {
         }
       }
 
-      return value;
+      return value.toFixed(decimalPlaces);
     }
+
+    /**
+     * @deprecated This has been deprecated for now and is no longer applied to the
+     * component onBlur.
+     */
+
   }, {
     key: 'update',
     value: function update() {
       var value = this.state.value;
 
 
-      this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-      this.props.onUpdate && this.props.onUpdate(value);
+      this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, (0, _utils.toNumber)(value));
+      this.props.onUpdate && this.props.onUpdate((0, _utils.toNumber)(value));
     }
   }, {
     key: 'renderSlider',
@@ -6697,12 +6716,14 @@ var DatNumber = function (_Component) {
           max = _props3.max,
           path = _props3.path,
           label = _props3.label,
-          labelWidth = _props3.labelWidth;
+          labelWidth = _props3.labelWidth,
+          step = _props3.step,
+          disableSlider = _props3.disableSlider;
 
       var labelText = (0, _lodash4.default)(label) ? label : path;
       var hasSlider = (0, _lodash2.default)(min) && (0, _lodash2.default)(max);
       var controlsWidth = 100 - labelWidth;
-      var inputWidth = hasSlider ? Math.round(controlsWidth / 3) : controlsWidth;
+      var inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
       var sliderWidth = controlsWidth - inputWidth;
 
       return _react2.default.createElement(
@@ -6716,15 +6737,17 @@ var DatNumber = function (_Component) {
             { className: 'label-text', style: { width: labelWidth + '%' } },
             labelText
           ),
-          hasSlider ? this.renderSlider(sliderWidth) : null,
+          hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null,
           _react2.default.createElement('input', {
             type: 'number',
+            step: step,
+            min: min,
+            max: max,
             inputMode: 'numeric',
             value: this.state.value,
             style: { width: inputWidth + '%' },
             onChange: this.handleChange,
-            onFocus: this.handleFocus,
-            onBlur: this.handleBlur
+            onFocus: this.handleFocus
           })
         )
       );
@@ -6744,7 +6767,8 @@ DatNumber.propTypes = {
   labelWidth: _propTypes2.default.number,
   liveUpdate: _propTypes2.default.bool,
   onUpdate: _propTypes2.default.func,
-  _onUpdateValue: _propTypes2.default.func
+  _onUpdateValue: _propTypes2.default.func,
+  disableSlider: _propTypes2.default.bool
 };
 exports.default = DatNumber;
 module.exports = exports['default'];
@@ -6930,8 +6954,6 @@ var _lodash4 = _interopRequireDefault(_lodash3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -6953,8 +6975,8 @@ var DatSelect = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DatSelect.__proto__ || Object.getPrototypeOf(DatSelect)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      value: '',
-      options: [_this.getValue()].concat(_toConsumableArray(_this.props.options))
+      value: _this.getValue(),
+      options: _this.props.options
     }, _this.handleChange = function (event) {
       var value = event.target.value;
 
