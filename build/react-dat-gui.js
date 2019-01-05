@@ -6765,7 +6765,6 @@ DatNumber.propTypes = {
   path: _propTypes2.default.string,
   label: _propTypes2.default.string,
   labelWidth: _propTypes2.default.number,
-  customLabelWidth: _propTypes2.default.number,
   liveUpdate: _propTypes2.default.bool,
   onUpdate: _propTypes2.default.func,
   _onUpdateValue: _propTypes2.default.func,
