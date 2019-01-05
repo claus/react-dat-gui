@@ -16,16 +16,15 @@ export default class DatNumber extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     labelWidth: PropTypes.number,
-    customLabelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
-    disableSlider: PropTypes.bool,
+    disableSlider: PropTypes.bool
   };
 
   state = {
-    value: this.getValue(),
-  }
+    value: this.getValue()
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -39,9 +38,14 @@ export default class DatNumber extends Component {
 
   applyConstraints(value) {
     const { min, max, step } = this.props;
-    const [ hasMin, hasMax, hasStep ] = [ isFinite(min), isFinite(max), isFinite(step) ];
-    const decimalPlaces = (hasStep && !isInteger(step)) ? step.toString().split('.')[1].length : 0;
-    let [ isMin, isMax ] = [ false, false ];
+    const [hasMin, hasMax, hasStep] = [
+      isFinite(min),
+      isFinite(max),
+      isFinite(step)
+    ];
+    const decimalPlaces =
+      hasStep && !isInteger(step) ? step.toString().split('.')[1].length : 0;
+    let [isMin, isMax] = [false, false];
 
     value = toNumber(value);
 
@@ -66,11 +70,11 @@ export default class DatNumber extends Component {
 
   handleChange = event => {
     this.setState({ value: event.target.value }, this.update);
-  }
+  };
 
   handleFocus = () => {
     document.addEventListener('keydown', this.handleKeyDown);
-  }
+  };
 
   /**
    * @deprecated This has been deprecated for now and is no longer applied to the
@@ -83,7 +87,7 @@ export default class DatNumber extends Component {
     window.getSelection().removeAllRanges();
 
     this.setState({ value }, this.update);
-  }
+  };
 
   handleKeyDown = event => {
     const key = event.keyCode || event.which;
@@ -93,23 +97,24 @@ export default class DatNumber extends Component {
 
       this.setState({ value }, this.update);
     }
-  }
+  };
 
   handleSliderUpdate = (value, isLive) => {
     const constrained = this.applyConstraints(value);
-    const shouldUpdate = (!isLive || this.props.liveUpdate);
+    const shouldUpdate = !isLive || this.props.liveUpdate;
 
     this.setState({ value: constrained }, () => {
       if (shouldUpdate) {
         this.update();
       }
     });
-  }
+  };
 
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, toNumber(value));
+    this.props._onUpdateValue &&
+      this.props._onUpdateValue(this.props.path, toNumber(value));
     this.props.onUpdate && this.props.onUpdate(toNumber(value));
   }
 
@@ -129,18 +134,33 @@ export default class DatNumber extends Component {
   }
 
   render() {
-    const { min, max, path, label, labelWidth, step, disableSlider } = this.props;
+    const {
+      min,
+      max,
+      path,
+      label,
+      labelWidth,
+      step,
+      disableSlider
+    } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
     const controlsWidth = 100 - labelWidth;
-    const inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
+    const inputWidth =
+      hasSlider && disableSlider !== true
+        ? Math.round(controlsWidth / 3)
+        : controlsWidth;
     const sliderWidth = controlsWidth - inputWidth;
 
     return (
       <li className="cr number">
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>{labelText}</span>
-          {hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null}
+          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+            {labelText}
+          </span>
+          {hasSlider && disableSlider !== true
+            ? this.renderSlider(sliderWidth)
+            : null}
           <input
             type="number"
             step={step}
