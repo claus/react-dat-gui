@@ -65,7 +65,7 @@ First you'll need a wrapper component which will handle the updates from your da
 import 'react-dat-gui/build/react-dat-gui.css';
 import React, { Component } from 'react';
 
-import DatGui, { DatBoolean, DatButton, DatNumber, DatString } from 'react-dat-gui';
+import DatGui, { DatBoolean, DatColor, DatNumber, DatString } from 'react-dat-gui';
 
 class App extends Component {
   state = {
