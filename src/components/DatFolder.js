@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, cloneElement } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -23,9 +23,17 @@ export default class DatFolder extends Component {
     this.setState({ closed });
   }
 
+  renderChildren() {
+    // Disable this rule to take title out of the props so nested folders can have unique titles.
+    // eslint-disable-next-line no-unused-vars
+    const { children, title, ...rest } = this.props;
+
+    return React.Children.map(children, child => cloneElement(child, {...rest}));
+  }
+
   render() {
     const { closed } = this.state;
-    const { title, children } = this.props;
+    const { title } = this.props;
 
     return (
       <li className={cx('folder', { 'closed': closed })}>
@@ -34,7 +42,7 @@ export default class DatFolder extends Component {
             {title}
           </div>
           <ul>
-            {children}
+            {this.renderChildren()}
           </ul>
         </div>
       </li>
