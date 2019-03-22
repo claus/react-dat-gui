@@ -70,12 +70,6 @@ const config = {
       'amd': 'react-dom',
       'root': 'ReactDOM'
     },
-    'classnames': {
-      'commonjs': 'classnames',
-      'commonjs2': 'classnames',
-      'amd': 'classnames',
-      'root': 'classNames'
-    },
     'prop-types': {
       'commonjs': 'prop-types',
       'commonjs2': 'prop-types',
