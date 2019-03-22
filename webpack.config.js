@@ -56,7 +56,33 @@ const config = {
     modules: [path.resolve('./src'), path.resolve('./node_modules')],
     extensions: ['.json', '.js', '.scss']
   },
-  plugins: plugins
+  plugins: plugins,
+  externals: {
+    'react': {
+      'commonjs': 'react',
+      'commonjs2': 'react',
+      'amd': 'react',
+      'root': 'React'
+    },
+    'react-dom': {
+      'commonjs': 'react-dom',
+      'commonjs2': 'react-dom',
+      'amd': 'react-dom',
+      'root': 'ReactDOM'
+    },
+    'classnames': {
+      'commonjs': 'classnames',
+      'commonjs2': 'classnames',
+      'amd': 'classnames',
+      'root': 'classNames'
+    },
+    'prop-types': {
+      'commonjs': 'prop-types',
+      'commonjs2': 'prop-types',
+      'amd': 'prop-types',
+      'root': 'PropTypes'
+    }
+  },
 };
 
 module.exports = config;

@@ -48,10 +48,7 @@
     "lodash.isundefined": "^3.0.1",
     "lodash.result": "^4.4.0",
     "lodash.set": "^4.2.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-color": "^2.13.8",
-    "react-dom": "^16.0.0"
+    "react-color": "^2.13.8"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -82,11 +79,19 @@
     "postcss-cli": "^2.5.2",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.13.1",
     "uglify-js": "2.6.2",
     "watch": "0.18.0",
     "webpack": "2.2.1",
     "webpack-dev-server": "1.14.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }
