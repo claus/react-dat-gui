@@ -13,31 +13,39 @@ export default class DatBoolean extends Component {
     _onUpdateValue: PropTypes.func
   };
 
-  state = {
-    value: this.getValue()
+  static defaultProps = {
+    data: null,
+    path: null,
+    label: null,
+    onUpdate: () => null,
+    _onUpdateValue: () => null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: result(props.data, props.path)
+    };
   }
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = result(nextProps.data, nextProps.path);
+
+    if (prevState.value === nextValue) return null;
+
+    return {
+      value: result(nextProps.data, nextProps.path)
+    };
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.checked }, this.update);
+    const value = event.target.checked;
+    const { onUpdate, _onUpdateValue, path } = this.props;
+
+    _onUpdateValue(path, value);
+    onUpdate(value);
   };
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
 
   render() {
     const { path, label } = this.props;
