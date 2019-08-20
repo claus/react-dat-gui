@@ -5,17 +5,21 @@ import color from 'react-color/lib/helpers/color';
 
 export default class Fields extends Component {
   handleChange = (value, e) => {
-    color.isValidHex(value) && this.props.onChange({
-      hex: value,
-      source: 'hex',
-    }, e);
-  }
+    color.isValidHex(value) &&
+      this.props.onChange(
+        {
+          hex: value,
+          source: 'hex'
+        },
+        e
+      );
+  };
 
   render() {
     return (
       <div className="flexbox-fix fields-wrap">
         <div className="flexbox-fix fields">
-          <div className='field'>
+          <div className="field">
             <EditableInput
               value={this.props.hex}
               onChange={this.handleChange}

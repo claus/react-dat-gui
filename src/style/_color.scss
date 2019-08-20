@@ -27,7 +27,7 @@
 
   .picker {
     background: '#fff';
-    box-shadow: 0 0 2px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.3);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
     box-sizing: initial;
     width: auto;
     font-family: 'Menlo';
@@ -61,7 +61,7 @@
       overflow: hidden;
 
       .saturation {
-        radius: 2px 2px 0 0,
+        radius: 2px 2px 0 0;
       }
     }
   }

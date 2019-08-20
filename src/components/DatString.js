@@ -12,12 +12,12 @@ export default class DatString extends Component {
     labelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func
   };
 
   state = {
-    value: this.getValue(),
-  }
+    value: this.getValue()
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -30,22 +30,22 @@ export default class DatString extends Component {
   }
 
   handleChange = event => {
-    const value = event.target.value;
+    const { value } = event.target;
 
     this.setState({ value }, () => {
       this.props.liveUpdate && this.update();
     });
-  }
+  };
 
   handleFocus = () => {
     document.addEventListener('keydown', this.handleKeyDown);
-  }
+  };
 
   handleBlur = () => {
     document.removeEventListener('keydown', this.handleKeyDown);
     window.getSelection().removeAllRanges();
     !this.props.liveUpdate && this.update();
-  }
+  };
 
   handleKeyDown = event => {
     const key = event.keyCode || event.which;
@@ -53,12 +53,13 @@ export default class DatString extends Component {
     if (key === 13) {
       !this.props.liveUpdate && this.update();
     }
-  }
+  };
 
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
+    this.props._onUpdateValue &&
+      this.props._onUpdateValue(this.props.path, value);
     this.props.onUpdate && this.props.onUpdate(value);
   }
 

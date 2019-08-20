@@ -1,35 +1,29 @@
 import { ColorWrap, Hue, Saturation } from 'react-color/lib/components/common';
 
+import PropTypes from 'prop-types';
+import React from 'react';
 import Fields from './Fields';
 import Pointer from './Pointer';
 import PointerCircle from './PointerCircle';
-import PropTypes from 'prop-types';
-import React from 'react';
 
-const Picker = ({
-  onChange,
-  hsl,
-  hsv,
-  hex,
-  className = ''
-}) => {
+const Picker = ({ onChange, hsl, hsv, hex, className = '' }) => {
   return (
     <div className={`picker ${className}`}>
-      <div className='saturation-wrap'>
+      <div className="saturation-wrap">
         <Saturation
-          className='saturation'
+          className="saturation"
           hsl={hsl}
           hsv={hsv}
           pointer={PointerCircle}
           onChange={onChange}
         />
       </div>
-      <div className='body'>
+      <div className="body">
         <div className="controls">
-          <div className='toggles'>
-            <div className='hue-wrap'>
+          <div className="toggles">
+            <div className="hue-wrap">
               <Hue
-                className='hue'
+                className="hue"
                 hsl={hsl}
                 pointer={Pointer}
                 onChange={onChange}
@@ -37,21 +31,18 @@ const Picker = ({
             </div>
           </div>
         </div>
-        <Fields
-          hex={hex}
-          onChange={onChange}
-        />
+        <Fields hex={hex} onChange={onChange} />
       </div>
     </div>
   );
 };
 
 Picker.propTypes = {
-  disableAlpha: PropTypes.bool,
+  disableAlpha: PropTypes.bool
 };
 
 Picker.defaultProps = {
-  disableAlpha: false,
+  disableAlpha: false
 };
 
 export default ColorWrap(Picker);

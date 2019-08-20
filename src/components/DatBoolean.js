@@ -10,12 +10,12 @@ export default class DatBoolean extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func
   };
 
   state = {
-    value: this.getValue(),
-  }
+    value: this.getValue()
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -29,12 +29,13 @@ export default class DatBoolean extends Component {
 
   handleChange = event => {
     this.setState({ value: event.target.checked }, this.update);
-  }
+  };
 
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
+    this.props._onUpdateValue &&
+      this.props._onUpdateValue(this.props.path, value);
     this.props.onUpdate && this.props.onUpdate(value);
   }
 
@@ -45,9 +46,7 @@ export default class DatBoolean extends Component {
     return (
       <li className="cr boolean">
         <label>
-          <span className="label-text">
-            {labelText}
-          </span>
+          <span className="label-text">{labelText}</span>
           <input
             type="checkbox"
             checked={this.state.value}

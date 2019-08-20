@@ -7,16 +7,16 @@ import { toNumber } from './utils';
 
 export default class Slider extends Component {
   static propTypes = {
-    value: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     min: PropTypes.number,
     max: PropTypes.number,
     width: PropTypes.number,
-    onUpdate: PropTypes.func,
+    onUpdate: PropTypes.func
   };
 
   state = {
-    value: toNumber(this.props.value),
-  }
+    value: toNumber(this.props.value)
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -29,25 +29,25 @@ export default class Slider extends Component {
 
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('mouseup', this.handleMouseUp);
-  }
+  };
 
   handleMouseMove = event => {
     this.update(event.pageX);
 
     event.preventDefault();
-  }
+  };
 
   handleMouseUp = event => {
     this.update(event.pageX, false);
 
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseup', this.handleMouseUp);
-  }
+  };
 
   handleClick = event => {
     // do not focus input field on slider click
     event.preventDefault();
-  }
+  };
 
   update(pageX, isLive = true) {
     const { min, max, onUpdate } = this.props;
@@ -63,7 +63,11 @@ export default class Slider extends Component {
 
   render() {
     const { min, max, width } = this.props;
-    const widthBackground = clamp((this.state.value - min) * 100 / (max - min), 0, 100);
+    const widthBackground = clamp(
+      ((this.state.value - min) * 100) / (max - min),
+      0,
+      100
+    );
     const style = {
       width: `${width}%`,
       backgroundSize: `${widthBackground}% 100%`

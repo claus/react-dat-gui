@@ -14,7 +14,7 @@ export default class DatPresets extends Component {
     options: PropTypes.array.isRequired,
     labelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func,
+    onUpdate: PropTypes.func
   };
 
   state = {
@@ -23,7 +23,7 @@ export default class DatPresets extends Component {
       { [DEFAULT_PRESET_KEY]: cloneDeep(this.props.data) },
       ...this.props.options
     ]
-  }
+  };
 
   componentWillMount() {
     this.setState({ value: cloneDeep(this.props.data) });
@@ -39,7 +39,7 @@ export default class DatPresets extends Component {
     this.setState({ value }, () => {
       this.props.liveUpdate && this.update();
     });
-  }
+  };
 
   update() {
     const { value } = this.state;
@@ -62,13 +62,15 @@ export default class DatPresets extends Component {
             style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
-            {
-              options.map(preset => {
-                return Object.keys(preset).map(key => {
-                  return <option key={key} value={JSON.stringify(preset[key])}>{key}</option>;
-                });
-              })
-            }
+            {options.map(preset => {
+              return Object.keys(preset).map(key => {
+                return (
+                  <option key={key} value={JSON.stringify(preset[key])}>
+                    {key}
+                  </option>
+                );
+              });
+            })}
           </select>
         </label>
       </li>

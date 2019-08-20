@@ -13,13 +13,13 @@ export default class DatSelect extends Component {
     labelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func
   };
 
   state = {
     value: this.getValue(),
-    options: this.props.options,
-  }
+    options: this.props.options
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -32,17 +32,18 @@ export default class DatSelect extends Component {
   }
 
   handleChange = event => {
-    const value = event.target.value;
+    const { value } = event.target;
 
     this.setState({ value }, () => {
       this.props.liveUpdate && this.update();
     });
-  }
+  };
 
   update() {
     const { value } = this.state;
 
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
+    this.props._onUpdateValue &&
+      this.props._onUpdateValue(this.props.path, value);
     this.props.onUpdate && this.props.onUpdate(value);
   }
 
@@ -62,7 +63,11 @@ export default class DatSelect extends Component {
             style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
-            {options.map((item, index) => <option key={index} value={item}>{item}</option>)}
+            {options.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
           </select>
         </label>
       </li>
