@@ -1,15 +1,12 @@
 import React, { Component, cloneElement } from 'react';
-
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 export default class DatFolder extends Component {
-  state = {
-    closed: this.props.closed
-  };
-
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string,
+    closed: PropTypes.bool,
+    children: PropTypes.element.isRequired
   };
 
   static defaultProps = {
@@ -17,11 +14,13 @@ export default class DatFolder extends Component {
     closed: true
   };
 
-  handleClick = () => {
-    const closed = !this.state.closed;
+  constructor(props) {
+    super(props);
+    this.state = { closed: props.closed };
+  }
 
-    this.setState({ closed });
-  };
+  handleClick = () =>
+    this.setState(prevState => ({ closed: !prevState.closed }));
 
   renderChildren() {
     // Disable this rule to take title out of the props so nested folders can have unique titles.
@@ -40,7 +39,13 @@ export default class DatFolder extends Component {
     return (
       <li className={cx('folder', { closed })}>
         <div className="dg">
-          <div className="title" onClick={this.handleClick}>
+          <div
+            className="title"
+            onClick={this.handleClick}
+            onKeyPress={this.handleClick}
+            role="button"
+            tabIndex={0}
+          >
             {title}
           </div>
           <ul>{this.renderChildren()}</ul>
