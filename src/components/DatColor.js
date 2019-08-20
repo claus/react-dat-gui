@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
@@ -16,56 +15,67 @@ export default class DatColor extends Component {
     _onUpdateValue: PropTypes.func
   };
 
-  state = {
-    value: this.getValue(),
-    displayColorPicker: false
+  static defaultProps = {
+    data: null,
+    path: null,
+    label: null,
+    labelWidth: null,
+    liveUpdate: null,
+    onUpdate: () => null,
+    _onUpdateValue: () => null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
+  constructor() {
+    super();
+
+    this.state = {
+      value: null,
+      displayColorPicker: false
+    };
   }
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = result(nextProps.data, nextProps.path);
+
+    return {
+      ...prevState,
+      value: nextValue
+    };
   }
 
-  handleClick = () => {
-    this.setState({
-      displayColorPicker: !this.state.displayColorPicker
-    });
-  };
+  handleClickColorPicker = () =>
+    this.setState(prevState => ({
+      ...prevState,
+      displayColorPicker: !prevState.displayColorPicker
+    }));
 
-  handleClose = () => {
+  handleCloseColorPicker = () =>
     this.setState({
       displayColorPicker: false
     });
-  };
 
-  handleChange = color => {
+  handleChangeColor = color => {
     const value = isString(color) ? color : color.hex;
+    const { _onUpdateValue, onUpdate, path } = this.props;
 
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
+    _onUpdateValue(path, value);
+    onUpdate(value);
   };
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
 
   renderPicker() {
     const { value, displayColorPicker } = this.state;
 
     return !displayColorPicker ? null : (
       <div className="popover">
-        <div className="cover" onClick={this.handleClose} />
-        <ColorPicker color={value} onChange={this.handleChange} />
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <div
+          className="cover"
+          onClick={this.handleCloseColorPicker}
+          onKeyPress={this.handleCloseColorPicker}
+          role="button"
+          tabIndex={0}
+        />
+        <ColorPicker color={value} onChange={this.handleChangeColor} />
       </div>
     );
   }
@@ -87,7 +97,13 @@ export default class DatColor extends Component {
               backgroundColor: `${value}`
             }}
           >
-            <div className="swatch" onClick={this.handleClick}>
+            <div
+              className="swatch"
+              onClick={this.handleClickColorPicker}
+              onKeyPress={this.handleClickColorPicker}
+              role="button"
+              tabIndex={0}
+            >
               {value}
             </div>
             {this.renderPicker()}
