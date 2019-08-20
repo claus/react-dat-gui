@@ -24,7 +24,7 @@ export default class DatBoolean extends Component {
     super(props);
 
     this.state = {
-      value: result(props.data, props.path)
+      value: null
     };
   }
 
@@ -34,7 +34,7 @@ export default class DatBoolean extends Component {
     if (prevState.value === nextValue) return null;
 
     return {
-      value: result(nextProps.data, nextProps.path)
+      value: nextValue
     };
   }
 
