@@ -12,30 +12,29 @@ import DatGui, {
 import 'react-dat-gui/dist/index.css';
 
 class App extends Component {
-  state = {
-    data: {
-      string: 'Hello World',
-      minMaxNumber: 66,
-      number: 80,
-      boolean: true,
-      select: 'one',
-      color: '#2FA1D6',
-      random: Math.random(),
-      nested: {
-        string: 'Goodbye Cruel World'
+  constructor() {
+    super();
+
+    this.state = {
+      data: {
+        string: 'Hello World',
+        minMaxNumber: 66,
+        number: 80,
+        boolean: true,
+        select: 'one',
+        color: '#2FA1D6',
+        random: Math.random(),
+        nested: {
+          string: 'Goodbye Cruel World'
+        }
       }
-    }
-  };
+    };
+  }
 
-  handleUpdate = data => {
-    this.setState({ data });
-  };
+  handleUpdate = data => this.setState({ data });
 
-  handleClick = () => {
-    const data = { ...this.state.data, random: Math.random() };
-
-    this.setState({ data });
-  };
+  handleClick = () =>
+    this.setState(prevState => ({ ...prevState, random: Math.random() }));
 
   render() {
     const { data } = this.state;
@@ -86,9 +85,7 @@ class App extends Component {
           </div>
           <div>
             <b>Picked color:</b>{' '}
-            <div
-              style={{ ...swatchStyle, backgroundColor: `${data.color}` }}
-            ></div>
+            <div style={{ ...swatchStyle, backgroundColor: `${data.color}` }} />
           </div>
           <div>
             <b>Click the button for a random number:</b> {data.random}
