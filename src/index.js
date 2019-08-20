@@ -19,7 +19,9 @@ export default class DatGui extends Component {
 
   static defaultProps = {
     liveUpdate: true,
-    labelWidth: 40
+    labelWidth: 40,
+    className: null,
+    style: null
   };
 
   handleUpdateValue = (path, value) => {
