@@ -1,11 +1,42 @@
+/* eslint-disable no-param-reassign */
 import React, { Component } from 'react';
-import { isInteger, toNumber } from './utils';
-
 import PropTypes from 'prop-types';
-import Slider from './Slider';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import Slider from './Slider';
+import { isInteger, toNumber } from './utils';
+
+const applyConstraints = ({ value, min, max, step }) => {
+  const [hasMin, hasMax, hasStep] = [
+    isFinite(min),
+    isFinite(max),
+    isFinite(step)
+  ];
+  const decimalPlaces =
+    hasStep && !isInteger(step) ? step.toString().split('.')[1].length : 0;
+  let [isMin, isMax] = [false, false];
+
+  value = toNumber(value);
+
+  if (hasMin && value <= min) {
+    value = min;
+    isMin = true;
+  }
+
+  if (hasMax && value >= max) {
+    value = max;
+    isMax = true;
+  }
+
+  if (!isMin && !isMax) {
+    if (hasStep && step !== 0) {
+      value = Math.round(value / step) * step;
+    }
+  }
+
+  return value.toFixed(decimalPlaces);
+};
 
 export default class DatNumber extends Component {
   static propTypes = {
@@ -22,101 +53,56 @@ export default class DatNumber extends Component {
     disableSlider: PropTypes.bool
   };
 
-  state = {
-    value: this.getValue()
+  static defaultProps = {
+    min: null,
+    max: null,
+    step: null,
+    data: null,
+    path: null,
+    label: null,
+    labelWidth: null,
+    liveUpdate: null,
+    onUpdate: () => null,
+    _onUpdateValue: () => null,
+    disableSlider: null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
+  constructor() {
+    super();
+    this.state = { value: null };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const { min, max, step } = nextProps;
+    const nextValue = applyConstraints({
+      value: result(nextProps.data, nextProps.path),
+      min,
+      max,
+      step
     });
-  }
 
-  getValue(props = this.props) {
-    return this.applyConstraints(result(props.data, props.path));
-  }
-
-  applyConstraints(value) {
-    const { min, max, step } = this.props;
-    const [hasMin, hasMax, hasStep] = [
-      isFinite(min),
-      isFinite(max),
-      isFinite(step)
-    ];
-    const decimalPlaces =
-      hasStep && !isInteger(step) ? step.toString().split('.')[1].length : 0;
-    let [isMin, isMax] = [false, false];
-
-    value = toNumber(value);
-
-    if (hasMin && value <= min) {
-      value = min;
-      isMin = true;
-    }
-
-    if (hasMax && value >= max) {
-      value = max;
-      isMax = true;
-    }
-
-    if (!isMin && !isMax) {
-      if (hasStep && step !== 0) {
-        value = Math.round(value / step) * step;
-      }
-    }
-
-    return value.toFixed(decimalPlaces);
+    return {
+      value: nextValue
+    };
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value }, this.update);
+    const { value } = event.target;
+    this.update(value);
   };
 
-  handleFocus = () => {
-    document.addEventListener('keydown', this.handleKeyDown);
+  handleSliderUpdate = value => {
+    const { min, max, step } = this.props;
+
+    this.update(applyConstraints({ value, min, max, step }));
   };
 
-  /**
-   * @deprecated This has been deprecated for now and is no longer applied to the
-   * component onBlur.
-   */
-  handleBlur = event => {
-    const value = this.applyConstraints(event.target.value);
+  update = value => {
+    const { onUpdate, _onUpdateValue, path } = this.props;
 
-    document.removeEventListener('keydown', this.handleKeyDown);
-    window.getSelection().removeAllRanges();
-
-    this.setState({ value }, this.update);
+    _onUpdateValue(path, toNumber(value));
+    onUpdate(toNumber(value));
   };
-
-  handleKeyDown = event => {
-    const key = event.keyCode || event.which;
-
-    if (key === 13) {
-      const value = this.applyConstraints(this.state.value);
-
-      this.setState({ value }, this.update);
-    }
-  };
-
-  handleSliderUpdate = (value, isLive) => {
-    const constrained = this.applyConstraints(value);
-    const shouldUpdate = !isLive || this.props.liveUpdate;
-
-    this.setState({ value: constrained }, () => {
-      if (shouldUpdate) {
-        this.update();
-      }
-    });
-  };
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, toNumber(value));
-    this.props.onUpdate && this.props.onUpdate(toNumber(value));
-  }
 
   renderSlider(width) {
     const { min, max } = this.props;
@@ -170,7 +156,6 @@ export default class DatNumber extends Component {
             value={this.state.value}
             style={{ width: `${inputWidth}%` }}
             onChange={this.handleChange}
-            onFocus={this.handleFocus}
           />
         </label>
       </li>
