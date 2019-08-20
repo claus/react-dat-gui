@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import clamp from 'lodash.clamp';
 import { toNumber } from './utils';
 
@@ -14,14 +14,28 @@ export default class Slider extends Component {
     onUpdate: PropTypes.func
   };
 
-  state = {
-    value: toNumber(this.props.value)
+  static defaultProps = {
+    value: null,
+    min: null,
+    max: null,
+    width: null,
+    onUpdate: () => null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: toNumber(nextProps.value)
-    });
+  constructor() {
+    super();
+    this.state = { value: null };
+    this.sliderRef = React.createRef();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = toNumber(nextProps.value);
+
+    if (prevState.value === nextValue) return null;
+
+    return {
+      value: nextValue
+    };
   }
 
   handleMouseDown = event => {
@@ -51,7 +65,7 @@ export default class Slider extends Component {
 
   update(pageX, isLive = true) {
     const { min, max, onUpdate } = this.props;
-    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+    const rect = this.sliderRef.current.getBoundingClientRect();
     const x = pageX - rect.left;
     const w = rect.right - rect.left;
     const value = min + clamp(x / w, 0, 1) * (max - min);
@@ -63,11 +77,8 @@ export default class Slider extends Component {
 
   render() {
     const { min, max, width } = this.props;
-    const widthBackground = clamp(
-      ((this.state.value - min) * 100) / (max - min),
-      0,
-      100
-    );
+    const { value } = this.state;
+    const widthBackground = clamp(((value - min) * 100) / (max - min), 0, 100);
     const style = {
       width: `${width}%`,
       backgroundSize: `${widthBackground}% 100%`
@@ -75,10 +86,16 @@ export default class Slider extends Component {
 
     return (
       <span
+        ref={this.sliderRef}
         className="slider"
         style={style}
         onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
+        role="slider"
+        tabIndex={0}
+        aria-valuenow={value}
+        aria-valuemin={min}
+        aria-valuemax={max}
       />
     );
   }
