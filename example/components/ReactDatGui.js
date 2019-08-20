@@ -34,7 +34,9 @@ class App extends Component {
   handleUpdate = data => this.setState({ data });
 
   handleClick = () =>
-    this.setState(prevState => ({ ...prevState, random: Math.random() }));
+    this.setState(prevState => ({
+      data: { ...prevState.data, random: Math.random() }
+    }));
 
   render() {
     const { data } = this.state;
