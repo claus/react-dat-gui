@@ -15,26 +15,38 @@ export default class DatString extends Component {
     _onUpdateValue: PropTypes.func
   };
 
-  state = {
-    value: this.getValue()
+  static defaultProps = {
+    data: null,
+    path: null,
+    label: null,
+    labelWidth: 40,
+    liveUpdate: true,
+    onUpdate: () => null,
+    _onUpdateValue: () => null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
+  constructor() {
+    super();
+    this.state = {
+      value: null
+    };
   }
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = result(nextProps.data, nextProps.path);
+
+    if (prevState.value === nextValue) return null;
+
+    return {
+      value: nextValue
+    };
   }
 
   handleChange = event => {
     const { value } = event.target;
+    const { liveUpdate } = this.props;
 
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
+    if (liveUpdate) this.update(value);
   };
 
   handleFocus = () => {
@@ -44,23 +56,22 @@ export default class DatString extends Component {
   handleBlur = () => {
     document.removeEventListener('keydown', this.handleKeyDown);
     window.getSelection().removeAllRanges();
-    !this.props.liveUpdate && this.update();
+
+    const { liveUpdate } = this.props;
+    if (!liveUpdate) this.update();
   };
 
   handleKeyDown = event => {
     const key = event.keyCode || event.which;
+    const { liveUpdate } = this.props;
 
-    if (key === 13) {
-      !this.props.liveUpdate && this.update();
-    }
+    if (key === 13 && !liveUpdate) this.update();
   };
 
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
+  update(value) {
+    const { _onUpdateValue, onUpdate, path } = this.props;
+    _onUpdateValue(path, value);
+    onUpdate(value);
   }
 
   render() {
