@@ -35,7 +35,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
-    "dev": "npm run start --prefix dev"
+    "dev": "npm run start --prefix dev",
+    "lint-js": "eslint src/* --ext .js"
   },
   "husky": {
     "hooks": {
@@ -54,7 +55,7 @@
     ]
   },
   "dependencies": {
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "lodash.clamp": "^4.0.2",
     "lodash.clonedeep": "^4.3.2",
     "lodash.isfinite": "^3.3.1",
