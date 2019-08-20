@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
@@ -16,36 +15,39 @@ export default class DatSelect extends Component {
     _onUpdateValue: PropTypes.func
   };
 
-  state = {
-    value: this.getValue(),
-    options: this.props.options
+  static defaultProps = {
+    data: null,
+    path: null,
+    label: null,
+    labelWidth: null,
+    liveUpdate: true,
+    onUpdate: () => null,
+    _onUpdateValue: () => null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
+  constructor() {
+    super();
+    this.state = {
+      value: null,
+      options: null
+    };
   }
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+  static getDerivedStateFromProps(nextProps) {
+    const nextValue = result(nextProps.data, nextProps.path);
+
+    return {
+      value: nextValue,
+      options: nextProps.options
+    };
   }
 
   handleChange = event => {
     const { value } = event.target;
-
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
+    const { liveUpdate, _onUpdateValue, onUpdate, path } = this.props;
+    _onUpdateValue(path, value);
+    if (liveUpdate) onUpdate(value);
   };
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
 
   render() {
     const { path, label, labelWidth } = this.props;
@@ -64,6 +66,7 @@ export default class DatSelect extends Component {
             onChange={this.handleChange}
           >
             {options.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <option key={index} value={item}>
                 {item}
               </option>
