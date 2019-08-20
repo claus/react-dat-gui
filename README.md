@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/react-dat-gui.svg)](https://www.npmjs.com/package/react-dat-gui)
 
-This is a fully[*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all the core components you'll need to cleanly integrate dat.GUIs into your React app.
+This is a fully[\*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all the core components you'll need to cleanly integrate dat.GUIs into your React app.
 
 For those that haven't used or seen dat.GUI before, it's basically a GUI for updating and interacting with objects in real time. It's used extensively in canvas or WebGL rendering demos/apps for libraries such as [three.js](http://threejs.org) but it can also be used to build browser based editing software.
 
@@ -10,33 +10,33 @@ For those that haven't used or seen dat.GUI before, it's basically a GUI for upd
 
 - [Demo](#demo)
 - [Installation](#installation)
-  * [React Version](#react-version)
+  - [React Version](#react-version)
 - [Usage](#usage)
 - [Docs](#docs)
-  * [`DatGui`](#datgui)
-    + [props](#props)
-  * [Components](#components)
-    + [Common props](#common-props)
-    + [`DatBoolean`](#datboolean)
-    + [`DatButton`](#datbutton)
-    + [`DatColor`](#datcolor)
-    + [`DatFolder`](#datfolder)
-    + [`DatNumber`](#datnumber)
-    + [`DatPresets`](#datpresets)
-    + [`DatSelect`](#datselect)
-    + [`DatString`](#datstring)
+  - [`DatGui`](#datgui)
+    - [props](#props)
+  - [Components](#components)
+    - [Common props](#common-props)
+    - [`DatBoolean`](#datboolean)
+    - [`DatButton`](#datbutton)
+    - [`DatColor`](#datcolor)
+    - [`DatFolder`](#datfolder)
+    - [`DatNumber`](#datnumber)
+    - [`DatPresets`](#datpresets)
+    - [`DatSelect`](#datselect)
+    - [`DatString`](#datstring)
 - [Scripts](#scripts)
-    + [`build`](#build)
-    + [`dev`](#dev)
-    + [`dev:migrate`](#devmigrate)
-    + [`dev:promote`](#devpromote)
-    + [`example`](#example)
-    + [`example:deploy`](#exampledeploy)
-    + [`test`](#test)
-    + [`test:watch`](#testwatch)
-    + [`lint`](#lint)
-    + [`lint:fix`](#lintfix)
-    + [`toc`](#toc)
+  - [`build`](#build)
+  - [`dev`](#dev)
+  - [`dev:migrate`](#devmigrate)
+  - [`dev:promote`](#devpromote)
+  - [`example`](#example)
+  - [`example:deploy`](#exampledeploy)
+  - [`test`](#test)
+  - [`test:watch`](#testwatch)
+  - [`lint`](#lint)
+  - [`lint:fix`](#lintfix)
+  - [`toc`](#toc)
 - [What's missing](#whats-missing)
 - [Roadmap](#roadmap)
 - [License](#license)
@@ -62,10 +62,9 @@ React dat.GUI uses React and React-DOM `^16.0.0` aka React Fiber. It's recommend
 First you'll need a wrapper component which will handle the updates from your dat.GUI, this component should pass the data for the GUI to control as well as an `onUpdate` function to the `DatGui` container component as props. Here's how you might do that:
 
 ```jsx
-import 'react-dat-gui/build/react-dat-gui.css';
 import React, { Component } from 'react';
-
 import DatGui, { DatBoolean, DatColor, DatNumber, DatString } from 'react-dat-gui';
+import 'react-dat-gui/dist/index.css';
 
 class App extends Component {
   state = {
@@ -105,16 +104,16 @@ This is the main container component for your GUI and is the default export from
 
 ##### required
 
-* `data: object` - The data your dat.GUI controller will mutate
-* `onUpdate: func` - The method which will be called whenever an update is handled by the controller
-* `children: array` - The dat.GUI components that make up the controller
+- `data: object` - The data your dat.GUI controller will mutate
+- `onUpdate: func` - The method which will be called whenever an update is handled by the controller
+- `children: array` - The dat.GUI components that make up the controller
 
 ##### optional
 
-* `liveUpdate: bool` - Determines if live updates should occur, defaults to `true`
-* `labelWidth: number` - The width of the labels in pixels, defaults to `40`
-* `className: string` - The class name to set on the `DatGui` div
-* `style: object` - The style object to set on the `DatGui` div
+- `liveUpdate: bool` - Determines if live updates should occur, defaults to `true`
+- `labelWidth: number` - The width of the labels in pixels, defaults to `40`
+- `className: string` - The class name to set on the `DatGui` div
+- `style: object` - The style object to set on the `DatGui` div
 
 ### Components
 
@@ -128,15 +127,15 @@ Below are docs for the required and optional props you can pass to each componen
 
 ##### required
 
-* `path: string` - the path to the value within the `data` object which the component will control, eg., considering your object was `{ foo: 'bar' }`: `<DatString path='foo' />`
-* Note, this prop is not required for the following components
-  * `DatButton`
-  * `DatFolder`
-  * `DatPresets`
+- `path: string` - the path to the value within the `data` object which the component will control, eg., considering your object was `{ foo: 'bar' }`: `<DatString path='foo' />`
+- Note, this prop is not required for the following components
+  - `DatButton`
+  - `DatFolder`
+  - `DatPresets`
 
 ##### optional
 
-* `label: string` - the label for the controller eg., `<DatString path='message' label='Message' />`
+- `label: string` - the label for the controller eg., `<DatString path='message' label='Message' />`
 
 #### `DatBoolean`
 
@@ -150,7 +149,7 @@ Can be used for performing any kind of function. Simply pass an `onClick` prop t
 
 ###### required
 
-* `onClick :func` - the function to perform with the rendered element is clicked
+- `onClick :func` - the function to perform with the rendered element is clicked
 
 #### `DatColor`
 
@@ -164,12 +163,12 @@ Component which wraps other components to render them within an expandable/colla
 
 ###### required
 
- * `title: string` - The folder title eg., `<DatFolder title='MyAwesomeFolder' />`
- * `children: array` - The child components to render
+- `title: string` - The folder title eg., `<DatFolder title='MyAwesomeFolder' />`
+- `children: array` - The child components to render
 
 ###### optional
 
- * `closed: boolean` - Whether the initial state of the folder is closed, defaults to `true`
+- `closed: boolean` - Whether the initial state of the folder is closed, defaults to `true`
 
 #### `DatNumber`
 
@@ -179,9 +178,9 @@ A number component for updating numeric values. Will render a slider if `min`, `
 
 ###### optional
 
-* `min: number` - The minimum range for the number
-* `max: number` - The maximum range for the number  
-* `step: number` - The amount the number should increment each tick
+- `min: number` - The minimum range for the number
+- `max: number` - The maximum range for the number
+- `step: number` - The amount the number should increment each tick
 
 If your `step` prop is a float, `DatNumber` will ensure that your number field steps to the correct number of decimal places to align with the step that you've set.
 
@@ -195,7 +194,7 @@ Each item in this array will need to be in the format `{ 'presetName': ...data, 
 
 ###### required
 
-* `options: array` - An array of objects, each in the format `{ 'presetName': ...data, ...preset }`
+- `options: array` - An array of objects, each in the format `{ 'presetName': ...data, ...preset }`
 
 #### `DatSelect`
 
@@ -205,59 +204,46 @@ A select component for updating a value with one of the options supplied via the
 
 ###### required
 
-* `options: array` - A simple array of options to select from eg., `<DatSelect path='fruits' options={['apple', 'orange', 'pear']} />`
+- `options: array` - A simple array of options to select from eg., `<DatSelect path='fruits' options={['apple', 'orange', 'pear']} />`
 
 #### `DatString`
 
 A simple text input component that can be used to mutate strings.
 
-## Scripts
+## Local Development
 
-There are a few NPM scripts in the root `package.json` for developing changes to the repo's source code as well as running tests and deploying the demo.
+Clone the repo
 
-#### `build`
+```bash
+git clone https://github.com/claus/react-dat-gui.git react-dat-gui
+cd react-dat-gui
+```
 
-Builds the package for publishing.
+Setup symlinks and install dependencies
 
-#### `dev`
+```bash
+yarn install
+yarn link
+cd example
+yarn link react-dat-gui
+yarn install
+```
 
-Runs the app in `./dev`.
+Run the library in development mode
 
-#### `dev:migrate`
+```bash
+cd ..
+yarn start
+```
 
-Migrates the code in `./src` to `./dev/src/react-dat-gui`. Handy for making sure you're developing with the latest source code.
+Run the example app in development mode
 
-#### `dev:promote`
+```bash
+cd example
+yarn start
+```
 
-Promotes the code in `./dev/src/react-dat-gui` back up to the root of the repo. Use this when you're happy with the changes you've been developing.
-
-#### `example`
-
-Runs the app in `./example`.
-
-#### `example:deploy`
-
-Deploys the production build of the app in `./example` to the `gh-pages` branch of this repo.
-
-#### `test`
-
-Runs unit tests.
-
-#### `test:watch`
-
-Runs unit tests and watches for changes.
-
-#### `lint`
-
-Runs `eslint` on the supplied path.
-
-#### `lint:fix`
-
-Runs `eslint --fix` on the supplied path.
-
-#### `toc`
-
-Prints the `README.md` table of contents into the console.
+Changes to the library code should hot reload in the demo app
 
 ## What's missing
 
@@ -269,10 +255,10 @@ Local storage however is in the roadmap and will probably be done very soon.
 
 ## Roadmap
 
-* Loading and storing both default and preset data via `localStorage`
-* Animations for `DatFolder` expanding/collapsing
-* Time travel with undo/redo buttons
-* Better support for floating point `DatNumber`s (rounding etc.)
+- Loading and storing both default and preset data via `localStorage`
+- Animations for `DatFolder` expanding/collapsing
+- Time travel with undo/redo buttons
+- Better support for floating point `DatNumber`s (rounding etc.)
 
 ## License
 
