@@ -36,7 +36,8 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "dev": "npm run start --prefix dev",
-    "lint-js": "eslint src/* --ext .js"
+    "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "fix-js": "yarn run lint-js --fix"
   },
   "husky": {
     "hooks": {
