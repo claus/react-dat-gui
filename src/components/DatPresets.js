@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 import isString from 'lodash.isstring';
-import result from 'lodash.result';
 
 const DEFAULT_PRESET_KEY = 'Default';
 
 export default class DatPresets extends Component {
   static propTypes = {
     data: PropTypes.object,
+    path: PropTypes.string,
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     labelWidth: PropTypes.number,
@@ -17,35 +16,35 @@ export default class DatPresets extends Component {
     onUpdate: PropTypes.func
   };
 
-  state = {
-    value: {},
-    options: [
-      { [DEFAULT_PRESET_KEY]: cloneDeep(this.props.data) },
-      ...this.props.options
-    ]
+  static defaultProps = {
+    data: null,
+    path: null,
+    labelWidth: 40,
+    liveUpdate: true,
+    onUpdate: () => null
   };
 
-  componentWillMount() {
-    this.setState({ value: cloneDeep(this.props.data) });
+  constructor() {
+    super();
+    this.state = {
+      options: null
+    };
   }
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+  static getDerivedStateFromProps(nextProps) {
+    const nextValue = cloneDeep(nextProps.data);
+
+    return {
+      options: [{ [DEFAULT_PRESET_KEY]: nextValue }, ...nextProps.options]
+    };
   }
 
   handleChange = event => {
     const value = JSON.parse(event.target.value);
+    const { liveUpdate, onUpdate } = this.props;
 
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
+    if (liveUpdate) onUpdate(value);
   };
-
-  update() {
-    const { value } = this.state;
-
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
 
   render() {
     const { path, label, labelWidth } = this.props;
