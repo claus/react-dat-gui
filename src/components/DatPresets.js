@@ -27,15 +27,25 @@ export default class DatPresets extends Component {
   constructor() {
     super();
     this.state = {
+      defaultPreset: null,
       options: null
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     const nextValue = cloneDeep(nextProps.data);
+    const defaultPreset = prevState.defaultPreset
+      ? prevState.defaultPreset
+      : nextValue;
 
     return {
-      options: [{ [DEFAULT_PRESET_KEY]: nextValue }, ...nextProps.options]
+      defaultPreset,
+      options: [
+        { [DEFAULT_PRESET_KEY]: defaultPreset },
+        ...nextProps.options.filter(preset => {
+          return Object.keys(preset)[0] !== DEFAULT_PRESET_KEY;
+        })
+      ]
     };
   }
 
