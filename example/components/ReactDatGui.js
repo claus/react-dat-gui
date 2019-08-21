@@ -23,7 +23,7 @@ class App extends Component {
         boolean: true,
         select: 'one',
         color: '#2FA1D6',
-        random: Math.random(),
+        random: null,
         nested: {
           string: 'Goodbye Cruel World'
         }
@@ -31,9 +31,13 @@ class App extends Component {
     };
   }
 
+  componentDidMount = () => this.generateRandomNumber();
+
+  handleClick = () => this.generateRandomNumber();
+
   handleUpdate = data => this.setState({ data });
 
-  handleClick = () =>
+  generateRandomNumber = () =>
     this.setState(prevState => ({
       data: { ...prevState.data, random: Math.random() }
     }));
