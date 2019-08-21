@@ -4,12 +4,16 @@ import cx from 'classnames';
 
 export default class DatFolder extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     title: PropTypes.string,
     closed: PropTypes.bool,
     children: PropTypes.element.isRequired
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     title: 'Folder',
     closed: true
   };
@@ -34,10 +38,10 @@ export default class DatFolder extends Component {
 
   render() {
     const { closed } = this.state;
-    const { title } = this.props;
+    const { title, className, style } = this.props;
 
     return (
-      <li className={cx('folder', { closed })}>
+      <li className={cx('folder', { closed }, className)} style={style}>
         <div className="dg">
           <div
             className="title"

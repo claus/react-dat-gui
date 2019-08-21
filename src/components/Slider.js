@@ -3,10 +3,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clamp from 'lodash.clamp';
+import cx from 'classnames';
 import { toNumber } from './utils';
 
 export default class Slider extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     min: PropTypes.number,
     max: PropTypes.number,
@@ -15,6 +18,8 @@ export default class Slider extends Component {
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     value: null,
     min: null,
     max: null,
@@ -76,19 +81,20 @@ export default class Slider extends Component {
   }
 
   render() {
-    const { min, max, width } = this.props;
+    const { min, max, width, className, style } = this.props;
     const { value } = this.state;
     const widthBackground = clamp(((value - min) * 100) / (max - min), 0, 100);
-    const style = {
+    const sliderStyles = {
       width: `${width}%`,
-      backgroundSize: `${widthBackground}% 100%`
+      backgroundSize: `${widthBackground}% 100%`,
+      ...style
     };
 
     return (
       <span
         ref={this.sliderRef}
-        className="slider"
-        style={style}
+        className={cx('slider', className)}
+        style={sliderStyles}
         onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
         role="slider"

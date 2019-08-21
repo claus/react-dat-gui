@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 import Slider from './Slider';
 import { isInteger, toNumber } from './utils';
 
@@ -40,6 +41,8 @@ const applyConstraints = ({ value, min, max, step }) => {
 
 export default class DatNumber extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
@@ -54,6 +57,8 @@ export default class DatNumber extends Component {
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     min: null,
     max: null,
     step: null,
@@ -127,7 +132,9 @@ export default class DatNumber extends Component {
       label,
       labelWidth,
       step,
-      disableSlider
+      disableSlider,
+      className,
+      style
     } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
@@ -139,7 +146,7 @@ export default class DatNumber extends Component {
     const sliderWidth = controlsWidth - inputWidth;
 
     return (
-      <li className="cr number">
+      <li className={cx('cr', 'number', className)} style={style}>
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>
             {labelText}

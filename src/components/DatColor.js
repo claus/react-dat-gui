@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 import ColorPicker from './Picker';
 
 export default class DatColor extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string,
@@ -16,6 +19,8 @@ export default class DatColor extends Component {
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     data: null,
     path: null,
     label: null,
@@ -81,12 +86,15 @@ export default class DatColor extends Component {
   }
 
   render() {
-    const { path, label, labelWidth } = this.props;
+    const { path, label, labelWidth, className, style } = this.props;
     const { value } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr color" style={{ borderLeftColor: `${value}` }}>
+      <li
+        className={cx('cr', 'color', className)}
+        style={{ borderLeftColor: `${value}`, ...style }}
+      >
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>
             {labelText}

@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 
 export default class DatBoolean extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string,
@@ -13,6 +16,8 @@ export default class DatBoolean extends Component {
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     data: null,
     path: null,
     label: null,
@@ -47,11 +52,11 @@ export default class DatBoolean extends Component {
   };
 
   render() {
-    const { path, label } = this.props;
+    const { path, label, className, style } = this.props;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr boolean">
+      <li className={cx('cr', 'boolean', className)} style={style}>
         <label>
           <span className="label-text">{labelText}</span>
           <input

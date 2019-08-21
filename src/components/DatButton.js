@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-const DatButton = ({ label, onClick }) => (
-  <li className="cr button">
+const DatButton = ({ label, onClick, className, style }) => (
+  <li className={cx('cr', 'button', className)} style={style}>
     <span
       className="label-text"
       onClick={onClick}
@@ -16,11 +17,15 @@ const DatButton = ({ label, onClick }) => (
 );
 
 DatButton.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
   label: PropTypes.string,
   onClick: PropTypes.func.isRequired
 };
 
 DatButton.defaultProps = {
+  className: null,
+  style: null,
   label: null
 };
 

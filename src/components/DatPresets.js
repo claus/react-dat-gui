@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 import isString from 'lodash.isstring';
+import cx from 'classnames';
 
 const DEFAULT_PRESET_KEY = 'Default';
 
 export default class DatPresets extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string.isRequired,
@@ -17,6 +20,8 @@ export default class DatPresets extends Component {
   };
 
   static defaultProps = {
+    className: null,
+    style: null,
     data: null,
     path: null,
     labelWidth: 40,
@@ -57,12 +62,12 @@ export default class DatPresets extends Component {
   };
 
   render() {
-    const { path, label, labelWidth } = this.props;
+    const { path, label, labelWidth, className, style } = this.props;
     const { options } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr presets">
+      <li className={cx('cr', 'presets', className)} style={style}>
         <label>
           <span className="label-text" style={{ width: `${labelWidth}%` }}>
             {labelText}

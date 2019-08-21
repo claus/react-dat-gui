@@ -135,7 +135,9 @@ Below are docs for the required and optional props you can pass to each componen
 
 ##### optional
 
-- `label: string` - the label for the controller eg., `<DatString path='message' label='Message' />`
+- `className: string` - A CSS class name
+- `style: object` - A style object for inline styles
+- `label: string` - The label for the controller eg., `<DatString path='message' label='Message' />`
 
 #### `DatBoolean`
 
