@@ -8,25 +8,22 @@ export default class DatSelect extends Component {
   static propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     labelWidth: PropTypes.string.isRequired,
-    liveUpdate: PropTypes.bool,
+    liveUpdate: PropTypes.bool.isRequired,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func
+    _onUpdateValue: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     className: null,
     style: null,
-    data: null,
     path: null,
     label: null,
-    liveUpdate: true,
-    onUpdate: () => null,
-    _onUpdateValue: () => null
+    onUpdate: () => null
   };
 
   constructor() {

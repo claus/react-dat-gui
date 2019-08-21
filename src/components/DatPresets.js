@@ -10,22 +10,19 @@ export default class DatPresets extends Component {
   static propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     labelWidth: PropTypes.string.isRequired,
-    liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func
+    liveUpdate: PropTypes.bool.isRequired,
+    onUpdate: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     className: null,
     style: null,
-    data: null,
-    path: null,
-    liveUpdate: true,
-    onUpdate: () => null
+    path: null
   };
 
   constructor() {

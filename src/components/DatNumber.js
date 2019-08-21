@@ -46,13 +46,11 @@ export default class DatNumber extends Component {
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
     labelWidth: PropTypes.string.isRequired,
-    liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func.isRequired,
     disableSlider: PropTypes.bool
   };
 
@@ -62,12 +60,8 @@ export default class DatNumber extends Component {
     min: null,
     max: null,
     step: null,
-    data: null,
     path: null,
     label: null,
-    liveUpdate: null,
-    onUpdate: () => null,
-    _onUpdateValue: () => null,
     disableSlider: null
   };
 
@@ -102,10 +96,9 @@ export default class DatNumber extends Component {
   };
 
   update = value => {
-    const { onUpdate, _onUpdateValue, path } = this.props;
+    const { _onUpdateValue, path } = this.props;
 
     _onUpdateValue(path, toNumber(value));
-    onUpdate(toNumber(value));
   };
 
   renderSlider(width) {

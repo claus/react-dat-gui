@@ -9,24 +9,18 @@ export default class DatColor extends Component {
   static propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
     labelWidth: PropTypes.string.isRequired,
-    liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func
+    _onUpdateValue: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     className: null,
     style: null,
-    data: null,
     path: null,
-    label: null,
-    liveUpdate: null,
-    onUpdate: () => null,
-    _onUpdateValue: () => null
+    label: null
   };
 
   constructor() {
@@ -60,10 +54,9 @@ export default class DatColor extends Component {
 
   handleChangeColor = color => {
     const value = isString(color) ? color : color.hex;
-    const { _onUpdateValue, onUpdate, path } = this.props;
+    const { _onUpdateValue, path } = this.props;
 
     _onUpdateValue(path, value);
-    onUpdate(value);
   };
 
   renderPicker() {

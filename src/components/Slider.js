@@ -14,7 +14,7 @@ export default class Slider extends Component {
     min: PropTypes.number,
     max: PropTypes.number,
     width: PropTypes.number,
-    onUpdate: PropTypes.func
+    onUpdate: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -23,8 +23,7 @@ export default class Slider extends Component {
     value: null,
     min: null,
     max: null,
-    width: null,
-    onUpdate: () => null
+    width: null
   };
 
   constructor() {
