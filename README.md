@@ -111,7 +111,7 @@ This is the main container component for your GUI and is the default export from
 ##### optional
 
 - `liveUpdate: bool` - Determines if live updates should occur, defaults to `true`
-- `labelWidth: number` - The width of the labels in pixels, defaults to `40`
+- `labelWidth: string` - The width of the labels in any valid CSS units, defaults to `40%`
 - `className: string` - The class name to set on the `DatGui` div
 - `style: object` - The style object to set on the `DatGui` div
 
@@ -138,6 +138,7 @@ Below are docs for the required and optional props you can pass to each componen
 - `className: string` - A CSS class name
 - `style: object` - A style object for inline styles
 - `label: string` - The label for the controller eg., `<DatString path='message' label='Message' />`
+- `labelWidth: string` - The width of the labels in any valid CSS units, overrides `<DatGUI labelWidth>`
 
 #### `DatBoolean`
 

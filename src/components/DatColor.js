@@ -12,7 +12,7 @@ export default class DatColor extends Component {
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func
@@ -24,7 +24,6 @@ export default class DatColor extends Component {
     data: null,
     path: null,
     label: null,
-    labelWidth: null,
     liveUpdate: null,
     onUpdate: () => null,
     _onUpdateValue: () => null
@@ -96,15 +95,10 @@ export default class DatColor extends Component {
         style={{ borderLeftColor: `${value}`, ...style }}
       >
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <div
-            style={{
-              width: `${100 - labelWidth}%`,
-              backgroundColor: `${value}`
-            }}
-          >
+          <div style={{ backgroundColor: value, width: '100%' }}>
             <div
               className="swatch"
               onClick={this.handleClickColorPicker}

@@ -12,14 +12,13 @@ export default class DatGui extends Component {
     children: PropTypes.node.isRequired,
     onUpdate: PropTypes.func.isRequired,
     liveUpdate: PropTypes.bool,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     className: PropTypes.string,
     style: PropTypes.object
   };
 
   static defaultProps = {
     liveUpdate: true,
-    labelWidth: 40,
     className: null,
     style: null
   };

@@ -12,7 +12,7 @@ export default class DatSelect extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func
@@ -24,7 +24,6 @@ export default class DatSelect extends Component {
     data: null,
     path: null,
     label: null,
-    labelWidth: null,
     liveUpdate: true,
     onUpdate: () => null,
     _onUpdateValue: () => null
@@ -62,13 +61,13 @@ export default class DatSelect extends Component {
     return (
       <li className={cx('cr', 'select', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           <select
             value={value}
-            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
+            style={{ width: '100%' }}
           >
             {options.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key

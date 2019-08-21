@@ -11,7 +11,7 @@ export default class DatString extends Component {
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func
@@ -23,7 +23,6 @@ export default class DatString extends Component {
     data: null,
     path: null,
     label: null,
-    labelWidth: 40,
     liveUpdate: true,
     onUpdate: () => null,
     _onUpdateValue: () => null
@@ -85,13 +84,12 @@ export default class DatString extends Component {
     return (
       <li className={cx('cr', 'string', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           <input
             type="text"
             value={this.state.value}
-            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}

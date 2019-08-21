@@ -49,7 +49,7 @@ export default class DatNumber extends Component {
     data: PropTypes.object,
     path: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
     _onUpdateValue: PropTypes.func,
@@ -65,7 +65,6 @@ export default class DatNumber extends Component {
     data: null,
     path: null,
     label: null,
-    labelWidth: null,
     liveUpdate: null,
     onUpdate: () => null,
     _onUpdateValue: () => null,
@@ -138,7 +137,7 @@ export default class DatNumber extends Component {
     } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
-    const controlsWidth = 100 - labelWidth;
+    const controlsWidth = 100;
     const inputWidth =
       hasSlider && disableSlider !== true
         ? Math.round(controlsWidth / 3)
@@ -148,7 +147,7 @@ export default class DatNumber extends Component {
     return (
       <li className={cx('cr', 'number', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           {hasSlider && disableSlider !== true

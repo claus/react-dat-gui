@@ -14,7 +14,7 @@ export default class DatPresets extends Component {
     path: PropTypes.string,
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func
   };
@@ -24,7 +24,6 @@ export default class DatPresets extends Component {
     style: null,
     data: null,
     path: null,
-    labelWidth: 40,
     liveUpdate: true,
     onUpdate: () => null
   };
@@ -69,13 +68,10 @@ export default class DatPresets extends Component {
     return (
       <li className={cx('cr', 'presets', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <select
-            style={{ width: `${100 - labelWidth}%` }}
-            onChange={this.handleChange}
-          >
+          <select onChange={this.handleChange}>
             {options.map(preset => {
               return Object.keys(preset).map(key => {
                 return (
