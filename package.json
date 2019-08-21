@@ -89,7 +89,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "rollup": "^1.19.4",
+    "rollup": "^1.20.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-filesize": "^6.2.0",
