@@ -10,6 +10,7 @@ export default class DatSelect extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
+    optionLabels: PropTypes.array,
     labelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
