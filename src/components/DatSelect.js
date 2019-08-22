@@ -10,6 +10,7 @@ export default class DatSelect extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
+    optionLabels: PropTypes.array,
     labelWidth: PropTypes.number,
     liveUpdate: PropTypes.bool,
     onUpdate: PropTypes.func,
@@ -47,7 +48,7 @@ export default class DatSelect extends Component {
   }
 
   render() {
-    const { path, label, labelWidth } = this.props;
+    const { path, label, labelWidth, optionLabels } = this.props;
     const { value, options } = this.state;
     const labelText = isString(label) ? label : path;
 
@@ -62,7 +63,7 @@ export default class DatSelect extends Component {
             style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
           >
-            {options.map((item, index) => <option key={index} value={item}>{item}</option>)}
+            {options.map((item, index) => <option key={index} value={item}>{optionLabels ? optionLabels[index] : item}</option>)}
           </select>
         </label>
       </li>
