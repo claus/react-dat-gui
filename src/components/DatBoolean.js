@@ -57,7 +57,10 @@ export default class DatBoolean extends Component {
           <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <span className="checkbox-container">
+          <span
+            className="checkbox-container"
+            style={{ width: `calc(100% - ${labelWidth})` }}
+          >
             <input
               type="checkbox"
               checked={this.state.value}

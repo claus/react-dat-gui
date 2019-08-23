@@ -68,7 +68,10 @@ export default class DatPresets extends Component {
           <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <select onChange={this.handleChange}>
+          <select
+            onChange={this.handleChange}
+            style={{ width: `calc(100% - ${labelWidth})` }}
+          >
             {options.map(preset => {
               return Object.keys(preset).map(key => {
                 return (

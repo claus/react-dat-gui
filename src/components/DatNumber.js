@@ -143,19 +143,23 @@ export default class DatNumber extends Component {
           <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          {hasSlider && disableSlider !== true
-            ? this.renderSlider(sliderWidth)
-            : null}
-          <input
-            type="number"
-            step={step}
-            min={min}
-            max={max}
-            inputMode="numeric"
-            value={this.state.value}
-            style={{ width: `${inputWidth}%` }}
-            onChange={this.handleChange}
-          />
+          <span
+            style={{ display: 'inherit', width: `calc(100% - ${labelWidth})` }}
+          >
+            {hasSlider && disableSlider !== true
+              ? this.renderSlider(sliderWidth)
+              : null}
+            <input
+              type="number"
+              step={step}
+              min={min}
+              max={max}
+              inputMode="numeric"
+              value={this.state.value}
+              style={{ width: `${inputWidth}%` }}
+              onChange={this.handleChange}
+            />
+          </span>
         </label>
       </li>
     );

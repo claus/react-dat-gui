@@ -85,6 +85,7 @@ export default class DatString extends Component {
             {labelText}
           </span>
           <input
+            style={{ width: `calc(100% - ${labelWidth})` }}
             type="text"
             value={this.state.value}
             onChange={this.handleChange}

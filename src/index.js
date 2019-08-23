@@ -12,7 +12,7 @@ export default class DatGui extends Component {
     children: PropTypes.node.isRequired,
     onUpdate: PropTypes.func.isRequired,
     liveUpdate: PropTypes.bool,
-    labelWidth: PropTypes.string.isRequired,
+    labelWidth: PropTypes.string,
     className: PropTypes.string,
     style: PropTypes.object
   };
@@ -20,7 +20,8 @@ export default class DatGui extends Component {
   static defaultProps = {
     liveUpdate: true,
     className: null,
-    style: null
+    style: null,
+    labelWidth: '40%'
   };
 
   handleUpdateValue = (path, value) => {

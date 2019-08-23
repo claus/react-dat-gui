@@ -64,7 +64,7 @@ export default class DatSelect extends Component {
           <select
             value={value}
             onChange={this.handleChange}
-            style={{ width: '100%' }}
+            style={{ width: `calc(100% - ${labelWidth})` }}
           >
             {options.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key

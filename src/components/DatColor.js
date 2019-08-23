@@ -91,7 +91,12 @@ export default class DatColor extends Component {
           <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <div style={{ backgroundColor: value, width: '100%' }}>
+          <div
+            style={{
+              backgroundColor: value,
+              width: `calc(100% - ${labelWidth})`
+            }}
+          >
             <div
               className="swatch"
               onClick={this.handleClickColorPicker}
