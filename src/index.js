@@ -52,11 +52,11 @@ export default class DatGui extends Component {
   }
 
   render() {
-    const { style = {} } = this.props;
-    const className = cx('react-dat-gui', this.props.className);
+    const { style, className } = this.props;
+    const classNames = cx('react-dat-gui', className);
 
     return (
-      <div className={className} style={style}>
+      <div className={classNames} style={style}>
         <ul className="dg main">{this.renderChildren()}</ul>
       </div>
     );
