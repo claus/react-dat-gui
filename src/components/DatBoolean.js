@@ -57,11 +57,13 @@ export default class DatBoolean extends Component {
           <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <input
-            type="checkbox"
-            checked={this.state.value}
-            onChange={this.handleChange}
-          />
+          <span className="checkbox-container">
+            <input
+              type="checkbox"
+              checked={this.state.value}
+              onChange={this.handleChange}
+            />
+          </span>
         </label>
       </li>
     );
