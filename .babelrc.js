@@ -1,3 +1,8 @@
+/**
+ * Configure Babel for Rollup
+ *
+ * @see https://babeljs.io/docs/en/options
+ */
 module.exports = {
   presets: ['@babel/env', '@babel/react'],
   plugins: [

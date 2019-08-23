@@ -1,7 +1,7 @@
 /**
  * Configure ESLint
  *
- * https://eslint.org/docs/user-guide/configuring
+ * @see https://eslint.org/docs/user-guide/configuring
  */
 module.exports = {
   parser: 'babel-eslint',

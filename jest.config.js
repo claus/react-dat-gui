@@ -2,6 +2,7 @@
  * Configure Jest as the test runner for @testing-library
  *
  * @see https://jestjs.io/docs/en/configuration
+ * @see https://testing-library.com/docs/react-testing-library/setup
  */
 module.exports = {
   setupFilesAfterEnv: [
