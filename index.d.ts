@@ -1,16 +1,42 @@
 import * as React from 'react';
 
 export interface DatGuiProps {
-  data: any; // The data your dat.GUI controller will mutate
-  onUpdate: (data: any) => any; // The method which will be called whenever an update is handled by the controller
-  children: any; // The dat.GUI components that make up the controller
-  liveUpdate?: boolean; // Determines if live updates should occur, defaults to true
-  labelWidth?: number; // The width of the labels in pixels, defaults to 40
-  className?: string; // The class name to set on the DatGui div
-  style?: StyleSheet; // The style object to set on the DatGui div
+  /**
+   * The data your dat.GUI controller will mutate
+   */
+  data: any;
+  /**
+   * The method which will be called whenever an update is handled by the controller
+   */
+  onUpdate: (data: any) => any;
+  /**
+   * The dat.GUI components that make up the controller
+   */
+  children: any;
+  /**
+   * Determines if live updates should occur, defaults to true
+   */
+  liveUpdate?: boolean;
+  /**
+   * The width of the labels in pixels, defaults to 40
+   */
+  labelWidth?: number;
+  /**
+   * The class name to set on the DatGui div
+   */
+  className?: string;
+  /**
+   * The style object to set on the DatGui div
+   */
+  style?: StyleSheet;
 }
 
-export default class DatGui extends React.Component<DatGuiProps, any> {}
+/**
+ * A React reimplementation of Google's dat.GUI controller library.
+ *
+ * @see https://github.com/claus/react-dat-gui
+ */
+export default class DatGui extends React.Component<DatGuiProps> {}
 
 export class DatUnchangableFieldProps {
   label?: string;
