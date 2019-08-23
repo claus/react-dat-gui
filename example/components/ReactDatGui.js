@@ -10,6 +10,7 @@ import DatGui, {
   DatString
 } from 'react-dat-gui';
 import 'react-dat-gui/dist/index.css';
+import Stats from './Stats';
 
 /**
  * Demonstrates presets that extend the default preset (initial state)
@@ -90,44 +91,7 @@ class DatGUI extends Component {
 
     return (
       <main style={{ marginRight: '350px' }}>
-        <h1>
-          <b style={{ color: data.color }}>react-dat-gui</b>
-        </h1>
-        <h2>Use the controls and watch your changes happen in real time!</h2>
-        <section>
-          <div>
-            <b>String value:</b> {data.string}
-          </div>
-          <div>
-            <b>Slider value:</b> {data.minMaxNumber}
-          </div>
-          <div>
-            <b>Number value:</b> {data.number}
-          </div>
-          <div>
-            <b>Checkbox value:</b> {data.boolean.toString()}
-          </div>
-          <div>
-            <b>Select value:</b> {data.select}
-          </div>
-          <div>
-            <b>Picked color:</b>{' '}
-            <div
-              style={{
-                width: '10px',
-                height: '10px',
-                display: 'inline-block',
-                backgroundColor: data.color
-              }}
-            />
-          </div>
-          <div>
-            <b>Click the button for a random number:</b> {data.random}
-          </div>
-          <div>
-            <b>Nested string value:</b> {data.nested.string}
-          </div>
-        </section>
+        <Stats data={data} />
         <DatGui data={data} onUpdate={this.handleUpdate}>
           <DatPresets
             label="Presets"
