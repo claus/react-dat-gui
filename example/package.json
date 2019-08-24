@@ -10,7 +10,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "next": "^9.0.3",
+    "next": "^9.0.5",
     "prop-types": "link:../node_modules/prop-types",
     "react": "link:../node_modules/react",
     "react-dat-gui": "link:..",
