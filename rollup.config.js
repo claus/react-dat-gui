@@ -5,6 +5,7 @@ import filesize from 'rollup-plugin-filesize';
 import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import pkg from './package.json';
 
 const root = process.platform === 'win32' ? path.resolve('/') : '/';
@@ -31,7 +32,7 @@ export default {
   external: id =>
     !id.startsWith('.') && !id.startsWith(root) && !id.includes('style-inject'),
   plugins: [
-    postcss({ plugins: [autoprefixer] }),
+    postcss({ plugins: [autoprefixer, cssnano] }),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
