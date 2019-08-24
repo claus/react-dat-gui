@@ -28,7 +28,7 @@ export interface DatGuiProps {
   /**
    * The style object to set on the DatGui div
    */
-  style?: StyleSheet;
+  style?: React.CSSProperties;
 }
 
 /**
