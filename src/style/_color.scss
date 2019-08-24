@@ -26,11 +26,11 @@
   }
 
   .picker {
-    background: '#fff';
+    background: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
     box-sizing: initial;
     width: auto;
-    font-family: 'Menlo';
+    font-family: Menlo, sans-serif;
     margin-top: -3px;
 
     .body {
@@ -45,10 +45,6 @@
           .hue-wrap {
             height: 10px;
             position: relative;
-
-            .hue {
-              radius: 2px;
-            }
           }
         }
       }
@@ -59,10 +55,6 @@
       padding-bottom: 55%;
       position: relative;
       overflow: hidden;
-
-      .saturation {
-        radius: 2px 2px 0 0;
-      }
     }
   }
 
