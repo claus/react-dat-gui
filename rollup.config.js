@@ -3,7 +3,8 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import resolve from 'rollup-plugin-node-resolve';
-import scss from 'rollup-plugin-scss';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 import pkg from './package.json';
 
 const root = process.platform === 'win32' ? path.resolve('/') : '/';
@@ -27,8 +28,10 @@ export default {
       sourcemap: true
     }
   ],
-  external: id => !id.startsWith('.') && !id.startsWith(root),
+  external: id =>
+    !id.startsWith('.') && !id.startsWith(root) && !id.includes('style-inject'),
   plugins: [
+    postcss({ plugins: [autoprefixer] }),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
@@ -36,9 +39,6 @@ export default {
     resolve(),
     commonjs({
       include: 'node_modules/**'
-    }),
-    scss({
-      output: 'dist/index.css'
     }),
     filesize()
   ]

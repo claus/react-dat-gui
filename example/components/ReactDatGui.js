@@ -9,7 +9,6 @@ import DatGui, {
   DatSelect,
   DatString
 } from 'react-dat-gui';
-import 'react-dat-gui/dist/index.css';
 import Stats from './Stats';
 
 /**
