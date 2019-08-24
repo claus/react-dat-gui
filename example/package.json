@@ -10,7 +10,6 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
     "next": "^9.0.3",
     "prop-types": "link:../node_modules/prop-types",
     "react": "link:../node_modules/react",
