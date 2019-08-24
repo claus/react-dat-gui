@@ -1,7 +1,7 @@
 /**
  * Configure Stylint
  *
- * @see https://stylelint.io/user-guide/configuration
+ * https://github.com/stylelint/stylelint-config-recommended
  */
 module.exports = {
   extends: ['stylelint-config-recommended']
