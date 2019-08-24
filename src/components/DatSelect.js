@@ -12,6 +12,7 @@ export default class DatSelect extends Component {
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
+    optionLabels: PropTypes.array,
     labelWidth: PropTypes.string.isRequired,
     liveUpdate: PropTypes.bool.isRequired,
     onUpdate: PropTypes.func,
@@ -23,6 +24,7 @@ export default class DatSelect extends Component {
     style: null,
     path: null,
     label: null,
+    optionLabels: null,
     onUpdate: () => null
   };
 
@@ -51,7 +53,14 @@ export default class DatSelect extends Component {
   };
 
   render() {
-    const { path, label, labelWidth, className, style } = this.props;
+    const {
+      path,
+      label,
+      labelWidth,
+      optionLabels,
+      className,
+      style
+    } = this.props;
     const { value, options } = this.state;
     const labelText = isString(label) ? label : path;
 
@@ -69,7 +78,7 @@ export default class DatSelect extends Component {
             {options.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <option key={index} value={item}>
-                {item}
+                {optionLabels ? optionLabels[index] : item}
               </option>
             ))}
           </select>
