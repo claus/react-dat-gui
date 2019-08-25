@@ -77,20 +77,23 @@ class App extends React.Component {
 
 This is the main container component for your GUI and is the default export from the package.
 
-#### props
+#### required
 
-##### required
+| prop     | Description                                                                     | Type     |
+|----------|---------------------------------------------------------------------------------|----------|
+| data     | The data your dat.GUI controller will mutate                                    | object   |
+| onUpdate | The method which will be called whenever an update is handled by the controller | function |
+| children | The dat.GUI components that make up the controller                              | array    |
 
-- `data: object` - The data your dat.GUI controller will mutate
-- `onUpdate: func` - The method which will be called whenever an update is handled by the controller
-- `children: array` - The dat.GUI components that make up the controller
+#### optional
 
-##### optional
+| prop       | Description                                    | Type    | Default |
+|------------|------------------------------------------------|---------|---------|
+| liveUpdate | Determines if live updates should occur        | boolean | true    |
+| labelWidth | The width of the labels in any valid CSS units | string  | "40%"   |
+| className  | The class name to set on the `DatGui` div      | string  | null    |
+| style      | The style object to set on the `DatGui` div    | object  | null    |
 
-- `liveUpdate: bool` - Determines if live updates should occur, defaults to `true`
-- `labelWidth: string` - The width of the labels in any valid CSS units, defaults to `40%`
-- `className: string` - The class name to set on the `DatGui` div
-- `style: object` - The style object to set on the `DatGui` div
 
 ### Components
 
