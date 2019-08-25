@@ -51,7 +51,11 @@ class App extends React.Component {
     }
   }
 
-  handleUpdate = data => this.setState({ data })
+  // Update current state with changes from controls
+  handleUpdate = newData =>
+    this.setState(prevState => ({
+      data: { ...prevState.data, ...newData }
+    }));
 
   render() {
     const { data } = this.state;
