@@ -73,7 +73,7 @@ class App extends React.Component {
 
 ## Docs
 
-### `DatGui`
+### `<DatGui />`
 
 This is the main container component for your GUI and is the default export from the package.
 
@@ -95,19 +95,26 @@ This is the main container component for your GUI and is the default export from
 | style      | The style object to set on the `DatGui` div    | object  | null    |
 
 
-### Components
+### Control Components
 
-All of the `react-dat-gui` components should be rendered as children of your `DatGui` parent component.
+`react-dat-gui` comes with eight built-in control components which can be used by rendering them as direct children of `<DatGui />`. Custom control components can also be used so long as they implement the required props. 
 
 #### Common props
 
-These components will have a number of props implicitly passed to them via the `DatGui` parent component's `renderChildren` method, but can also require other props to be passed explicitly to them.
+All child components of `<DatGui />` receive the following props implicitly, these are useful when building custom control components. See the built-in control components in [src/components](src/components) for examples of how to implement your own controls. 
 
-Below are docs for the required and optional props you can pass to each component. Check the `renderChildren` method of `src/index.js` to see which other props are passed down implicitly.
+| prop           | Description                                                                                                               | Type     |
+|----------------|---------------------------------------------------------------------------------------------------------------------------|----------|
+| data           | The data your dat.GUI controller will mutate, the same object from `<DatGui data={data} />                                | object   |
+| labelWidth     | The width of the control name label                                                                                       | string   |
+| liveUpdate     | Determines if live updates should occur                                                                                   | boolean  |
+| _onUpdateValue | A callback function for `<DatGui onUpdate={this.onUpdate} />, call this method to update dat.Gui state from your control. | function |
+
+Below are docs for the required and optional props you can pass to each built-in control component.
 
 ##### required
 
-- `path: string` - the path to the value within the `data` object which the component will control, eg., considering your object was `{ foo: 'bar' }`: `<DatString path='foo' />`
+- `path: string` - the path to the value within the `data` object which the component will control, eg., considering your object was `{ foo: 'bar' }`: `<DatString path='foo' />` or `{ foo: { bar: 'string' } }`: `<DatString path='foo.bar' />` for nested values.
 - Note, this prop is not required for the following components
   - `DatButton`
   - `DatFolder`
