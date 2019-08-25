@@ -97,7 +97,17 @@ This is the main container component for your GUI and is the default export from
 
 ### Control Components
 
-`react-dat-gui` comes with eight built-in control components which can be used by rendering them as direct children of `<DatGui />`. Custom control components can also be used so long as they implement the required props. 
+`react-dat-gui` comes with eight built-in control components which can be used by rendering them as direct children of `<DatGui />`. 
+
+- [DatBoolean](#datboolean)
+- [DatButton](#datbutton)
+- [DatColor](#datcolor)
+- [DatFolder](#datfolder)
+- [DatPresets](#datpresets)
+- [DatSelect](#datselect)
+- [DatString](#datstring)
+
+Custom control components can also be used so long as they implement the required props. 
 
 #### Common props
 
