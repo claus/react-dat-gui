@@ -1,51 +1,31 @@
 # React dat.GUI
 
-[![](https://img.shields.io/npm/v/react-dat-gui.svg)](https://www.npmjs.com/package/react-dat-gui)
+![npm](https://img.shields.io/npm/v/react-dat-gui?style=flat-square)
+![Travis (.org)](https://img.shields.io/travis/claus/react-dat-gui?style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dat-gui?style=flat-square)
+![GitHub](https://img.shields.io/github/license/claus/react-dat-gui?style=flat-square)
 
-This is a fully[\*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all the core components you'll need to cleanly integrate dat.GUIs into your React app.
+react-dat-gui is a fully[\*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all of the core components you will need to cleanly integrate dat.GUIs into your React app.
 
-For those that haven't used or seen dat.GUI before, it's basically a GUI for updating and interacting with objects in real time. It's used extensively in canvas or WebGL rendering demos/apps for libraries such as [three.js](http://threejs.org) but it can also be used to build browser based editing software.
+<p align="middle">
+  <a href="https://claus.github.io/react-dat-gui/">
+    <img width="300px" src="https://i.imgur.com/1bJt59V.png" />
+  </a>
+  <br />
+  <a href="https://claus.github.io/react-dat-gui/">Demo</a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://codesandbox.io/s/react-dat-gui-emjcf?fontsize=14&module=%2Fsrc%2Fcomponents%2FReactDatGui.js">Codesandbox</a>
+</p>
 
-## TOC
+The dat.GUI library is designed for easily updating and interacting with objects in real time. It is used extensively in canvas and WebGL rendering demos/apps for libraries such as [three.js](http://threejs.org) and is also commonly used in browser based editing software.
 
-- [Demo](#demo)
-- [Installation](#installation)
-  - [React Version](#react-version)
-- [Usage](#usage)
+## Contents
+
+- [Basic Usage](#installation)
 - [Docs](#docs)
-  - [`DatGui`](#datgui)
-    - [props](#props)
-  - [Components](#components)
-    - [Common props](#common-props)
-    - [`DatBoolean`](#datboolean)
-    - [`DatButton`](#datbutton)
-    - [`DatColor`](#datcolor)
-    - [`DatFolder`](#datfolder)
-    - [`DatNumber`](#datnumber)
-    - [`DatPresets`](#datpresets)
-    - [`DatSelect`](#datselect)
-    - [`DatString`](#datstring)
-- [Scripts](#scripts)
-  - [`build`](#build)
-  - [`dev`](#dev)
-  - [`dev:migrate`](#devmigrate)
-  - [`dev:promote`](#devpromote)
-  - [`example`](#example)
-  - [`example:deploy`](#exampledeploy)
-  - [`test`](#test)
-  - [`test:watch`](#testwatch)
-  - [`lint`](#lint)
-  - [`lint:fix`](#lintfix)
-  - [`toc`](#toc)
+- [Local Development](#local-development)
 - [What's missing](#whats-missing)
 - [Roadmap](#roadmap)
-- [License](#license)
-
-## Demo
-
-[Checkout the demo!](https://claus.github.io/react-dat-gui/)
-
-The demo is a deployed version of the latest production build of `./example`. There's also a `dev` directory where you can prototype changes to the source code easily. Both of these have been bootstrapped with `create-react-app`.
 
 ## Installation
 
@@ -53,19 +33,15 @@ The demo is a deployed version of the latest production build of `./example`. Th
 npm install react-dat-gui --save
 ```
 
-### React Version
+## Basic Usage
 
-React dat.GUI uses React and React-DOM `^16.0.0` aka React Fiber. It's recommended that you update your app's React version to align with this in order to avoid any issues.
-
-## Usage
-
-First you'll need a wrapper component which will handle the updates from your dat.GUI, this component should pass the data for the GUI to control as well as an `onUpdate` function to the `DatGui` container component as props. Here's how you might do that:
+react-dat-gui has a wrapper component `<DatGUI />` and several control components that can be used to add functionality to the controller.
 
 ```jsx
-import React, { Component } from 'react';
+import React from 'react';
 import DatGui, { DatBoolean, DatColor, DatNumber, DatString } from 'react-dat-gui';
 
-class App extends Component {
+class App extends React.Component {
   state = {
     data: {
       package: 'react-dat-gui',
@@ -90,8 +66,6 @@ class App extends Component {
     )
   }
 ```
-
-This will give you a dat.GUI controller which can perform live mutations to the `data` in the `App` component's state.
 
 ## Docs
 
@@ -246,6 +220,21 @@ yarn start
 ```
 
 Changes to the library code should hot reload in the demo app
+
+## Scripts
+
+| Script        | Description                                                                                                                                                 |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build`       | Builds the library for production into  `/dist`                                                                                                             |
+| `start`       | Starts the library in development mode with hot module reloading                                                                                            |
+| `test`        | Runs unit testing suite powered by [Jest](https://github.com/facebook/jest) and [testing-library](https://github.com/testing-library/react-testing-library) |
+| `lint`        | Runs linting over entire codebase with `prettier`, `eslint` and `stylelint`                                                                                 |
+| `lint-js`     | Lints only javascript files                                                                                                                                 |
+| `lint-styles` | Lints only stylesheet files                                                                                                                                 |
+| `fix`         | Runs linting over entire codebase with `prettier`, `eslint` and `stylelint` and applies any available automatic fixes                                       |
+| `fix-js`      | Lints only javascript files and applies any available automatic fixes                                                                                       |
+| `fix-styles`  | Lints only stylesheet files and applies any available automatic fixes                                                                                       |
+  
 
 ## What's missing
 
