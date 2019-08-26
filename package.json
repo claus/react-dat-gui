@@ -51,7 +51,8 @@
     "lint-styles": "stylelint --ignore-path .gitignore --ignore-pattern \"!**/.*\" \"./**/*.{css,less,styl,scss,sass,sss}\"",
     "fix": "yarn fix-js && yarn fix-styles",
     "fix-js": "yarn lint-js --fix",
-    "fix-styles": "yarn lint-styles --fix"
+    "fix-styles": "yarn lint-styles --fix",
+    "deploy": "cd example && yarn deploy"
   },
   "husky": {
     "hooks": {

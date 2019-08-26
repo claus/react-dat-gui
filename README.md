@@ -80,7 +80,7 @@ This is the main container component for your GUI and is the default export from
 #### required
 
 | prop     | Description                                                                     | Type     |
-|----------|---------------------------------------------------------------------------------|----------|
+| -------- | ------------------------------------------------------------------------------- | -------- |
 | data     | The data your dat.GUI controller will mutate                                    | object   |
 | onUpdate | The method which will be called whenever an update is handled by the controller | function |
 | children | The dat.GUI components that make up the controller                              | array    |
@@ -88,16 +88,15 @@ This is the main container component for your GUI and is the default export from
 #### optional
 
 | prop       | Description                                    | Type    | Default |
-|------------|------------------------------------------------|---------|---------|
+| ---------- | ---------------------------------------------- | ------- | ------- |
 | liveUpdate | Determines if live updates should occur        | boolean | true    |
 | labelWidth | The width of the labels in any valid CSS units | string  | "40%"   |
 | className  | The class name to set on the `DatGui` div      | string  | null    |
 | style      | The style object to set on the `DatGui` div    | object  | null    |
 
-
 ### Control Components
 
-`react-dat-gui` comes with eight built-in control components which can be used by rendering them as direct children of `<DatGui />`. 
+`react-dat-gui` comes with eight built-in control components which can be used by rendering them as direct children of `<DatGui />`.
 
 - [DatBoolean](#datboolean)
 - [DatButton](#datbutton)
@@ -107,18 +106,18 @@ This is the main container component for your GUI and is the default export from
 - [DatSelect](#datselect)
 - [DatString](#datstring)
 
-Custom control components can also be used so long as they implement the required props. 
+Custom control components can also be used so long as they implement the required props.
 
 #### Common props
 
-All child components of `<DatGui />` receive the following props implicitly, these are useful when building custom control components. See the built-in control components in [src/components](src/components) for examples of how to implement your own controls. 
+All child components of `<DatGui />` receive the following props implicitly, these are useful when building custom control components. See the built-in control components in [src/components](src/components) for examples of how to implement your own controls.
 
-| prop           | Description                                                                                                               | Type     |
-|----------------|---------------------------------------------------------------------------------------------------------------------------|----------|
-| data           | The data your dat.GUI controller will mutate, the same object from `<DatGui data={data} />                                | object   |
-| labelWidth     | The width of the control name label                                                                                       | string   |
-| liveUpdate     | Determines if live updates should occur                                                                                   | boolean  |
-| _onUpdateValue | A callback function for `<DatGui onUpdate={this.onUpdate} />, call this method to update dat.Gui state from your control. | function |
+| prop            | Description                                                                                                                          | Type    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| data            | The data your dat.GUI controller will mutate, the same object from `<DatGui data={data} /> | object                                  |
+| labelWidth      | The width of the control name label                                                                                                  | string  |
+| liveUpdate      | Determines if live updates should occur                                                                                              | boolean |
+| \_onUpdateValue | A callback function for `<DatGui onUpdate={this.onUpdate} />, call this method to update dat.Gui state from your control. | function |
 
 Below are docs for the required and optional props you can pass to each built-in control component.
 
@@ -248,8 +247,8 @@ Changes to the library code should hot reload in the demo app
 ## Scripts
 
 | Script        | Description                                                                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `build`       | Builds the library for production into  `/dist`                                                                                                             |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build`       | Builds the library for production into `/dist`                                                                                                              |
 | `start`       | Starts the library in development mode with hot module reloading                                                                                            |
 | `test`        | Runs unit testing suite powered by [Jest](https://github.com/facebook/jest) and [testing-library](https://github.com/testing-library/react-testing-library) |
 | `lint`        | Runs linting over entire codebase with `prettier`, `eslint` and `stylelint`                                                                                 |
@@ -258,7 +257,7 @@ Changes to the library code should hot reload in the demo app
 | `fix`         | Runs linting over entire codebase with `prettier`, `eslint` and `stylelint` and applies any available automatic fixes                                       |
 | `fix-js`      | Lints only javascript files and applies any available automatic fixes                                                                                       |
 | `fix-styles`  | Lints only stylesheet files and applies any available automatic fixes                                                                                       |
-  
+| `deploy`      | Compiles and deploys a static build of `/example` next.js app to gh-pages                                                                                   |
 
 ## What's missing
 

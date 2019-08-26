@@ -19,6 +19,13 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "build": "next build"
+    "build": "next build",
+    "export": "yarn clean && next build && next export",
+    "clean": "shx rm -rf out",
+    "deploy": "yarn export && shx touch out/.nojekyll && gh-pages -t -d out && yarn clean"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "shx": "^0.3.2"
   }
 }
