@@ -1,6 +1,7 @@
 import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Spring, animated } from 'react-spring/renderprops.cjs';
 
 export default class DatFolder extends Component {
   static propTypes = {
@@ -20,13 +21,23 @@ export default class DatFolder extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { closed: props.closed };
+    this.state = {
+      initialRender: true,
+      closed: props.closed
+    };
   }
 
-  handleClick = () =>
-    this.setState(prevState => ({ closed: !prevState.closed }));
+  componentDidMount = () =>
+    this.setState({
+      initialRender: false
+    });
 
-  renderChildren() {
+  handleClick = () =>
+    this.setState(prevState => ({
+      closed: !prevState.closed
+    }));
+
+  renderChildren = () => {
     // Disable this rule to take title out of the props so nested folders can have unique titles.
     // eslint-disable-next-line no-unused-vars
     const { children, title, ...rest } = this.props;
@@ -34,10 +45,10 @@ export default class DatFolder extends Component {
     return React.Children.map(children, child =>
       cloneElement(child, { ...rest })
     );
-  }
+  };
 
   render() {
-    const { closed } = this.state;
+    const { closed, initialRender } = this.state;
     const { title, className, style } = this.props;
 
     return (
@@ -52,7 +63,18 @@ export default class DatFolder extends Component {
           >
             {title}
           </div>
-          <ul>{this.renderChildren()}</ul>
+          <Spring
+            native
+            immediate={initialRender}
+            to={{ height: closed ? 0 : 'auto' }}
+            from={{ height: closed ? 'auto' : 0 }}
+          >
+            {animStyles => (
+              <animated.ul style={animStyles}>
+                {this.renderChildren()}
+              </animated.ul>
+            )}
+          </Spring>
         </div>
       </li>
     );

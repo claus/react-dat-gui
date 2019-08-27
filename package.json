@@ -84,7 +84,8 @@
     "lodash.isundefined": "^3.0.1",
     "lodash.result": "^4.4.0",
     "lodash.set": "^4.2.0",
-    "react-color": "^2.13.8"
+    "react-color": "^2.13.8",
+    "react-spring": "^8.0.27"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
