@@ -32,7 +32,7 @@ export default {
   external: id =>
     !id.startsWith('.') && !id.startsWith(root) && !id.includes('style-inject'),
   plugins: [
-    postcss({ plugins: [autoprefixer, cssnano] }),
+    postcss({ plugins: [autoprefixer, cssnano], extract: pkg.style }),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
