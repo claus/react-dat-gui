@@ -261,7 +261,7 @@ Changes to the library code should hot reload in the demo app
 
 ## What's missing
 
-There are still a few features from the original implementation missing from this package. These are mainly related to saving and loading data as well as local storage.
+There are still a few features from the original implementation missing from this package. These are mainly related to saving and loading data as well as local storage. Animations for folder expanding/collapsing is also not currently implemented, but shouldn't be too hard to do.
 
 For the first, I think the fact that this is now an NPM module sort of goes against it handling this sort of stuff. Google's original concept was basically a plug and play controller that could do everything if you just slam it into the browser and pass it an object. However, in module form, it's expected that you'll most likely be integrating this with an existing application. In that case, you'll probably have pretty specific needs around how you would like to save/load data into your GUI and so it's been left out for now.
 
@@ -270,6 +270,7 @@ Local storage however is in the roadmap and will probably be done very soon.
 ## Roadmap
 
 - Loading and storing both default and preset data via `localStorage`
+- Animations for `DatFolder` expanding/collapsing
 - Time travel with undo/redo buttons
 - Better support for floating point `DatNumber`s (rounding etc.)
 
