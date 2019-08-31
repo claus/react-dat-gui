@@ -11,5 +11,9 @@ module.exports = {
   ],
   collectCoverage: true,
   coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/'],
-  testMatch: ['**/__tests__/**/*.(spec|test).[jt]s?(x)']
+  testMatch: ['**/__tests__/**/*.(spec|test).[jt]s?(x)'],
+  // https://jestjs.io/docs/en/webpack.html#mocking-css-modules
+  moduleNameMapper: {
+    '\\.(scss)$': 'identity-obj-proxy'
+  }
 };
