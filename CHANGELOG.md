@@ -1,10 +1,48 @@
 # Changelog
 
+## (2019-09-01) `v4.0.0`
+
+Special thanks to [@tim-soft](https://github.com/tim-soft) for this awesome [PR](https://github.com/claus/react-dat-gui/pull/33)!
+
+### Added
+
+- Testing framework via `jest` and `testing-library/react`
+- CI integration with Travis
+
+### Changed
+
+- Switched deprecated `componentWillReceiveProps` to `getDerivedStateFromProps`
+- All linting packages updated
+- Example now uses `nextjs` and links to root modules for better dev experience
+- Bundling now done with `rollup`
+
+### Fixed
+
+- Default preset is stored separately so that it can be reapplied after changing to other presets
+- All built-in react-dat-gui components now accept className and style props
+- All built-in react-dat-gui components can now have a labelWidth prop which can override the <DatGUI labelWidth> container prop and in any valid CSS units
+- Automatically include styles, no longer require importing external stylesheet
+- Add linting and precommit scripts that run prettier, eslint and stylelint over the codebase
+
+## (2019-04-02) `v3.0.0`
+
+### Changed
+
+- Move `react`, `react-dom` and `prop-types` to peer deps [@tim-soft](https://github.com/tim-soft)
+
+## (2019-03-01) `v2.2.0`
+
+### Fixed
+
+- Coding example in README [@avin](https://github.com/avin)
+- `DatFolder` now passes props to children correctly once again [@rdrgn](https://github.com/rdrgn)
+
 ## (2019-01-02) `v2.0.1`
 
 ### Added
 
 - `TypeScript` definitions
+- Better support for floats
 
 ## (2019-01-02) `v2.0.0`
 
