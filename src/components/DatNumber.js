@@ -1,122 +1,105 @@
+/* eslint-disable no-param-reassign */
 import React, { Component } from 'react';
-import { isInteger, toNumber } from './utils';
-
 import PropTypes from 'prop-types';
-import Slider from './Slider';
 import isFinite from 'lodash.isfinite';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
+import Slider from './Slider';
+import { isInteger, toNumber } from './utils';
+
+const applyConstraints = ({ value, min, max, step }) => {
+  const [hasMin, hasMax, hasStep] = [
+    isFinite(min),
+    isFinite(max),
+    isFinite(step)
+  ];
+  const decimalPlaces =
+    hasStep && !isInteger(step) ? step.toString().split('.')[1].length : 0;
+  let [isMin, isMax] = [false, false];
+
+  value = toNumber(value);
+
+  if (hasMin && value <= min) {
+    value = min;
+    isMin = true;
+  }
+
+  if (hasMax && value >= max) {
+    value = max;
+    isMax = true;
+  }
+
+  if (!isMin && !isMax) {
+    if (hasStep && step !== 0) {
+      value = Math.round(value / step) * step;
+    }
+  }
+
+  return value.toFixed(decimalPlaces);
+};
 
 export default class DatNumber extends Component {
   static propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
-    data: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.number,
-    liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    labelWidth: PropTypes.string.isRequired,
+    _onUpdateValue: PropTypes.func.isRequired,
     disableSlider: PropTypes.bool
   };
 
-  state = {
-    value: this.getValue()
+  static defaultProps = {
+    className: null,
+    style: null,
+    min: null,
+    max: null,
+    step: null,
+    path: null,
+    label: null,
+    disableSlider: null
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
+  constructor() {
+    super();
+    this.state = { value: null };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const { min, max, step } = nextProps;
+    const nextValue = applyConstraints({
+      value: result(nextProps.data, nextProps.path),
+      min,
+      max,
+      step
     });
-  }
 
-  getValue(props = this.props) {
-    return this.applyConstraints(result(props.data, props.path));
-  }
-
-  applyConstraints(value) {
-    const { min, max, step } = this.props;
-    const [hasMin, hasMax, hasStep] = [
-      isFinite(min),
-      isFinite(max),
-      isFinite(step)
-    ];
-    const decimalPlaces =
-      hasStep && !isInteger(step) ? step.toString().split('.')[1].length : 0;
-    let [isMin, isMax] = [false, false];
-
-    value = toNumber(value);
-
-    if (hasMin && value <= min) {
-      value = min;
-      isMin = true;
-    }
-
-    if (hasMax && value >= max) {
-      value = max;
-      isMax = true;
-    }
-
-    if (!isMin && !isMax) {
-      if (hasStep && step !== 0) {
-        value = Math.round(value / step) * step;
-      }
-    }
-
-    return value.toFixed(decimalPlaces);
+    return {
+      value: nextValue
+    };
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value }, this.update);
+    const { value } = event.target;
+    this.update(value);
   };
 
-  handleFocus = () => {
-    document.addEventListener('keydown', this.handleKeyDown);
+  handleSliderUpdate = value => {
+    const { min, max, step } = this.props;
+
+    this.update(applyConstraints({ value, min, max, step }));
   };
 
-  /**
-   * @deprecated This has been deprecated for now and is no longer applied to the
-   * component onBlur.
-   */
-  handleBlur = event => {
-    const value = this.applyConstraints(event.target.value);
+  update = value => {
+    const { _onUpdateValue, path } = this.props;
 
-    document.removeEventListener('keydown', this.handleKeyDown);
-    window.getSelection().removeAllRanges();
-
-    this.setState({ value }, this.update);
+    _onUpdateValue(path, toNumber(value));
   };
-
-  handleKeyDown = event => {
-    const key = event.keyCode || event.which;
-
-    if (key === 13) {
-      const value = this.applyConstraints(this.state.value);
-
-      this.setState({ value }, this.update);
-    }
-  };
-
-  handleSliderUpdate = (value, isLive) => {
-    const constrained = this.applyConstraints(value);
-    const shouldUpdate = !isLive || this.props.liveUpdate;
-
-    this.setState({ value: constrained }, () => {
-      if (shouldUpdate) {
-        this.update();
-      }
-    });
-  };
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue &&
-      this.props._onUpdateValue(this.props.path, toNumber(value));
-    this.props.onUpdate && this.props.onUpdate(toNumber(value));
-  }
 
   renderSlider(width) {
     const { min, max } = this.props;
@@ -141,11 +124,13 @@ export default class DatNumber extends Component {
       label,
       labelWidth,
       step,
-      disableSlider
+      disableSlider,
+      className,
+      style
     } = this.props;
     const labelText = isString(label) ? label : path;
     const hasSlider = isFinite(min) && isFinite(max);
-    const controlsWidth = 100 - labelWidth;
+    const controlsWidth = 100;
     const inputWidth =
       hasSlider && disableSlider !== true
         ? Math.round(controlsWidth / 3)
@@ -153,25 +138,28 @@ export default class DatNumber extends Component {
     const sliderWidth = controlsWidth - inputWidth;
 
     return (
-      <li className="cr number">
+      <li className={cx('cr', 'number', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          {hasSlider && disableSlider !== true
-            ? this.renderSlider(sliderWidth)
-            : null}
-          <input
-            type="number"
-            step={step}
-            min={min}
-            max={max}
-            inputMode="numeric"
-            value={this.state.value}
-            style={{ width: `${inputWidth}%` }}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-          />
+          <span
+            style={{ display: 'inherit', width: `calc(100% - ${labelWidth})` }}
+          >
+            {hasSlider && disableSlider !== true
+              ? this.renderSlider(sliderWidth)
+              : null}
+            <input
+              type="number"
+              step={step}
+              min={min}
+              max={max}
+              inputMode="numeric"
+              value={this.state.value}
+              style={{ width: `${inputWidth}%` }}
+              onChange={this.handleChange}
+            />
+          </span>
         </label>
       </li>
     );

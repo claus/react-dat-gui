@@ -3,21 +3,30 @@
   "homepage": "https://claus.github.io/react-dat-gui",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14",
-    "react-dat-gui": "claus/react-dat-gui"
+    "@zeit/next-css": "^1.0.1",
+    "next": "^9.0.5",
+    "prop-types": "link:../node_modules/prop-types",
+    "react": "link:../node_modules/react",
+    "react-dat-gui": "link:..",
+    "react-dom": "link:../node_modules/react-dom"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "next",
+    "start": "next start",
+    "build": "next build",
+    "export": "yarn clean && next build && next export",
+    "clean": "shx rm -rf out",
+    "deploy": "yarn export && shx touch out/.nojekyll && gh-pages -t -d out && yarn clean"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0"
+    "gh-pages": "^2.1.1",
+    "shx": "^0.3.2"
   }
 }

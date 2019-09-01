@@ -1,7 +1,8 @@
 .react-dat-gui .cr.number {
   border-left: $border-left-size solid $number-color;
 
-  input[type=text], input[type=number] {
+  input[type='text'],
+  input[type='number'] {
     color: $number-color;
     height: $number-height;
   }

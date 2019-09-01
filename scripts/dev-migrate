@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-rm -rf dev/src/react-dat-gui;
-cp -r src dev/src/react-dat-gui;

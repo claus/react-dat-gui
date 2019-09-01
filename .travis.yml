@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 'node'
+  - 'lts/*'
+cache:
+  directories:
+    - ~/.npm
+install: npm install
+script:
+  - npm run build
+  - npm run test
+branches:
+  only: master
+notifications:
+  email: false

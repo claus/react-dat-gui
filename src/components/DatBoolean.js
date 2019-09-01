@@ -1,58 +1,72 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 
 export default class DatBoolean extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
-    onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    labelWidth: PropTypes.string.isRequired,
+    _onUpdateValue: PropTypes.func.isRequired
   };
 
-  state = {
-    value: this.getValue(),
+  static defaultProps = {
+    className: null,
+    style: null,
+    path: null,
+    label: null
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: null
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
-  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = result(nextProps.data, nextProps.path);
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+    if (prevState.value === nextValue) return null;
+
+    return {
+      value: nextValue
+    };
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.checked }, this.update);
-  }
+    const value = event.target.checked;
+    const { _onUpdateValue, path } = this.props;
 
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
+    _onUpdateValue(path, value);
+  };
 
   render() {
-    const { path, label } = this.props;
+    const { path, label, labelWidth, className, style } = this.props;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr boolean">
+      <li className={cx('cr', 'boolean', className)} style={style}>
         <label>
-          <span className="label-text">
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
-          <input
-            type="checkbox"
-            checked={this.state.value}
-            onChange={this.handleChange}
-          />
+          <span
+            className="checkbox-container"
+            style={{ width: `calc(100% - ${labelWidth})` }}
+          >
+            <input
+              type="checkbox"
+              checked={this.state.value}
+              onChange={this.handleChange}
+            />
+          </span>
         </label>
       </li>
     );
