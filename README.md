@@ -1,9 +1,9 @@
 # React dat.GUI
 
-![npm](https://img.shields.io/npm/v/react-dat-gui?style=flat-square)
-![Travis (.org)](https://img.shields.io/travis/claus/react-dat-gui?style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dat-gui?style=flat-square)
-![GitHub](https://img.shields.io/github/license/claus/react-dat-gui?style=flat-square)
+[![npm](https://img.shields.io/npm/v/react-dat-gui?style=flat-square)](https://www.npmjs.com/package/react-dat-gui)
+[![Travis (.org)](https://img.shields.io/travis/claus/react-dat-gui?style=flat-square)](https://travis-ci.org/claus/react-dat-gui)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dat-gui?style=flat-square)](https://bundlephobia.com/result?p=react-dat-gui)
+[![GitHub](https://img.shields.io/github/license/claus/react-dat-gui?style=flat-square)](https://github.com/claus/react-dat-gui/blob/master/LICENSE)
 
 react-dat-gui is a fully[\*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all of the core components you will need to cleanly integrate dat.GUIs into your React app.
 
