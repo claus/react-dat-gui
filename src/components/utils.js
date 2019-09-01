@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 export function toNumber(value) {
   const float = parseFloat(value);
   return isNaN(float) ? 0 : float;
@@ -10,8 +11,13 @@ export function toNumber(value) {
  * @param {number} value
  * @return {bool}
  */
-export const isInteger = Number.isInteger || function (value) {
-  return typeof value === 'number' &&
-    isFinite(value) &&
-    Math.floor(value) === value;
-};
+export const isInteger =
+  Number.isInteger ||
+  // eslint-disable-next-line func-names
+  function(value) {
+    return (
+      typeof value === 'number' &&
+      isFinite(value) &&
+      Math.floor(value) === value
+    );
+  };

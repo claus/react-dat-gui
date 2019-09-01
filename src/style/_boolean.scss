@@ -9,10 +9,14 @@
   .label-text {
     display: block;
     padding: 5px 0;
-
   }
 
-  input[type=checkbox] {
+  .checkbox-container {
+    width: 100%;
+  }
+
+  input[type='checkbox'] {
     margin: 0;
+    vertical-align: middle;
   }
 }

@@ -1,74 +1,86 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 import isString from 'lodash.isstring';
-import result from 'lodash.result';
+import cx from 'classnames';
 
 const DEFAULT_PRESET_KEY = 'Default';
 
 export default class DatPresets extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object.isRequired,
+    path: PropTypes.string,
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    labelWidth: PropTypes.number,
-    liveUpdate: PropTypes.bool,
-    onUpdate: PropTypes.func,
+    labelWidth: PropTypes.string.isRequired,
+    liveUpdate: PropTypes.bool.isRequired,
+    onUpdate: PropTypes.func.isRequired
   };
 
-  state = {
-    value: {},
-    options: [
-      { [DEFAULT_PRESET_KEY]: cloneDeep(this.props.data) },
-      ...this.props.options
-    ]
+  static defaultProps = {
+    className: null,
+    style: null,
+    path: null
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      defaultPreset: null,
+      options: null
+    };
   }
 
-  componentWillMount() {
-    this.setState({ value: cloneDeep(this.props.data) });
-  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = cloneDeep(nextProps.data);
+    const defaultPreset = prevState.defaultPreset
+      ? prevState.defaultPreset
+      : nextValue;
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+    return {
+      defaultPreset,
+      options: [
+        { [DEFAULT_PRESET_KEY]: defaultPreset },
+        ...nextProps.options.filter(preset => {
+          return Object.keys(preset)[0] !== DEFAULT_PRESET_KEY;
+        })
+      ]
+    };
   }
 
   handleChange = event => {
     const value = JSON.parse(event.target.value);
+    const { liveUpdate, onUpdate } = this.props;
 
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
-  }
-
-  update() {
-    const { value } = this.state;
-
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
+    if (liveUpdate) onUpdate(value);
+  };
 
   render() {
-    const { path, label, labelWidth } = this.props;
+    const { path, label, labelWidth, className, style } = this.props;
     const { options } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr presets">
+      <li className={cx('cr', 'presets', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           <select
-            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
+            style={{ width: `calc(100% - ${labelWidth})` }}
           >
-            {
-              options.map(preset => {
-                return Object.keys(preset).map(key => {
-                  return <option key={key} value={JSON.stringify(preset[key])}>{key}</option>;
-                });
-              })
-            }
+            {options.map(preset => {
+              return Object.keys(preset).map(key => {
+                return (
+                  <option key={key} value={JSON.stringify(preset[key])}>
+                    {key}
+                  </option>
+                );
+              });
+            })}
           </select>
         </label>
       </li>

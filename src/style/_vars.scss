@@ -4,12 +4,12 @@ $hover-lighten: 5%;
 $border-lighten: 5%;
 $active-lighten: 10%;
 
-$number-color: #2FA1D6;
+$number-color: #2fa1d6;
 $boolean-color: #806787;
 $string-color: #1ed36f;
 $button-color: #e61d5f;
 $save-row-color: #dad5cb;
-$select-color: #F4D450;
+$select-color: #f4d450;
 $presets-color: #dad5cb;
 
 $border-color: lighten($background-color, $border-lighten);
@@ -19,8 +19,12 @@ $input-padding: 2px 5px;
 
 $border-left-size: 5px;
 
-$folder-closed: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==) 6px 48% no-repeat;
-$folder-open: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 48% no-repeat;
+$folder-closed: #000
+  url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)
+  6px 48% no-repeat;
+$folder-open: #000
+  url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==)
+  6px 48% no-repeat;
 
 $nest-margin: 4px;
 $number-height: 25px;

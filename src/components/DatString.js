@@ -1,81 +1,93 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 
 export default class DatString extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.number,
-    liveUpdate: PropTypes.bool,
+    labelWidth: PropTypes.string.isRequired,
+    liveUpdate: PropTypes.bool.isRequired,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func.isRequired
   };
 
-  state = {
-    value: this.getValue(),
+  static defaultProps = {
+    className: null,
+    style: null,
+    path: null,
+    label: null,
+    onUpdate: () => null
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      value: null
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
-  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextValue = result(nextProps.data, nextProps.path);
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+    if (prevState.value === nextValue) return null;
+
+    return {
+      value: nextValue
+    };
   }
 
   handleChange = event => {
-    const value = event.target.value;
+    const { value } = event.target;
+    const { liveUpdate } = this.props;
 
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
-  }
+    if (liveUpdate) this.update(value);
+  };
 
   handleFocus = () => {
     document.addEventListener('keydown', this.handleKeyDown);
-  }
+  };
 
   handleBlur = () => {
     document.removeEventListener('keydown', this.handleKeyDown);
     window.getSelection().removeAllRanges();
-    !this.props.liveUpdate && this.update();
-  }
+
+    const { liveUpdate } = this.props;
+    if (!liveUpdate) this.update();
+  };
 
   handleKeyDown = event => {
     const key = event.keyCode || event.which;
+    const { liveUpdate } = this.props;
 
-    if (key === 13) {
-      !this.props.liveUpdate && this.update();
-    }
-  }
+    if (key === 13 && !liveUpdate) this.update();
+  };
 
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
+  update(value) {
+    const { _onUpdateValue, onUpdate, path } = this.props;
+    _onUpdateValue(path, value);
+    onUpdate(value);
   }
 
   render() {
-    const { path, label, labelWidth } = this.props;
+    const { path, label, labelWidth, className, style } = this.props;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr string">
+      <li className={cx('cr', 'string', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           <input
+            style={{ width: `calc(100% - ${labelWidth})` }}
             type="text"
             value={this.state.value}
-            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}

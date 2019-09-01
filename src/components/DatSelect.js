@@ -1,69 +1,86 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
+import cx from 'classnames';
 
 export default class DatSelect extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object.isRequired,
     path: PropTypes.string,
     label: PropTypes.string,
     options: PropTypes.array.isRequired,
     optionLabels: PropTypes.array,
-    labelWidth: PropTypes.number,
-    liveUpdate: PropTypes.bool,
+    labelWidth: PropTypes.string.isRequired,
+    liveUpdate: PropTypes.bool.isRequired,
     onUpdate: PropTypes.func,
-    _onUpdateValue: PropTypes.func,
+    _onUpdateValue: PropTypes.func.isRequired
   };
 
-  state = {
-    value: this.getValue(),
-    options: this.props.options,
+  static defaultProps = {
+    className: null,
+    style: null,
+    path: null,
+    label: null,
+    optionLabels: null,
+    onUpdate: () => null
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      value: null,
+      options: null
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: this.getValue(nextProps)
-    });
-  }
+  static getDerivedStateFromProps(nextProps) {
+    const nextValue = result(nextProps.data, nextProps.path);
 
-  getValue(props = this.props) {
-    return result(props.data, props.path);
+    return {
+      value: nextValue,
+      options: nextProps.options
+    };
   }
 
   handleChange = event => {
-    const value = event.target.value;
-
-    this.setState({ value }, () => {
-      this.props.liveUpdate && this.update();
-    });
-  }
-
-  update() {
-    const { value } = this.state;
-
-    this.props._onUpdateValue && this.props._onUpdateValue(this.props.path, value);
-    this.props.onUpdate && this.props.onUpdate(value);
-  }
+    const { value } = event.target;
+    const { liveUpdate, _onUpdateValue, onUpdate, path } = this.props;
+    _onUpdateValue(path, value);
+    if (liveUpdate) onUpdate(value);
+  };
 
   render() {
-    const { path, label, labelWidth, optionLabels } = this.props;
+    const {
+      path,
+      label,
+      labelWidth,
+      optionLabels,
+      className,
+      style
+    } = this.props;
     const { value, options } = this.state;
     const labelText = isString(label) ? label : path;
 
     return (
-      <li className="cr select">
+      <li className={cx('cr', 'select', className)} style={style}>
         <label>
-          <span className="label-text" style={{ width: `${labelWidth}%` }}>
+          <span className="label-text" style={{ width: labelWidth }}>
             {labelText}
           </span>
           <select
             value={value}
-            style={{ width: `${100 - labelWidth}%` }}
             onChange={this.handleChange}
+            style={{ width: `calc(100% - ${labelWidth})` }}
           >
-            {options.map((item, index) => <option key={index} value={item}>{optionLabels ? optionLabels[index] : item}</option>)}
+            {options.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <option key={index} value={item}>
+                {optionLabels ? optionLabels[index] : item}
+              </option>
+            ))}
           </select>
         </label>
       </li>

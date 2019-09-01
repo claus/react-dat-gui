@@ -11,89 +11,91 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
 
-  *, *:before, *:after {
+  *,
+  *:before,
+  *:after {
     box-sizing: inherit;
   }
 
   .dg {
+    margin: 0;
+    padding: 0;
+    color: #eee;
+    overflow: hidden;
+
+    ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      color: #eee;
-      overflow: hidden;
+      width: 100%;
+      clear: both;
+    }
 
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        clear: both;
+    &.main {
+      &::-webkit-scrollbar {
+        width: 5px;
+        background: $background-color;
       }
 
-      &.main {
-
-        &::-webkit-scrollbar {
-          width: 5px;
-          background: $background-color;
-        }
-
-        &::-webkit-scrollbar-corner {
-          height: 0;
-          display: none;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 5px;
-          background: lighten($background-color, 30%);
-        }
+      &::-webkit-scrollbar-corner {
+        height: 0;
+        display: none;
       }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: lighten($background-color, 30%);
+      }
+    }
   }
 
   .cr {
-      display: block;
-      background-color: $background-color;
+    display: block;
+    background-color: $background-color;
+    user-select: none;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-color;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      padding: 1px 2px 1px 8px;
+    }
+
+    .label-text {
+      width: 40%;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       user-select: none;
+    }
 
-      &:not(:last-child) {
-        border-bottom: 1px solid $border-color;
+    input[type='text'],
+    input[type='number'] {
+      background: $input-color;
+      border: 3px solid $background-color;
+      border-radius: 0;
+      margin: 0;
+      outline: none;
+      font-size: inherit;
+
+      &:hover {
+        background: lighten($input-color, $hover-lighten);
       }
 
-      label {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        padding: 1px 2px 1px 8px;
+      &:focus {
+        background: lighten($input-color, $active-lighten);
+        color: #fff;
       }
 
-      .label-text {
-        width: 40%;
-        min-width: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        user-select: none;
+      &::-ms-clear {
+        display: none;
       }
-
-      input[type=text], input[type=number] {
-        background: $input-color;
-        border: 3px solid $background-color;
-        border-radius: 0;
-        margin: 0;
-        outline: none;
-        font-size: inherit;
-
-        &:hover {
-          background: lighten($input-color, $hover-lighten);
-        }
-
-        &:focus {
-          background: lighten($input-color, $active-lighten);
-          color: #fff;
-        }
-
-        &::-ms-clear {
-          display: none;
-        }
-      }
+    }
   }
 }

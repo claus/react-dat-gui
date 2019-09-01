@@ -1,10 +1,10 @@
 import React, { Component, cloneElement } from 'react';
-
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
 import isUndefined from 'lodash.isundefined';
 import set from 'lodash.set';
+import './style/dat.scss';
 
 export default class DatGui extends Component {
   static propTypes = {
@@ -12,14 +12,16 @@ export default class DatGui extends Component {
     children: PropTypes.node.isRequired,
     onUpdate: PropTypes.func.isRequired,
     liveUpdate: PropTypes.bool,
-    labelWidth: PropTypes.number,
+    labelWidth: PropTypes.string,
     className: PropTypes.string,
-    style: PropTypes.object,
+    style: PropTypes.object
   };
 
   static defaultProps = {
     liveUpdate: true,
-    labelWidth: 40,
+    className: null,
+    style: null,
+    labelWidth: '40%'
   };
 
   handleUpdateValue = (path, value) => {
@@ -27,34 +29,36 @@ export default class DatGui extends Component {
     const dataUpdated = set(cloneDeep(data), path, value);
 
     onUpdate(dataUpdated);
-  }
+  };
 
   renderChildren() {
     const { children, data } = this.props;
 
     return React.Children.toArray(children).map((child, i) => {
-      const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
-      const labelWidth = isUndefined(child.props.labelWidth) ? this.props.labelWidth : child.props.labelWidth;
+      const liveUpdate = isUndefined(child.props.liveUpdate)
+        ? this.props.liveUpdate
+        : child.props.liveUpdate;
+      const labelWidth = isUndefined(child.props.labelWidth)
+        ? this.props.labelWidth
+        : child.props.labelWidth;
 
       return cloneElement(child, {
         key: i,
         data,
         liveUpdate,
         labelWidth,
-        _onUpdateValue: this.handleUpdateValue,
+        _onUpdateValue: this.handleUpdateValue
       });
     });
   }
 
   render() {
-    const { style = {} } = this.props;
-    const className = cx('react-dat-gui', this.props.className);
+    const { style, className } = this.props;
+    const classNames = cx('react-dat-gui', className);
 
     return (
-      <div className={className} style={style}>
-        <ul className="dg main">
-          {this.renderChildren()}
-        </ul>
+      <div className={classNames} style={style}>
+        <ul className="dg main">{this.renderChildren()}</ul>
       </div>
     );
   }
