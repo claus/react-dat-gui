@@ -7,9 +7,11 @@ cache:
     - ~/.npm
 install: npm install
 script:
-  - npm run build
+  - npm run lint
   - npm run test
 branches:
-  only: master
+  - master
+  - develop
+  - /^feature.*$/
 notifications:
   email: false
