@@ -218,31 +218,31 @@ git clone https://github.com/claus/react-dat-gui.git react-dat-gui
 cd react-dat-gui
 ```
 
-Setup symlinks and install dependencies
+In order to see your changes to `react-dat-gui` the best way is to develop on the package and the example simultaneously. To do this, follow these steps.
+
+### 1. Setup symlinks and install dependencies
 
 ```bash
-yarn install
-yarn link
+npm install
 cd example
-yarn link react-dat-gui
-yarn install
+npm install
 ```
 
-Run the library in development mode
+### 2. Run the library in development mode
 
 ```bash
 cd ..
-yarn start
+npm run dev
 ```
 
-Run the example app in development mode
+### 3. Run the example app in development mode (in second terminal window)
 
 ```bash
 cd example
-yarn start
+npm run dev
 ```
 
-Changes to the library code should hot reload in the demo app
+After the example has compiled, it should be available for viewing at [http://localhost:3000](http://localhost:3000). Changes to the library code should now hot reload in the example app
 
 ## Scripts
 
@@ -272,7 +272,7 @@ Local storage however is in the roadmap and will probably be done very soon.
 - Loading and storing both default and preset data via `localStorage`
 - Animations for `DatFolder` expanding/collapsing
 - Time travel with undo/redo buttons
-- Better support for floating point `DatNumber`s (rounding etc.)
+- ~~Better support for floating point `DatNumber`s (rounding etc.)~~ ✅
 
 ## License
 

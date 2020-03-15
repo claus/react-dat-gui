@@ -6,6 +6,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 const root = process.platform === 'win32' ? path.resolve('/') : '/';
@@ -41,6 +42,9 @@ export default {
     commonjs({
       include: 'node_modules/**'
     }),
-    filesize()
+    filesize(),
+    copy({
+      targets: [{ src: './index.d.ts', dest: 'dist' }]
+    })
   ]
 };

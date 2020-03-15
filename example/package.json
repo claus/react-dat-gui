@@ -11,19 +11,19 @@
   ],
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
-    "next": "^9.0.5",
-    "prop-types": "link:../node_modules/prop-types",
-    "react": "link:../node_modules/react",
-    "react-dat-gui": "link:..",
-    "react-dom": "link:../node_modules/react-dom"
+    "next": "^9.3.0",
+    "prop-types": "file:../node_modules/prop-types",
+    "react": "file:../node_modules/react",
+    "react-dat-gui": "file:..",
+    "react-dom": "file:../node_modules/react-dom"
   },
   "scripts": {
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "export": "yarn clean && next build && next export",
+    "export": "npm run clean && next build && next export",
     "clean": "shx rm -rf out",
-    "deploy": "yarn export && shx touch out/.nojekyll && gh-pages -t -d out && yarn clean"
+    "deploy": "npm run export && shx touch out/.nojekyll && gh-pages -t -d out && npm run clean"
   },
   "devDependencies": {
     "gh-pages": "^2.1.1",

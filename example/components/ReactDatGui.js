@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import 'react-dat-gui/dist/index.css';
+
 import DatGui, {
   DatBoolean,
   DatButton,
@@ -9,7 +10,8 @@ import DatGui, {
   DatSelect,
   DatString
 } from 'react-dat-gui';
-import 'react-dat-gui/dist/index.css';
+import React, { Component } from 'react';
+
 import Stats from './Stats';
 
 /**
@@ -20,22 +22,22 @@ class DatGUI extends Component {
   constructor() {
     super();
 
-    const initialDatState = {
+    const initialState = {
       string: 'Hello World',
       minMaxNumber: 66,
       number: 80,
       boolean: true,
       select: 'one',
       color: '#2FA1D6',
-      random: Math.random(),
+      random: 0,
       nested: {
         string: 'Nested Hello World'
       }
     };
 
     this.state = {
-      data: initialDatState,
-      defaultData: initialDatState
+      data: initialState,
+      defaultData: initialState
     };
   }
 
