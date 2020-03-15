@@ -1,15 +1,15 @@
 language: node_js
 node_js:
   - 'node'
-  - 'lts/*'
-cache:
-  directories:
-    - ~/.npm
 install: npm install
 script:
-  - npm run build
+  - npm run lint
   - npm run test
 branches:
-  only: master
+  - master
+  - develop
+  - /^feature.*$/
 notifications:
   email: false
+cache:
+  npm: true
