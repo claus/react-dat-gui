@@ -1,5 +1,13 @@
 # Changelog
 
+## (2020-03-15) `v4.0.1`
+
+Thanks to [@anselanza](https://github.com/anselanza) for their work to getting typescript types into the `dist` folder 🎉 !
+
+### Resolves
+
+* [#47](https://github.com/claus/react-dat-gui/issues/47) 
+
 ## (2019-09-01) `v4.0.0`
 
 Special thanks to [@tim-soft](https://github.com/tim-soft) for this awesome [PR](https://github.com/claus/react-dat-gui/pull/33)!
