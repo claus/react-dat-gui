@@ -454,7 +454,6 @@ function (_Component) {
       _onUpdateValue(path, value);
     });
 
-    console.log('dude');
     _this.state = {
       value: null
     };
