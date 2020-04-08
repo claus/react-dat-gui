@@ -6,10 +6,10 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var _classCallCheck = _interopDefault(require('@babel/runtime/helpers/classCallCheck'));
 var _createClass = _interopDefault(require('@babel/runtime/helpers/createClass'));
-var _possibleConstructorReturn = _interopDefault(require('@babel/runtime/helpers/possibleConstructorReturn'));
-var _getPrototypeOf = _interopDefault(require('@babel/runtime/helpers/getPrototypeOf'));
 var _assertThisInitialized = _interopDefault(require('@babel/runtime/helpers/assertThisInitialized'));
 var _inherits = _interopDefault(require('@babel/runtime/helpers/inherits'));
+var _possibleConstructorReturn = _interopDefault(require('@babel/runtime/helpers/possibleConstructorReturn'));
+var _getPrototypeOf = _interopDefault(require('@babel/runtime/helpers/getPrototypeOf'));
 var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
 var React = require('react');
 var React__default = _interopDefault(React);
@@ -26,17 +26,21 @@ var common = require('react-color/lib/components/common');
 var color = _interopDefault(require('react-color/lib/helpers/color'));
 var _toConsumableArray = _interopDefault(require('@babel/runtime/helpers/toConsumableArray'));
 
-var DatString =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatString = /*#__PURE__*/function (_Component) {
   _inherits(DatString, _Component);
+
+  var _super = _createSuper(DatString);
 
   function DatString() {
     var _this;
 
     _classCallCheck(this, DatString);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatString).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var value = event.target.value;
@@ -89,15 +93,15 @@ function (_Component) {
           className = _this$props2.className,
           style = _this$props2.style;
       var labelText = isString(label) ? label : path;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'string', className),
         style: style
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("input", {
+      }, labelText), /*#__PURE__*/React__default.createElement("input", {
         style: {
           width: "calc(100% - ".concat(labelWidth, ")")
         },
@@ -155,17 +159,21 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var Slider =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$1(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$1()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var Slider = /*#__PURE__*/function (_Component) {
   _inherits(Slider, _Component);
+
+  var _super = _createSuper$1(Slider);
 
   function Slider() {
     var _this;
 
     _classCallCheck(this, Slider);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Slider).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleMouseDown", function (event) {
       _this.update(event.pageX);
@@ -234,7 +242,7 @@ function (_Component) {
         backgroundSize: "".concat(widthBackground, "% 100%")
       }, style);
 
-      return React__default.createElement("span", {
+      return /*#__PURE__*/React__default.createElement("span", {
         ref: this.sliderRef,
         className: cx('slider', className),
         style: sliderStyles,
@@ -270,6 +278,10 @@ _defineProperty(Slider, "defaultProps", {
   width: null
 });
 
+function _createSuper$2(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$2()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 var applyConstraints = function applyConstraints(_ref) {
   var value = _ref.value,
       min = _ref.min,
@@ -303,17 +315,17 @@ var applyConstraints = function applyConstraints(_ref) {
   return value.toFixed(decimalPlaces);
 };
 
-var DatNumber =
-/*#__PURE__*/
-function (_Component) {
+var DatNumber = /*#__PURE__*/function (_Component) {
   _inherits(DatNumber, _Component);
+
+  var _super = _createSuper$2(DatNumber);
 
   function DatNumber() {
     var _this;
 
     _classCallCheck(this, DatNumber);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatNumber).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var value = event.target.value;
@@ -356,7 +368,7 @@ function (_Component) {
           min = _this$props3.min,
           max = _this$props3.max;
       var value = this.state.value;
-      return React__default.createElement(Slider, {
+      return /*#__PURE__*/React__default.createElement(Slider, {
         value: value,
         min: min,
         max: max,
@@ -382,20 +394,20 @@ function (_Component) {
       var controlsWidth = 100;
       var inputWidth = hasSlider && disableSlider !== true ? Math.round(controlsWidth / 3) : controlsWidth;
       var sliderWidth = controlsWidth - inputWidth;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'number', className),
         style: style
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("span", {
+      }, labelText), /*#__PURE__*/React__default.createElement("span", {
         style: {
           display: 'inherit',
           width: "calc(100% - ".concat(labelWidth, ")")
         }
-      }, hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null, React__default.createElement("input", {
+      }, hasSlider && disableSlider !== true ? this.renderSlider(sliderWidth) : null, /*#__PURE__*/React__default.createElement("input", {
         type: "number",
         step: step,
         min: min,
@@ -440,17 +452,21 @@ _defineProperty(DatNumber, "defaultProps", {
   disableSlider: null
 });
 
-var DatBoolean =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$3(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$3()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$3() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatBoolean = /*#__PURE__*/function (_Component) {
   _inherits(DatBoolean, _Component);
+
+  var _super = _createSuper$3(DatBoolean);
 
   function DatBoolean(props) {
     var _this;
 
     _classCallCheck(this, DatBoolean);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatBoolean).call(this, props));
+    _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var value = event.target.checked;
@@ -477,20 +493,20 @@ function (_Component) {
           className = _this$props2.className,
           style = _this$props2.style;
       var labelText = isString(label) ? label : path;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'boolean', className),
         style: style
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("span", {
+      }, labelText), /*#__PURE__*/React__default.createElement("span", {
         className: "checkbox-container",
         style: {
           width: "calc(100% - ".concat(labelWidth, ")")
         }
-      }, React__default.createElement("input", {
+      }, /*#__PURE__*/React__default.createElement("input", {
         type: "checkbox",
         checked: this.state.value,
         onChange: this.handleChange
@@ -522,10 +538,10 @@ var DatButton = function DatButton(_ref) {
       onClick = _ref.onClick,
       className = _ref.className,
       style = _ref.style;
-  return React__default.createElement("li", {
+  return /*#__PURE__*/React__default.createElement("li", {
     className: cx('cr', 'button', className),
     style: style
-  }, React__default.createElement("span", {
+  }, /*#__PURE__*/React__default.createElement("span", {
     className: "label-text",
     onClick: onClick,
     onKeyPress: onClick,
@@ -544,17 +560,21 @@ function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if 
 
 function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var DatFolder =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$4(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$4()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$4() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatFolder = /*#__PURE__*/function (_Component) {
   _inherits(DatFolder, _Component);
+
+  var _super = _createSuper$4(DatFolder);
 
   function DatFolder(props) {
     var _this;
 
     _classCallCheck(this, DatFolder);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatFolder).call(this, props));
+    _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "handleClick", function () {
       return _this.setState(function (prevState) {
@@ -592,20 +612,20 @@ function (_Component) {
           title = _this$props2.title,
           className = _this$props2.className,
           style = _this$props2.style;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('folder', {
           closed: closed
         }, className),
         style: style
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "dg"
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "title",
         onClick: this.handleClick,
         onKeyPress: this.handleClick,
         role: "button",
         tabIndex: 0
-      }, title), React__default.createElement("ul", null, this.renderChildren())));
+      }, title), /*#__PURE__*/React__default.createElement("ul", null, this.renderChildren())));
     }
   }]);
 
@@ -619,17 +639,21 @@ _defineProperty(DatFolder, "defaultProps", {
   closed: true
 });
 
-var DatSelect =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$5(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$5()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$5() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatSelect = /*#__PURE__*/function (_Component) {
   _inherits(DatSelect, _Component);
+
+  var _super = _createSuper$5(DatSelect);
 
   function DatSelect() {
     var _this;
 
     _classCallCheck(this, DatSelect);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatSelect).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var value = event.target.value;
@@ -665,22 +689,24 @@ function (_Component) {
           value = _this$state.value,
           options = _this$state.options;
       var labelText = isString(label) ? label : path;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'select', className),
         style: style
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("select", {
+      }, labelText), /*#__PURE__*/React__default.createElement("select", {
         value: value,
         onChange: this.handleChange,
         style: {
           width: "calc(100% - ".concat(labelWidth, ")")
         }
       }, options.map(function (item, index) {
-        return (// eslint-disable-next-line react/no-array-index-key
+        return (
+          /*#__PURE__*/
+          // eslint-disable-next-line react/no-array-index-key
           React__default.createElement("option", {
             key: index,
             value: item
@@ -713,14 +739,16 @@ _defineProperty(DatSelect, "defaultProps", {
   }
 });
 
-var Fields =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$6(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$6()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$6() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var Fields = /*#__PURE__*/function (_Component) {
   _inherits(Fields, _Component);
 
-  function Fields() {
-    var _getPrototypeOf2;
+  var _super = _createSuper$6(Fields);
 
+  function Fields() {
     var _this;
 
     _classCallCheck(this, Fields);
@@ -729,7 +757,7 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Fields)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (value, e) {
       var onChange = _this.props.onChange;
@@ -746,13 +774,13 @@ function (_Component) {
     key: "render",
     value: function render() {
       var hex = this.props.hex;
-      return React__default.createElement("div", {
+      return /*#__PURE__*/React__default.createElement("div", {
         className: "flexbox-fix fields-wrap"
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "flexbox-fix fields"
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "field"
-      }, React__default.createElement(common.EditableInput, {
+      }, /*#__PURE__*/React__default.createElement(common.EditableInput, {
         value: hex,
         onChange: this.handleChange
       }))));
@@ -763,13 +791,13 @@ function (_Component) {
 }(React.Component);
 
 var Pointer = function Pointer() {
-  return React__default.createElement("div", {
+  return /*#__PURE__*/React__default.createElement("div", {
     className: "pointer"
   });
 };
 
 var PointerCircle = function PointerCircle() {
-  return React__default.createElement("div", {
+  return /*#__PURE__*/React__default.createElement("div", {
     className: "pointer-circle"
   });
 };
@@ -781,30 +809,30 @@ var Picker = function Picker(_ref) {
       hex = _ref.hex,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className;
-  return React__default.createElement("div", {
+  return /*#__PURE__*/React__default.createElement("div", {
     className: "picker ".concat(className)
-  }, React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "saturation-wrap"
-  }, React__default.createElement(common.Saturation, {
+  }, /*#__PURE__*/React__default.createElement(common.Saturation, {
     className: "saturation",
     hsl: hsl,
     hsv: hsv,
     pointer: PointerCircle,
     onChange: onChange
-  })), React__default.createElement("div", {
+  })), /*#__PURE__*/React__default.createElement("div", {
     className: "body"
-  }, React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "controls"
-  }, React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "toggles"
-  }, React__default.createElement("div", {
+  }, /*#__PURE__*/React__default.createElement("div", {
     className: "hue-wrap"
-  }, React__default.createElement(common.Hue, {
+  }, /*#__PURE__*/React__default.createElement(common.Hue, {
     className: "hue",
     hsl: hsl,
     pointer: Pointer,
     onChange: onChange
-  })))), React__default.createElement(Fields, {
+  })))), /*#__PURE__*/React__default.createElement(Fields, {
     hex: hex,
     onChange: onChange
   })));
@@ -823,17 +851,21 @@ function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if 
 
 function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var DatColor =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$7(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$7()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$7() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatColor = /*#__PURE__*/function (_Component) {
   _inherits(DatColor, _Component);
+
+  var _super = _createSuper$7(DatColor);
 
   function DatColor() {
     var _this;
 
     _classCallCheck(this, DatColor);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatColor).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleClickColorPicker", function () {
       return _this.setState(function (prevState) {
@@ -871,15 +903,15 @@ function (_Component) {
       var _this$state = this.state,
           value = _this$state.value,
           displayColorPicker = _this$state.displayColorPicker;
-      return !displayColorPicker ? null : React__default.createElement("div", {
+      return !displayColorPicker ? null : /*#__PURE__*/React__default.createElement("div", {
         className: "popover"
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "cover",
         onClick: this.handleCloseColorPicker,
         onKeyPress: this.handleCloseColorPicker,
         role: "button",
         tabIndex: 0
-      }), React__default.createElement(ColorPicker, {
+      }), /*#__PURE__*/React__default.createElement(ColorPicker, {
         color: value,
         onChange: this.handleChangeColor
       }));
@@ -895,22 +927,22 @@ function (_Component) {
           style = _this$props2.style;
       var value = this.state.value;
       var labelText = isString(label) ? label : path;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'color', className),
         style: _objectSpread$2({
           borderLeftColor: "".concat(value)
         }, style)
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("div", {
+      }, labelText), /*#__PURE__*/React__default.createElement("div", {
         style: {
           backgroundColor: value,
           width: "calc(100% - ".concat(labelWidth, ")")
         }
-      }, React__default.createElement("div", {
+      }, /*#__PURE__*/React__default.createElement("div", {
         className: "swatch",
         onClick: this.handleClickColorPicker,
         onKeyPress: this.handleClickColorPicker,
@@ -938,19 +970,22 @@ _defineProperty(DatColor, "defaultProps", {
   label: null
 });
 
+function _createSuper$8(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$8()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$8() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 var DEFAULT_PRESET_KEY = 'Default';
 
-var DatPresets =
-/*#__PURE__*/
-function (_Component) {
+var DatPresets = /*#__PURE__*/function (_Component) {
   _inherits(DatPresets, _Component);
+
+  var _super = _createSuper$8(DatPresets);
 
   function DatPresets() {
     var _this;
 
     _classCallCheck(this, DatPresets);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatPresets).call(this));
+    _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var value = JSON.parse(event.target.value);
@@ -978,22 +1013,22 @@ function (_Component) {
           style = _this$props2.style;
       var options = this.state.options;
       var labelText = isString(label) ? label : path;
-      return React__default.createElement("li", {
+      return /*#__PURE__*/React__default.createElement("li", {
         className: cx('cr', 'presets', className),
         style: style
-      }, React__default.createElement("label", null, React__default.createElement("span", {
+      }, /*#__PURE__*/React__default.createElement("label", null, /*#__PURE__*/React__default.createElement("span", {
         className: "label-text",
         style: {
           width: labelWidth
         }
-      }, labelText), React__default.createElement("select", {
+      }, labelText), /*#__PURE__*/React__default.createElement("select", {
         onChange: this.handleChange,
         style: {
           width: "calc(100% - ".concat(labelWidth, ")")
         }
       }, options.map(function (preset) {
         return Object.keys(preset).map(function (key) {
-          return React__default.createElement("option", {
+          return /*#__PURE__*/React__default.createElement("option", {
             key: key,
             value: JSON.stringify(preset[key])
           }, key);
@@ -1023,14 +1058,16 @@ _defineProperty(DatPresets, "defaultProps", {
   path: null
 });
 
-var DatGui =
-/*#__PURE__*/
-function (_Component) {
+function _createSuper$9(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct$9()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$9() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var DatGui = /*#__PURE__*/function (_Component) {
   _inherits(DatGui, _Component);
 
-  function DatGui() {
-    var _getPrototypeOf2;
+  var _super = _createSuper$9(DatGui);
 
+  function DatGui() {
     var _this;
 
     _classCallCheck(this, DatGui);
@@ -1039,7 +1076,7 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DatGui)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (path, value) {
       var _this$props = _this.props,
@@ -1079,10 +1116,10 @@ function (_Component) {
           style = _this$props3.style,
           className = _this$props3.className;
       var classNames = cx('react-dat-gui', className);
-      return React__default.createElement("div", {
+      return /*#__PURE__*/React__default.createElement("div", {
         className: classNames,
         style: style
-      }, React__default.createElement("ul", {
+      }, /*#__PURE__*/React__default.createElement("ul", {
         className: "dg main"
       }, this.renderChildren()));
     }
