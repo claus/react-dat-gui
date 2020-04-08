@@ -7,7 +7,7 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "style": "dist/index.css",
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "author": "Claus Wahlers <claus@codeazur.com.br> (https://github.com/claus)",
   "contributors": [
     {
