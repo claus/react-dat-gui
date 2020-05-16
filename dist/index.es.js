@@ -6,10 +6,8 @@ import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstruct
 import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import React, { Component, cloneElement } from 'react';
-import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
 import isUndefined from 'lodash.isundefined';
-import set from 'lodash.set';
 import isString from 'lodash.isstring';
 import result from 'lodash.result';
 import isFinite$1 from 'lodash.isfinite';
@@ -18,6 +16,7 @@ import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProper
 import { EditableInput, ColorWrap, Saturation, Hue } from 'react-color/lib/components/common';
 import color from 'react-color/lib/helpers/color';
 import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
+import cloneDeep from 'lodash.clonedeep';
 
 function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -1072,10 +1071,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (path, value) {
-      var _this$props = _this.props,
-          data = _this$props.data,
-          onUpdate = _this$props.onUpdate;
-      var dataUpdated = set(cloneDeep(data), path, value);
+      var onUpdate = _this.props.onUpdate;
+      var dataUpdated = {};
+      dataUpdated[path] = value;
       onUpdate(dataUpdated);
     });
 
@@ -1087,9 +1085,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
     value: function renderChildren() {
       var _this2 = this;
 
-      var _this$props2 = this.props,
-          children = _this$props2.children,
-          data = _this$props2.data;
+      var _this$props = this.props,
+          children = _this$props.children,
+          data = _this$props.data;
       return React.Children.toArray(children).map(function (child, i) {
         var liveUpdate = isUndefined(child.props.liveUpdate) ? _this2.props.liveUpdate : child.props.liveUpdate;
         var labelWidth = isUndefined(child.props.labelWidth) ? _this2.props.labelWidth : child.props.labelWidth;
@@ -1105,9 +1103,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          style = _this$props3.style,
-          className = _this$props3.className;
+      var _this$props2 = this.props,
+          style = _this$props2.style,
+          className = _this$props2.className;
       var classNames = cx('react-dat-gui', className);
       return /*#__PURE__*/React.createElement("div", {
         className: classNames,

@@ -13,10 +13,8 @@ var _getPrototypeOf = _interopDefault(require('@babel/runtime/helpers/getPrototy
 var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
 var React = require('react');
 var React__default = _interopDefault(React);
-var cloneDeep = _interopDefault(require('lodash.clonedeep'));
 var cx = _interopDefault(require('classnames'));
 var isUndefined = _interopDefault(require('lodash.isundefined'));
-var set = _interopDefault(require('lodash.set'));
 var isString = _interopDefault(require('lodash.isstring'));
 var result = _interopDefault(require('lodash.result'));
 var isFinite$1 = _interopDefault(require('lodash.isfinite'));
@@ -25,6 +23,7 @@ var _objectWithoutProperties = _interopDefault(require('@babel/runtime/helpers/o
 var common = require('react-color/lib/components/common');
 var color = _interopDefault(require('react-color/lib/helpers/color'));
 var _toConsumableArray = _interopDefault(require('@babel/runtime/helpers/toConsumableArray'));
+var cloneDeep = _interopDefault(require('lodash.clonedeep'));
 
 function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -1079,10 +1078,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (path, value) {
-      var _this$props = _this.props,
-          data = _this$props.data,
-          onUpdate = _this$props.onUpdate;
-      var dataUpdated = set(cloneDeep(data), path, value);
+      var onUpdate = _this.props.onUpdate;
+      var dataUpdated = {};
+      dataUpdated[path] = value;
       onUpdate(dataUpdated);
     });
 
@@ -1094,9 +1092,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
     value: function renderChildren() {
       var _this2 = this;
 
-      var _this$props2 = this.props,
-          children = _this$props2.children,
-          data = _this$props2.data;
+      var _this$props = this.props,
+          children = _this$props.children,
+          data = _this$props.data;
       return React__default.Children.toArray(children).map(function (child, i) {
         var liveUpdate = isUndefined(child.props.liveUpdate) ? _this2.props.liveUpdate : child.props.liveUpdate;
         var labelWidth = isUndefined(child.props.labelWidth) ? _this2.props.labelWidth : child.props.labelWidth;
@@ -1112,9 +1110,9 @@ var DatGui = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          style = _this$props3.style,
-          className = _this$props3.className;
+      var _this$props2 = this.props,
+          style = _this$props2.style,
+          className = _this$props2.className;
       var classNames = cx('react-dat-gui', className);
       return /*#__PURE__*/React__default.createElement("div", {
         className: classNames,
