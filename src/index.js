@@ -1,9 +1,7 @@
 import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash.clonedeep';
 import cx from 'classnames';
 import isUndefined from 'lodash.isundefined';
-import set from 'lodash.set';
 import './style/dat.scss';
 
 export default class DatGui extends Component {
@@ -25,8 +23,9 @@ export default class DatGui extends Component {
   };
 
   handleUpdateValue = (path, value) => {
-    const { data, onUpdate } = this.props;
-    const dataUpdated = set(cloneDeep(data), path, value);
+    const { onUpdate } = this.props;
+    const dataUpdated = {};
+    dataUpdated[path] = value;
 
     onUpdate(dataUpdated);
   };
