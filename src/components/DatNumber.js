@@ -86,7 +86,7 @@ export default class DatNumber extends Component {
 
   handleChange = event => {
     const { value } = event.target;
-    this.update(value);
+    this.handleSliderUpdate(value);
   };
 
   handleSliderUpdate = value => {
