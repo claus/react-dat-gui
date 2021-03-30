@@ -1,8 +1,8 @@
 import path from 'path';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import filesize from 'rollup-plugin-filesize';
-import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
@@ -22,12 +22,13 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named',
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
     }
   ],
   external: id =>
@@ -36,7 +37,7 @@ export default {
     postcss({ plugins: [autoprefixer, cssnano], extract: pkg.style }),
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: true
+      babelHelpers: 'runtime'
     }),
     resolve(),
     commonjs({

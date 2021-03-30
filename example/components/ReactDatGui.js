@@ -1,5 +1,3 @@
-import 'react-dat-gui/dist/index.css';
-
 import DatGui, {
   DatBoolean,
   DatButton,
