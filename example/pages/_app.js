@@ -1,4 +1,4 @@
-import 'react-dat-gui/dist/index.css';
+import './index.css';
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
