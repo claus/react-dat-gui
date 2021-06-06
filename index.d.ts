@@ -91,6 +91,7 @@ export class DatNumber extends React.Component<DatNumberProps, any> {}
 
 export interface DatSelectProps extends DatChangableFieldProps {
   options: any[];
+  optionLabels?: string[];
 }
 
 export class DatSelect extends React.Component<DatSelectProps, any> {}
