@@ -42,24 +42,24 @@ export default class Slider extends Component {
     };
   }
 
-  handleMouseDown = event => {
+  handlePointerDown = event => {
     this.update(event.pageX);
 
-    window.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('mouseup', this.handleMouseUp);
+    window.addEventListener('pointermove', this.handlePointerMove);
+    window.addEventListener('pointerup', this.handlePointerUp);
   };
 
-  handleMouseMove = event => {
+  handlePointerMove = event => {
     this.update(event.pageX);
 
     event.preventDefault();
   };
 
-  handleMouseUp = event => {
+  handlePointerUp = event => {
     this.update(event.pageX, false);
 
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('mouseup', this.handleMouseUp);
+    window.removeEventListener('pointermove', this.handlePointerMove);
+    window.removeEventListener('pointerup', this.handlePointerUp);
   };
 
   handleClick = event => {
@@ -95,7 +95,7 @@ export default class Slider extends Component {
         className={cx('slider', className)}
         style={sliderStyles}
         onClick={this.handleClick}
-        onMouseDown={this.handleMouseDown}
+        onPointerDown={this.handlePointerDown}
         role="slider"
         tabIndex={0}
         aria-valuenow={value}
