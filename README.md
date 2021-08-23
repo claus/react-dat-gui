@@ -5,6 +5,8 @@
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dat-gui?style=flat-square)](https://bundlephobia.com/result?p=react-dat-gui)
 [![GitHub](https://img.shields.io/github/license/claus/react-dat-gui?style=flat-square)](https://github.com/claus/react-dat-gui/blob/master/LICENSE)
 
+**This project is not maintained. I am not really using it myself and currently have no bandwidth to take care of it. If anyone would like to fork and run with it, i would be more than happy to drop a link here. Also feel free to check out [Leva](https://github.com/pmndrs/leva), which looks like a decent alternative.**
+
 react-dat-gui is a fully[\*](#whats-missing) featured React port of Google's esteemed [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. It comes packed with all of the core components you will need to cleanly integrate dat.GUIs into your React app.
 
 <p align="middle">
